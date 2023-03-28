@@ -1,0 +1,38 @@
+@use '../utils/mixins' as *;
+
+.section-heading {
+  display: flex;
+  gap:240px;
+  justify-content: space-between;
+  margin-bottom: 48px;
+
+  &__title {
+    font-weight: 400;
+    font-size: rem(40px);
+    line-height: 120%;
+    letter-spacing: -0.02em;
+
+    &--centered {
+      margin: 0 auto;
+    }
+
+    span {
+      background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%);
+      /* stylelint-disable-next-line property-no-vendor-prefix */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  &__text {
+    width: 100%;
+    max-width: 400px;
+    line-height: 150%;
+  }
+
+  &__desc {
+    margin-bottom: 40px;
+    text-indent: 50px;
+  }
+  
+}

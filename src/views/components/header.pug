@@ -1,0 +1,14 @@
+include ../utils/variables
+
+header.header.container
+    .header__logo.logo 
+      a.logo__link(href="/") 
+        picture.logo__picture 
+          img(src="@/assets/img/logo.svg", alt="")
+    nav.header__nav.nav 
+      ul.nav__list
+        each val in menu
+          li.nav__item 
+            a.nav__link(href=val.link)=val.name
+    a.header__btn.btn.btn--primary(href="") 
+      span.btn__inner Kontakt aufnehmen

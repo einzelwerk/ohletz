@@ -1,0 +1,17 @@
+section.section.section-hero
+  .hero
+    .container.d-md-flex.justify-content-between.align-items-center
+      .col-md-6
+        if heroBack
+          a.hero__back.btn.btn--primary.btn--arrow(href="") 
+            svg(width='32' height='32')
+              use(href='./assets/sprite.svg#arrow-link')
+            | Zurück zu Rechtsgebieten
+        h1.hero__title=heroTitle
+      if heroDesc
+        .col-md-4 
+          p.hero__desc=heroDesc
+    .container-fluid.g-0
+      picture.hero__image.d-block.w-100.ratio.ratio-16x9
+        img(src=heroImage alt="")
+

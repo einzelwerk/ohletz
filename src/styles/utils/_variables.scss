@@ -1,0 +1,23 @@
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1520px
+);
+
+:root {
+  --dark-color:#16171a;
+  --white-color:#fff;
+  --gray-color:#95989b;
+  --dark-border:#dedede;
+  --lt-gray-color:#f3f3f3;
+  --bs-body-font-family:'Inter', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, oxygen, ubuntu, cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --bs-body-font-size:16px;
+  --bs-body-font-weight:400;
+  --bs-body-line-height:1.1;
+  --bs-body-bg:var(--white-color);
+  --gap-y:70px;
+
+}
+

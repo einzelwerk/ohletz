@@ -1,0 +1,29 @@
+section.section.container 
+  .services
+    aside.services-nav
+      .services-nav__item(data-id="services-card-1")
+        a.services-nav__link(href="#services-card-1") Arbeitsrecht
+      .services-nav__item(data-id="services-card-2")
+        a.services-nav__link(href="#services-card-2") Baurecht
+      .services-nav__item(data-id="services-card-3")
+        a.services-nav__link(href="#services-card-3") Erbrecht und Vermögensnachfolge
+      .services-nav__item(data-id="services-card-4")
+        a.services-nav__link(href="#services-card-4") Gesellschaftsrecht
+      .services-nav__item(data-id="services-card-5")
+        a.services-nav__link(href="#services-card-5") Gewerblicher Rechtsschutz
+      .services-nav__item(data-id="services-card-6")
+        a.services-nav__link(href="#services-card-6") Immobilienrecht / Grundstücksrecht
+      .services-nav__item(data-id="services-card-7")
+        a.services-nav__link(href="#services-card-7") Mietrecht (Gewerbe und Wohnraum)
+      .services-nav__item(data-id="services-card-8")
+        a.services-nav__link(href="#services-card-8") Professionelles Forderungsmanagement
+    .services-cards
+      each val,index in ['#FFDEDE', '#F6E6FA', '#E7DEFF', '#DEEFFF', '#FAFFDE', '#FFFCDE', '#DDFADD', '#E4F4EF']
+        .services-cards__item.js-services-cards(style=`--background:${val}` id=`services-card-${index + 1}`)
+          .services-cards__title Arbeitsrecht
+          picture.services-cards__image
+            img(src=`@/assets/img/services/${index + 1}.jpg` alt="")
+          .services-cards__desc 
+            p Ihr Arbeitnehmer: Die wichtigste Ressource im Unternehmen.
+            p Im Arbeitsrecht beraten wir Arbeitnehmer und Arbeitgeber zu sämtlichen rechtlichen Fällen am Arbeitsplatz. 
+          a.services-cards__btn.btn.btn--secondary(href="") Mehr erfahren

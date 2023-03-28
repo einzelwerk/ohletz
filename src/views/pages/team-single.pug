@@ -1,0 +1,65 @@
+extends ../layouts/main
+
+block vars
+  - const title = 'Home';
+  - const pageName = 'home-page';
+
+block content
+  - const heroTitle = 'Anwälte und Notare'
+  - const heroDesc = 'Mittelstand und Freiberufler. Wir bieten Ihnen spezialisierte rechtliche Expertise aus einer Hand.'
+  - const heroImage = '@/assets/img/hero/6.jpg'
+  section.section.single-section.container
+    a.back-btn.btn.btn--primary.btn--arrow(href="") 
+      svg(width='32' height='32')
+        use(href='./assets/sprite.svg#arrow-link')
+      | Zurück zum Team
+    .team-single 
+      .team-single__image-wrapper 
+        picture.team-single__image 
+          img(src="@/assets/img/team-single.jpg" alt="")
+        .team-single__tags-list 
+          span.team-single__tags-item Handelsrecht
+          span.team-single__tags-item Gesellschaftsrecht
+          span.team-single__tags-item Steuerrecht
+      .team-single__information.team-information
+        h1.team-information__name Katharina Denker
+        h2.team-information__position Rechtsanwältin, Notarin
+        .team-information__grid.information-grid 
+          .information-grid__item 
+            h3.information-grid__heading Sekretariat
+            .information-grid__links
+              a.information-grid__links-item(href="")  <span>T</span> +49 201 95 98 2-0
+              a.information-grid__links-item(href="")  <span>F</span> +49 201 95 98 2-0
+              a.information-grid__links-item(href="")  <span>F</span> +49 201 95 98 2-0
+          .information-grid__item 
+            h3.information-grid__heading Sprachen
+            .information-grid__value Englisch
+          .information-grid__item 
+            h3.information-grid__heading Safe-ID:
+            .information-grid__value DE.BRAK.215f7d99-4300-45a9-a36e-955c0bed2622.0835
+          .information-grid__item 
+            h3.information-grid__heading BEN-ID:
+            .information-grid__value DE.BEN_PROD.192e7b89-b20d-41f5-a5ea-09175dcd4ec3.a294
+          .information-grid__item.information-grid__item--list
+            h3.information-grid__heading Erfahrung
+            ul.information-grid__list
+              li.information-grid__list-item 
+                div Universität Münster
+              li.information-grid__list-item 
+                div Rechtsanwältin <span>seit 2015</span>
+              li.information-grid__list-item 
+                div Masterstudiengang “Real Estate Law” (LL.M.)  <span>seit 2018</span>
+              li.information-grid__list-item 
+                div Notarin <span>seit 2022</span>
+  section.section.section--no-top.container
+    .section-heading 
+      h5.section-heading__title Experten in den gleichen Rechtsgebieten
+    .team-grid
+        each val in [1,1,1,1,1,1,1]
+          .team-item.swiper-slide 
+            picture.team-item__image 
+              img(src="@/assets/img/team/1.jpg" alt="")
+            .team-item__text 
+              h4.team-item__name Lukas Erdmann
+              span.team-item__position Fachanwalt für Gewerblichen Rechtsschutz, Notar
+  include ../components/cta

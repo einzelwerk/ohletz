@@ -1,0 +1,17 @@
+section.section.container
+  .section-heading 
+    h2.section-heading__title Wir unterstützen <span>Konzerne</span>, <span>Unternehmen</span> und <span>Einzelpersonen</span> in jeder Phase ihrer Geschäftstätigkeit: bei der Unternehmensgründung, bei Umwandlungen, Rechtsstreitigkeiten oder anderen Veränderungen.
+  .about-us-block.js-about-us-slider.swiper
+    .swiper-wrapper
+      each val in [1,2,3,1,2,3,1,2]
+        .swiper-slide.about-us-block__item
+          picture.about-us-block__image
+            img(src=`@/assets/img/about-us-block/${val}.jpg` alt="")
+    a.about-us-block__link(href="")
+      span Mehr erfahren
+      span.about-us-block__icon 
+        svg(width='32' height='32')
+          use(href='./assets/sprite.svg#arrow')
+
+    
+      

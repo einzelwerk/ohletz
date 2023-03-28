@@ -1,0 +1,18 @@
+extends ../layouts/main
+
+block vars
+  - const title = 'Home';
+  - const pageName = 'home-page';
+
+block content
+  - const heroTitle = 'Anwälte und Notare'
+  - const heroDesc = 'Mittelstand und Freiberufler. Wir bieten Ihnen spezialisierte rechtliche Expertise aus einer Hand.'
+  - const heroImage = '@/assets/img/hero/6.jpg'
+  include ../components/hero
+  include ../components/team-tabs
+  include ../components/cta
+
+
+
+
+

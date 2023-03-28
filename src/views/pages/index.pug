@@ -1,0 +1,17 @@
+extends ../layouts/main
+
+block vars
+  - const title = 'Home';
+  - const pageName = 'home-page';
+
+block content
+  - const heroTitle = 'Rechtsanwälte. Notare. Steuerberater.'
+  - const heroDesc = 'Wir bieten Ihnen spezialisierte rechtliche Expertise aus einer Hand. Wir beraten, betreuen, verhandeln und vertreten vor Gericht. Bundesweit. Vertrauen Sie uns.'
+  - const heroImage = '@/assets/img/hero/1.jpg'
+  include ../components/hero
+  include ../components/services-block
+  include ../components/about-us-block
+  include ../components/cards-block
+  include ../components/career-block
+  include ../components/cta
+

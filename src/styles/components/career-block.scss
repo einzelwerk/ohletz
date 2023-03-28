@@ -1,0 +1,67 @@
+.career-block {
+  $this: &;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: var(--lt-gray-color);
+
+    &:hover {
+      #{$this}__icon-circle {
+        transform: translateY(0%);
+      }
+      #{$this}__icon {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__icon-wrapper {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+  }
+
+  &__icon {
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: var(--white-color);
+    border-radius: 50%;
+    transition: transform .25s;
+  }
+
+  &__icon-circle {
+    position: absolute;
+    z-index: 9;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #CACACA;
+    border-radius: 50%;
+    transition: transform .25s;
+
+    &:nth-child(1) {
+      transform: translateY(-80%);
+    }
+
+    &:nth-child(2) {
+      transform: translateY(-40%);
+    }
+
+    &:nth-child(3) {
+      transform: translateY(40%);
+    }
+
+    &:nth-child(4) {
+      transform: translateY(80%);
+    }
+  }
+}

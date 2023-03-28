@@ -1,0 +1,54 @@
+section.section-tabs
+  .tabs 
+    .tabs-nav(role="tablist" id="tabs-nav")
+      button.tabs-nav__item.active( id="alle-tab" data-bs-toggle="tab" data-bs-target="#alle-content" type="button" role="tab" aria-controls="alle-content" aria-selected="true")
+        span.tabs-nav__item-text Alle
+        span.tabs-nav__count 142
+      button.tabs-nav__item( id="rechtsanwälte-tab" data-bs-toggle="tab" data-bs-target="#rechtsanwälte-content" type="button" role="tab" aria-controls="rechtsanwälte-content" aria-selected="false")
+        span.tabs-nav__item-text Cases
+        span.tabs-nav__count 25
+      button.tabs-nav__item( id="notare-tab" data-bs-toggle="tab" data-bs-target="#notare-content" type="button" role="tab" aria-controls="notare-content" aria-selected="false")
+        span.tabs-nav__item-text Cases
+        span.tabs-nav__count 117
+      button.tabs-nav__item( id="organisation-tab" data-bs-toggle="tab" data-bs-target="#organisation-content" type="button" role="tab" aria-controls="organisation-content" aria-selected="false")
+        span.tabs-nav__item-text Cases
+        span.tabs-nav__count 117
+    .tabs-content.container
+      .tabs-content__item.active(id="alle-content" role="tabpanel" aria-labelledby="alle-tab")
+        .team-grid
+          each val in [1,1,1,1,1,1,1,1,1,1,1,1,1]
+            .team-item.swiper-slide 
+              picture.team-item__image 
+                img(src="@/assets/img/team/1.jpg" alt="")
+              .team-item__text 
+                h4.team-item__name Lukas Erdmann
+                span.team-item__position Fachanwalt für Gewerblichen Rechtsschutz, Notar
+      .tabs-content__item(id="rechtsanwälte-content" role="tabpanel" aria-labelledby="rechtsanwälte-tab")
+        .team-grid
+          each val in [1,1,1,1,1,1,1,1,1,1,1,1,1]
+            .team-item.swiper-slide 
+              picture.team-item__image 
+                img(src="@/assets/img/team/1.jpg" alt="")
+              .team-item__text 
+                h4.team-item__name Lukas Erdmann 2
+                span.team-item__position Rechtsanwalt
+      .tabs-content__item(id="notare-content" role="tabpanel" aria-labelledby="notare-tab")
+        .team-grid
+          each val in [1,1,1,1,1,1,1,1,1,1,1,1,1]
+            .team-item.swiper-slide 
+              picture.team-item__image 
+                img(src="@/assets/img/team/1.jpg" alt="")
+              .team-item__text 
+                h4.team-item__name Lukas Erdmann 3
+                span.team-item__position Rechtsanwalt
+      .tabs-content__item(id="organisation-content" role="tabpanel" aria-labelledby="organisation-tab")
+        .team-grid
+          each val in [1,1,1,1,1,1,1,1,1,1,1,1,1]
+            .team-item.swiper-slide 
+              picture.team-item__image 
+                img(src="@/assets/img/team/1.jpg" alt="")
+              .team-item__text 
+                h4.team-item__name Lukas Erdmann 4
+                span.team-item__position Rechtsanwalt
+
+

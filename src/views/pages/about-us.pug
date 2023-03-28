@@ -1,0 +1,35 @@
+extends ../layouts/main
+
+block vars
+  - const title = 'Home';
+  - const pageName = 'home-page';
+
+block content
+  - const heroTitle = 'Das sind wir'
+  - const heroDesc = 'Seit über 40 Jahren verlässlicher Ansprechpartner für Konzerne, Mittelstand und Freiberufler. Wir bieten Ihnen spezialisierte rechtliche Expertise aus einer Hand.'
+  - const heroImage = '@/assets/img/hero/4.jpg'
+  include ../components/hero
+  include ../components/presentation-block
+  include ../components/image
+  section.section.container
+    .section-heading 
+      h2.section-heading__title Unsere notariellen Tätigkeiten erstrecken sich über die Fachgebiete <span>Immobilienrecht</span>, Baurecht, Gesellschaftsrecht und Erbangelegenheiten. Ebenso bilden derzeit 8 Rechtsanwälte und Rechtsanwältinnen ein auf das Wohnraum- und Gewerbemietrecht spezialisiertes Team, das deutschlandweit über 70.000 Verfahren jährlich betreut.
+  section.section.container 
+    .row.presentation-block.d-flex.align-items-center.flex-columns.flex-md-row-reverse
+      .col-md-6.col-12
+        .presentation-block__text 
+          h2.presentation-block__title OHLETZ – wir bieten Ihnen spezialisierte rechtliche <span>Expertise aus einer Hand.</span> 
+          .presentation-block__desc 
+            p Wir sind sehr stolz auf unsere langjährigen, von Vertrauen geprägten Mandantenbeziehungen, die wir gleichermaßen zu DAX-Konzernen und einigen der größten Immobilienunternehmen Deutschlands aufgebaut haben, wie auch zu familiengeführten Unternehmen, Stiftungen und Privatpersonen. Jeder Mandant erhält sein maßgeschneidertes Angebot, gestützt durch Fachwissen und jahrzehntelange Erfahrung auf dem jeweilig gewünschten Fachgebiet. 
+            p Damit stehen wir Konzernen, Gesellschaften und Unternehmern in allen Phasen unternehmerischen Handelns zur Seite: Bei der Unternehmensgründung, im Falle von Umwandlungen oder sonstigen Veränderungen, im Arbeitsrecht und gewerblichen Rechtsschutz und natürlich auch in der Nachfolgegestaltung. 
+      .col-md-6.col-12
+        picture.presentation-block__image
+          img(src="@/assets/img/presentation.jpg" alt="")
+  include ../components/services-block-secondary
+  include ../components/cta-image
+  include ../components/team-block
+  include ../components/cta-vacancy
+
+
+
+

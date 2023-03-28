@@ -1,0 +1,25 @@
+@use '../base/typography';
+@use './variables' as vars;
+@use './functions' as fn;
+
+$breakpoints: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1360px
+);
+
+@mixin media($breakpoint, $minmax: max-width) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media ( $minmax: #{map-get($breakpoints, $breakpoint)}) {
+      @content;
+    }
+  } @else {
+    @warn 'err: wrong breakpoint, check breakpoint in _mixins.scss';
+  }
+}
+
+@function rem($px) {
+  @return calc($px / 16px * 1rem);
+}

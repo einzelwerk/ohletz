@@ -1,0 +1,13 @@
+extends ../layouts/main
+
+block vars
+  - const title = 'Home';
+  - const pageName = 'home-page';
+
+block content
+  - const heroTitle = 'Rechtsgebiete'
+  - const heroDesc = 'Um unsere Mandanten umfassend und professionell beraten und betreuen zu können, betrachten wir es als Notwendigkeit, Ihnen unser Wissen und Können zur Verfügung zu stellen.'
+  - const heroImage = '@/assets/img/hero/2.jpg'
+  include ../components/hero
+  include ../components/services
+

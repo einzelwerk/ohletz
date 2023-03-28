@@ -1,0 +1,42 @@
+@use '../utils/mixins' as *;
+
+.about-us-block {
+  position: relative;
+  overflow: visible;
+
+ &__image {
+  position: relative;
+  display: block;
+  height: 0;
+  padding-bottom: calc(600px / 670px * 100%);
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+ }
+
+ &__link {
+  position: absolute;
+  bottom:0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 735px;
+  padding: 40px 32px;
+  font-size: rem(32px);
+  line-height: 125%;
+  letter-spacing: -0.015em;
+  text-decoration: none;
+  background: var(--white-color);
+  border-radius: 20px;
+  transform: translateY(50%);
+ }
+}

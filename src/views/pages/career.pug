@@ -1,0 +1,181 @@
+extends ../layouts/main
+
+block vars
+  - const title = 'Home';
+  - const pageName = 'home-page';
+
+block content
+  - const heroTitle = 'Karriere'
+  - const heroDesc = 'Wir suchen engagierte und leidenschaftliche Rechtsanwälte/-innen mit unterschiedlichen Spezialisierungen und Qualifikationen - sowohl erfahrene Profis als auch motivierte Einsteiger/-innen.'
+  - const heroImage = '@/assets/img/hero/7.jpg'
+  include ../components/hero
+  section.section.container
+    .section-heading 
+      h2.section-heading__title Warum bei Ohletz arbeiten?
+    .career-features.swiper.js-career-features-slider 
+      .swiper-wrapper 
+        .career-features__item.swiper-slide
+          h3.career-features__title Entwicklungsmöglichkeiten
+          p.career-features__desc Interne Schulungen und Unterstützung bei externen Fortbildungen bieten Karrieremöglichkeiten.
+        .career-features__item.swiper-slide
+          h3.career-features__title Angenehme Arbeitsumgebung
+          p.career-features__desc Modernes Büro mit neuesten Technologien und kollegiale Arbeitsatmosphäre.
+        .career-features__item.swiper-slide
+          h3.career-features__title Herausfordernde Projekte
+          p.career-features__desc Spannende Projekte mit führenden Kunden, Zusammenarbeit mit Experten aus verschiedenen Bereichen.
+  section.section.container 
+    .section-heading 
+      h2.section-heading__title Ihre Benefits
+    .tabs 
+      .tabs-nav.tabs-nav--left(role="tablist" id="tabs-nav")
+        button.tabs-nav__item.active( id="betriebsklima-tab" data-bs-toggle="tab" data-bs-target="#betriebsklima-content" type="button" role="tab" aria-controls="betriebsklima-content" aria-selected="true")
+          span.tabs-nav__item-text Betriebsklima
+          span.tabs-nav__count 6
+        button.tabs-nav__item( id="aufgabenfeld-tab" data-bs-toggle="tab" data-bs-target="#aufgabenfeld-content" type="button" role="tab" aria-controls="bufgabenfeld-content" aria-selected="false")
+          span.tabs-nav__item-text Aufgabenfeld
+          span.tabs-nav__count 6
+        button.tabs-nav__item( id="entwicklung-tab" data-bs-toggle="tab" data-bs-target="#entwicklung-content" type="button" role="tab" aria-controls="entwicklung-content" aria-selected="false")
+          span.tabs-nav__item-text Entwicklung
+          span.tabs-nav__count 6
+      .tabs-content.container
+        .tabs-content__item.active(id="betriebsklima-content" role="tabpanel" aria-labelledby="betriebsklima-tab")
+          .benefits.swiper.js-benefits-slider
+            .benefits__grid.swiper-wrapper 
+              .benefits__item.swiper-slide 
+                picture.benefits__image 
+                  img(src="@/assets/img/features.jpg" alt="")
+                .benefits__icon 
+                  img(src="@/assets/img/features/1.svg" alt="")
+                h3.benefits__title Flexible Arbeitszeiten
+              .benefits__item.swiper-slide 
+                .benefits__icon 
+                  img(src="@/assets/img/features/2.svg" alt="")
+                h3.benefits__title Home-Office / mobile Arbeitstage möglich
+              .benefits__item.swiper-slide 
+                .benefits__icon 
+                  img(src="@/assets/img/features/3.svg" alt="")
+                h3.benefits__title Faire Vergütung
+              .benefits__item.swiper-slide 
+                .benefits__icon 
+                  img(src="@/assets/img/features/4.svg" alt="")
+                h3.benefits__title Weihnachtsgeld als 13. Gehalt
+              .benefits__item.swiper-slide 
+                .benefits__icon 
+                  img(src="@/assets/img/features/5.svg" alt="")
+                h3.benefits__title Angebot an fachlichen Fort- & Weiterbildungsmaßnahmen
+              .benefits__item.swiper-slide 
+                .benefits__icon 
+                  img(src="@/assets/img/features/6.svg" alt="")
+                h3.benefits__title Vollausgestatteter Arbeitsplatz
+        .tabs-content__item(id="aufgabenfeld-content" role="tabpanel" aria-labelledby="aufgabenfeld-tab")
+          .benefits.swiper.js-benefits-slider 
+            .benefits__grid.swiper-wrapper 
+              .benefits__item.swiper-slide 
+                picture.benefits__image 
+                  img(src="@/assets/img/features.jpg" alt="")
+                .benefits__icon 
+                  img(src="@/assets/img/features/1.svg" alt="")
+                h3.benefits__title Flexible Arbeitszeiten
+              .benefits__item.swiper-slide 
+                .benefits__icon 
+                  img(src="@/assets/img/features/2.svg" alt="")
+                h3.benefits__title Home-Office / mobile Arbeitstage möglich
+              .benefits__item.swiper-slide 
+                .benefits__icon 
+                  img(src="@/assets/img/features/3.svg" alt="")
+                h3.benefits__title Faire Vergütung
+              .benefits__item.swiper-slide 
+                .benefits__icon 
+                  img(src="@/assets/img/features/4.svg" alt="")
+                h3.benefits__title Weihnachtsgeld als 13. Gehalt
+              .benefits__item.swiper-slide 
+                .benefits__icon 
+                  img(src="@/assets/img/features/5.svg" alt="")
+                h3.benefits__title Angebot an fachlichen Fort- & Weiterbildungsmaßnahmen
+              .benefits__item.swiper-slide 
+                .benefits__icon 
+                  img(src="@/assets/img/features/6.svg" alt="")
+                h3.benefits__title Vollausgestatteter Arbeitsplatz
+        .tabs-content__item(id="aufgabenfeld-content" role="tabpanel" aria-labelledby="entwicklung-tab")
+  section.section.container
+    .row.presentation-block.g-0.d-flex.flex-columns.flex-md-row
+      .col-md-6.col-12
+        .presentation-block__text 
+          h2.presentation-block__title Atmosphäre
+          .presentation-block__desc 
+            p Unsere Kanzlei schätzt Menschen mit Persönlichkeit. 
+            p Wir sind stolz darauf, eine Kanzlei zu sein, die auf die individuellen Bedürfnisse und Wünsche unserer Mitarbeiter eingeht. Wir fördern und unterstützen unsere Teammitglieder, damit sie ihre Fähigkeiten und Fertigkeiten optimal nutzen können. Wir glauben daran, dass ein angenehmes Arbeitsumfeld und eine offene Kommunikation den Erfolg unserer Kanzlei ausmachen.
+            p Wenn Sie eine offene und herzliche Persönlichkeit besitzen und eine Leidenschaft für juristische Themen haben, sind Sie bei uns genau richtig. 
+          a.presentation-block__link(href="") Mehr Über uns
+            svg(width='32' height='32')
+              use(href='./assets/sprite.svg#arrow')
+      .col-md-6.col-12
+        picture.presentation-block__image
+          img(src="@/assets/img/presentation-slider/1.jpg" alt="")
+  section.section.container
+    .section-heading 
+      h2.section-heading__title Wir sind offen für Bewerber/-innen mit einer breiten Palette an Spezialisierungen und ausgewiesenen Qualifikationen
+      p.section-heading__desc Als dynamische und wachsende Kanzlei möchten wir unser Team weiter ausbauen. Wir sind immer auf der Suche nach talentierten und engagierten Menschen, die unsere Leidenschaft für das Recht teilen.
+    .vacancies
+      article.vacancies__item
+        a.vacancies__link(href="") 
+          picture.vacancies__image
+            img(src="@/assets/img/vacancies/1.jpg" alt="")
+          .vacancies__info 
+            h3.vacancies__title Rechtsanwalts- und Notarfachangestellte, Rechts- bzw. Notarfachwirte
+            p.vacancies__desc Zur Verstärkung unseres Teams suchen wir zum nächstmöglichen Termin eine/n Rechtsanwalts- und Notarfachangestellte, Rechts- bzw. Notarfachwirte (m/w/d) in Voll- oder Teilzeit in Essen.
+            .vacancies__tags.vacancies-tags 
+              span.vacancies-tags__item Essen
+              span.vacancies-tags__item Vollzeit
+              span.vacancies-tags__item Fachangestellte
+      article.vacancies__item
+        a.vacancies__link(href="") 
+          picture.vacancies__image
+            img(src="@/assets/img/vacancies/1.jpg" alt="")
+          .vacancies__info 
+            h3.vacancies__title Rechtsanwalts- und Notarfachangestellte, Rechts- bzw. Notarfachwirte
+            p.vacancies__desc Zur Verstärkung unseres Teams suchen wir zum nächstmöglichen Termin eine/n Rechtsanwalts- und Notarfachangestellte, Rechts- bzw. Notarfachwirte (m/w/d) in Voll- oder Teilzeit in Essen.
+            .vacancies__tags.vacancies-tags 
+              span.vacancies-tags__item Essen
+              span.vacancies-tags__item Vollzeit
+              span.vacancies-tags__item Fachangestellte
+      article.vacancies__item
+        a.vacancies__link(href="") 
+          picture.vacancies__image
+            img(src="@/assets/img/vacancies/1.jpg" alt="")
+          .vacancies__info 
+            h3.vacancies__title Rechtsanwalts- und Notarfachangestellte, Rechts- bzw. Notarfachwirte
+            p.vacancies__desc Zur Verstärkung unseres Teams suchen wir zum nächstmöglichen Termin eine/n Rechtsanwalts- und Notarfachangestellte, Rechts- bzw. Notarfachwirte (m/w/d) in Voll- oder Teilzeit in Essen.
+            .vacancies__tags.vacancies-tags 
+              span.vacancies-tags__item Essen
+              span.vacancies-tags__item Vollzeit
+              span.vacancies-tags__item Fachangestellte
+      article.vacancies__item
+        a.vacancies__link(href="") 
+          picture.vacancies__image
+            img(src="@/assets/img/vacancies/1.jpg" alt="")
+          .vacancies__info 
+            h3.vacancies__title Rechtsanwalts- und Notarfachangestellte, Rechts- bzw. Notarfachwirte
+            p.vacancies__desc Zur Verstärkung unseres Teams suchen wir zum nächstmöglichen Termin eine/n Rechtsanwalts- und Notarfachangestellte, Rechts- bzw. Notarfachwirte (m/w/d) in Voll- oder Teilzeit in Essen.
+            .vacancies__tags.vacancies-tags 
+              span.vacancies-tags__item Essen
+              span.vacancies-tags__item Vollzeit
+              span.vacancies-tags__item Fachangestellte
+  include ../components/cta-image
+  section.section
+    .section-heading.container 
+      h2.section-heading__title.section-heading__title--centered Das sagen unsere Mitarbeiter
+    .reviews-block.swiper.js-reviews-slider 
+      .swiper-wrapper
+        each val in [1,1,1,1,1,1,1,1,1,1,1,1]
+          .swiper-slide.reviews-block__item 
+            h4.reviews-block__name Leni
+            p.reviews-block__desc «I was at Facebook for 6 years. I started becoming bored, demotivated, exhausted, and becoming less productive and scored a “Meets Most Expectations” on my performance review. This was fatal. For starters. Everyone should hits a “Meets All Expectations”. It goes: “Meets None Expectations”, “Meets Most Expectations”, “Meets All Expectations”, “Exceeds Expectations”, “Redefines Expectations”.»
+      .slider-navigation
+        button.slider-navigation__prev.slider-navigation__btn(type="button")
+          svg(width='24' height='24')
+            use(href='./assets/sprite.svg#arrow-left')
+        .slider-navigation__pagination.pagination 
+        button.slider-navigation__next.slider-navigation__btn(type="button")
+          svg(width='24' height='24')
+            use(href='./assets/sprite.svg#arrow-right')

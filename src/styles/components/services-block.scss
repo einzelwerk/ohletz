@@ -1,0 +1,90 @@
+@use '../utils/mixins' as *;
+
+.services-block {
+  $this: &;
+
+  display: flex;
+  flex-direction: column;
+  gap:16px;
+  @include media(md) {
+    gap:10px;
+  }
+
+  &__background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    height: 100%;
+    padding: 40px;
+
+    img {
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__item {
+    position: relative;
+    background: transparent;
+    border:1px solid var(--dark-border);
+    transition: border-color .5s, background .5s, border-radius .25s;
+
+    &.active {
+      overflow: hidden;
+      background: var(--background);
+      border-radius: 24px;
+      #{$this}__icon {
+        display: none;
+      }
+      #{$this}__background {
+        display: block;
+      }
+    }
+
+    &:hover {
+      border-color: var(--black-color);
+      #{$this}__icon {
+        transform: translateX(10px);
+      }
+    }
+  }
+
+ 
+  &__link {
+    color:inherit;
+    text-decoration: none;
+  }
+
+  &__button {
+    margin: 0;
+    padding: 40px;
+    font-weight: 400;
+    font-size: rem(32px);
+    line-height: 125%;
+    letter-spacing: -0.02em;
+  }
+
+  &__icon {
+    transition: transform .5s;
+  }
+
+  &__content {
+    max-width: 630px;
+    padding: 40px;
+    padding-top: 0;
+  }
+
+  &__title {
+    margin-bottom: 40px;
+    font-weight: 400;
+    font-size: rem(32px);
+    line-height: 125%;
+    letter-spacing: -0.02em;
+  }
+
+  &__desc {
+    margin-bottom: 40px;
+    line-height: 150%;
+  }
+}

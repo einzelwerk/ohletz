@@ -1,0 +1,53 @@
+section.section-tabs
+  .tabs 
+    .tabs-nav(role="tablist" id="tabs-nav")
+      button.tabs-nav__item.active( id="alle-tab" data-bs-toggle="tab" data-bs-target="#alle-content" type="button" role="tab" aria-controls="alle-content" aria-selected="true")
+        span.tabs-nav__item-text Alle
+        span.tabs-nav__count 142
+      button.tabs-nav__item( id="cases-tab" data-bs-toggle="tab" data-bs-target="#cases-content" type="button" role="tab" aria-controls="cases-content" aria-selected="false")
+        span.tabs-nav__item-text Cases
+        span.tabs-nav__count 25
+      button.tabs-nav__item( id="news-tab" data-bs-toggle="tab" data-bs-target="#news-content" type="button" role="tab" aria-controls="news-content" aria-selected="false")
+        span.tabs-nav__item-text Cases
+        span.tabs-nav__count 117
+    .tabs-content.container
+      .tabs-content__item.active(id="alle-content" role="tabpanel" aria-labelledby="alle-tab")
+        .cards-grid 
+          each val in [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+            article.cards-grid__item.card-item
+              a.cards-grid__link.card-item__link(href="") 
+                .cards-grid__image-wrapper.card-item__image-wrapper 
+                  span.cards-grid__tag.card-item__tag Gesellschaftsrecht
+                  picture.cards-grid__image.card-item__image 
+                    img(src="@/assets/img/cards/1.jpg" alt="")
+                .cards-grid__text.card-item__text 
+                  h3.cards-grid__title.card-item__title The Rebirth of Insurance
+                  p.cards-grid__desc.card-item__desc Lorem Ipsum ist in der Industrie bereits der Standard Demo-Text seit 1500, als ein unbekannter Schriftsteller eine Hand voll Wörter nahm und dies...
+        button.cards-load-more.btn.btn--primary Mehr anzeigen
+      .tabs-content__item(id="cases-content" role="tabpanel" aria-labelledby="cases-tab") 
+        .cards-grid 
+          each val in [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+            article.cards-grid__item.card-item
+              a.cards-grid__link.card-item__link(href="") 
+                .cards-grid__image-wrapper.card-item__image-wrapper 
+                  span.cards-grid__tag.card-item__tag Gesellschaftsrecht 2
+                  picture.cards-grid__image.card-item__image 
+                    img(src="@/assets/img/cards/1.jpg" alt="")
+                .cards-grid__text.card-item__text 
+                  h3.cards-grid__title.card-item__title The Rebirth of Insurance
+                  p.cards-grid__desc.card-item__desc Lorem Ipsum ist in der Industrie bereits der Standard Demo-Text seit 1500, als ein unbekannter Schriftsteller eine Hand voll Wörter nahm und dies...
+        button.cards-load-more.btn.btn--primary Mehr anzeigen
+      .tabs-content__item(id="news-content" role="tabpanel" aria-labelledby="news-tab")
+        .cards-grid 
+          each val in [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+            article.cards-grid__item.card-item
+              a.cards-grid__link.card-item__link(href="") 
+                .cards-grid__image-wrapper.card-item__image-wrapper 
+                  span.cards-grid__tag.card-item__tag Gesellschaftsrecht 3
+                  picture.cards-grid__image.card-item__image 
+                    img(src="@/assets/img/cards/1.jpg" alt="")
+                .cards-grid__text.card-item__text 
+                  h3.cards-grid__title.card-item__title The Rebirth of Insurance
+                  p.cards-grid__desc.card-item__desc Lorem Ipsum ist in der Industrie bereits der Standard Demo-Text seit 1500, als ein unbekannter Schriftsteller eine Hand voll Wörter nahm und dies...
+          button.cards-load-more.btn.btn--primary Mehr anzeigen
+
