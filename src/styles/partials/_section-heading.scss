@@ -34,6 +34,10 @@
   &__desc {
     margin-bottom: 40px;
     text-indent: 50px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
   
 }

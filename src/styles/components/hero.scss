@@ -13,9 +13,10 @@
   }
 
   &__title {
+    margin: 0;
     font-weight: 400;
     font-size: rem(60px);
-    line-height: 140%;
+    line-height: 120%;
 
     span {
       background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%);
