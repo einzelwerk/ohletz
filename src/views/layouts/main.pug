@@ -17,7 +17,7 @@ html(lang=lang)
     script(defer src="./assets/scripts/main.js") 
     title #{title}
   body
-    div(class="app " + pageName)
+    .root
       include ../components/header
       .main
         block content

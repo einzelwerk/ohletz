@@ -1,6 +1,105 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/scripts/Classes/AttachedFiles.js":
+/*!**********************************************!*\
+  !*** ./src/scripts/Classes/AttachedFiles.js ***!
+  \**********************************************/
+/***/ (() => {
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var AttachedFiles = /*#__PURE__*/function () {
+  function AttachedFiles(container) {
+    var _this = this;
+    _classCallCheck(this, AttachedFiles);
+    this.container = container;
+    this.input = this.container.querySelector('input[type="file"]');
+    this.fileListContainer = this.container.querySelector(".attached-files");
+    document.addEventListener('change', function (event) {
+      if (event.target.closest('.js-attached-files')) {
+        _this.handleChange(event);
+      }
+    });
+    document.addEventListener('click', function (event) {
+      if (event.target.closest('.attached-files__item-delete')) {
+        _this.handleRemove(event);
+      }
+    });
+    this.fileList = [];
+  }
+  _createClass(AttachedFiles, [{
+    key: "handleChange",
+    value: function handleChange() {
+      var fileList = _toConsumableArray(this.input.files);
+      this.fileList = fileList;
+      this.updateInput();
+      this.renderFileList();
+    }
+  }, {
+    key: "handleRemove",
+    value: function handleRemove(event) {
+      var index = event.target.closest('.attached-files__item-delete').dataset.index;
+      this.fileList.splice(Number(index), 1);
+      this.updateInput();
+      this.renderFileList();
+    }
+  }, {
+    key: "renderFileList",
+    value: function renderFileList() {
+      var _this2 = this;
+      var svgClose = "\n        <svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g clip-path=\"url(#clip0_970_5261)\">\n          <path d=\"M6.58691 6.74731L9.41534 9.57574\" stroke=\"#0B0F16\" stroke-linecap=\"round\"/>\n          <path d=\"M9.41504 6.74731L6.58661 9.57574\" stroke=\"#0B0F16\" stroke-linecap=\"round\"/>\n          <circle cx=\"8.00065\" cy=\"7.99992\" r=\"6.16667\" stroke=\"#0B0F16\"/>\n          </g>\n          <defs>\n          <clipPath id=\"clip0_970_5261\">\n          <rect width=\"16\" height=\"16\" fill=\"white\"/>\n          </clipPath>\n          </defs>\n        </svg>      \n    ";
+      this.fileListContainer.innerHTML = '';
+      this.fileList.forEach(function (file, index) {
+        var fileContainer = document.createElement('div');
+        fileContainer.classList.add('attached-files__item');
+        fileContainer.innerHTML = "<div class=\"attached-files__item-name\">".concat(file.name, "</div> <button type=\"button\" class=\"attached-files__item-delete\" data-index=\"").concat(index, "\">").concat(svgClose, "</button>");
+        _this2.fileListContainer.appendChild(fileContainer);
+      });
+    }
+  }, {
+    key: "updateInput",
+    value: function updateInput() {
+      var dataTransfer = new DataTransfer();
+      this.fileList.forEach(function (file) {
+        dataTransfer.items.add(file);
+      });
+      this.input.files = dataTransfer.files;
+      if (this.input.files.length > 0) {
+        this.input.closest('.js-attached-files').querySelector('.main-form__label-file').classList.add('has-files');
+      } else {
+        this.input.closest('.js-attached-files').querySelector('.main-form__label-file').classList.remove('has-files');
+      }
+    }
+  }]);
+  return AttachedFiles;
+}();
+document.querySelectorAll('.js-attached-files').forEach(function (elem) {
+  return new AttachedFiles(elem);
+});
+var observer = new MutationObserver(function () {
+  document.querySelectorAll('.js-attached-files').forEach(function (elem) {
+    return new AttachedFiles(elem);
+  });
+});
+observer.observe(document.body, {
+  childList: true,
+  subtree: true,
+  characterDataOldValue: true
+});
+
+/***/ }),
+
 /***/ "./src/scripts/Classes/Sliders.js":
 /*!****************************************!*\
   !*** ./src/scripts/Classes/Sliders.js ***!
@@ -30,141 +129,128 @@ var Sliders = /*#__PURE__*/function () {
     key: "aboutUs",
     value: function aboutUs() {
       var root = document.querySelector('.js-about-us-slider');
-      var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
-        modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
-        init: false,
-        loop: true,
-        slidesPerView: 1.2,
-        spaceBetween: 20,
-        mousewheel: {
-          forceToAxis: true,
-          sensitivity: 0.3
-        },
-        breakpoints: {
-          768: {
-            slidesPerView: 2
+      if (root) {
+        var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
+          modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
+          init: false,
+          loop: true,
+          slidesPerView: 1.2,
+          spaceBetween: 20,
+          mousewheel: {
+            forceToAxis: true,
+            sensitivity: 0.3
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 2
+            }
           }
-        }
-      });
-      sliderInstance.init();
+        });
+        sliderInstance.init();
+      }
     }
   }, {
     key: "cards",
     value: function cards() {
       var root = document.querySelector('.js-cards-slider');
-      var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
-        modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
-        init: false,
-        loop: true,
-        slidesPerView: 1.2,
-        spaceBetween: 20,
-        mousewheel: {
-          forceToAxis: true,
-          sensitivity: 0.3
-        },
-        breakpoints: {
-          768: {
-            slidesPerView: 3
+      if (root) {
+        var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
+          modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
+          init: false,
+          loop: true,
+          slidesPerView: 1.2,
+          spaceBetween: 20,
+          mousewheel: {
+            forceToAxis: true,
+            sensitivity: 0.3
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 3
+            }
           }
-        }
-      });
-      sliderInstance.init();
+        });
+        sliderInstance.init();
+      }
     }
   }, {
     key: "services",
     value: function services() {
       var root = document.querySelector('.js-services-slider');
-      var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
-        modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
-        init: false,
-        loop: true,
-        slidesPerView: 1.2,
-        spaceBetween: 20,
-        mousewheel: {
-          forceToAxis: true,
-          sensitivity: 0.3
-        },
-        breakpoints: {
-          768: {
-            slidesPerView: 3
+      if (root) {
+        var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
+          modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
+          init: false,
+          loop: true,
+          slidesPerView: 1.2,
+          spaceBetween: 20,
+          mousewheel: {
+            forceToAxis: true,
+            sensitivity: 0.3
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 3
+            }
           }
-        }
-      });
-      sliderInstance.init();
+        });
+        sliderInstance.init();
+      }
     }
   }, {
     key: "defaultSlider",
     value: function defaultSlider() {
       var root = document.querySelector('.js-default-slider');
-      var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
-        modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
-        init: false,
-        loop: true,
-        slidesPerView: 1.2,
-        spaceBetween: 20,
-        mousewheel: {
-          forceToAxis: true,
-          sensitivity: 0.3
-        },
-        breakpoints: {
-          768: {
-            slidesPerView: 2
+      if (root) {
+        var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
+          modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
+          init: false,
+          loop: true,
+          slidesPerView: 1.2,
+          spaceBetween: 20,
+          mousewheel: {
+            forceToAxis: true,
+            sensitivity: 0.3
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 2
+            }
           }
-        }
-      });
-      sliderInstance.init();
+        });
+        sliderInstance.init();
+      }
     }
   }, {
     key: "teamSlider",
     value: function teamSlider() {
       var root = document.querySelector('.js-team-slider');
-      var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
-        modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
-        init: false,
-        loop: true,
-        slidesPerView: 1.2,
-        spaceBetween: 20,
-        mousewheel: {
-          forceToAxis: true,
-          sensitivity: 0.3
-        },
-        breakpoints: {
-          768: {
-            slidesPerView: 3
+      if (root) {
+        var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
+          modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
+          init: false,
+          loop: true,
+          slidesPerView: 1.2,
+          spaceBetween: 20,
+          mousewheel: {
+            forceToAxis: true,
+            sensitivity: 0.3
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 3
+            }
           }
-        }
-      });
-      sliderInstance.init();
+        });
+        sliderInstance.init();
+      }
     }
   }, {
     key: "careerSlider",
     value: function careerSlider() {
       var root = document.querySelector('.js-career-features-slider');
-      var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
-        modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
-        init: false,
-        slidesPerView: 1.2,
-        spaceBetween: 20,
-        mousewheel: {
-          forceToAxis: true,
-          sensitivity: 0.3
-        },
-        breakpoints: {
-          768: {
-            slidesPerView: 2
-          }
-        }
-      });
-      if (window.matchMedia(_utils_MatchMedia__WEBPACK_IMPORTED_MODULE_2__["default"].isDesktop).matches) {
-        sliderInstance.init();
-      }
-    }
-  }, {
-    key: "benifitsSlider",
-    value: function benifitsSlider() {
-      var root = document.querySelectorAll('.js-benefits-slider');
-      root.forEach(function (elem) {
-        var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](elem, {
+      if (root) {
+        var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
           modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
           init: false,
           slidesPerView: 1.2,
@@ -179,72 +265,103 @@ var Sliders = /*#__PURE__*/function () {
             }
           }
         });
-        if (window.matchMedia(_utils_MatchMedia__WEBPACK_IMPORTED_MODULE_2__["default"].isMobile).matches) {
+        if (window.matchMedia(_utils_MatchMedia__WEBPACK_IMPORTED_MODULE_2__["default"].isDesktop).matches) {
           sliderInstance.init();
         }
-      });
+      }
+    }
+  }, {
+    key: "benifitsSlider",
+    value: function benifitsSlider() {
+      var root = document.querySelectorAll('.js-benefits-slider');
+      if (root) {
+        root.forEach(function (elem) {
+          var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](elem, {
+            modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
+            init: false,
+            slidesPerView: 1.2,
+            spaceBetween: 20,
+            mousewheel: {
+              forceToAxis: true,
+              sensitivity: 0.3
+            },
+            breakpoints: {
+              768: {
+                slidesPerView: 2
+              }
+            }
+          });
+          if (window.matchMedia(_utils_MatchMedia__WEBPACK_IMPORTED_MODULE_2__["default"].isMobile).matches) {
+            sliderInstance.init();
+          }
+        });
+      }
     }
   }, {
     key: "presentationSlider",
     value: function presentationSlider() {
       var root = document.querySelector('.js-presentation-slider');
-      var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
-        modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
-        init: false,
-        slidesPerView: 1.2,
-        spaceBetween: 20,
-        mousewheel: {
-          forceToAxis: true,
-          sensitivity: 0.3
-        },
-        breakpoints: {
-          768: {
-            slidesPerView: 1
+      if (root) {
+        var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
+          modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
+          init: false,
+          slidesPerView: 1.2,
+          spaceBetween: 20,
+          mousewheel: {
+            forceToAxis: true,
+            sensitivity: 0.3
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 1
+            }
           }
+        });
+        if (window.matchMedia(_utils_MatchMedia__WEBPACK_IMPORTED_MODULE_2__["default"].isDesktop).matches) {
+          sliderInstance.init();
         }
-      });
-      if (window.matchMedia(_utils_MatchMedia__WEBPACK_IMPORTED_MODULE_2__["default"].isDesktop).matches) {
-        sliderInstance.init();
       }
     }
   }, {
     key: "reviewsSlider",
     value: function reviewsSlider() {
       var root = document.querySelector('.js-reviews-slider');
-      var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
-        modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel, swiper__WEBPACK_IMPORTED_MODULE_0__.Pagination, swiper__WEBPACK_IMPORTED_MODULE_0__.Navigation],
-        init: false,
-        loop: true,
-        slidesPerView: 1.2,
-        spaceBetween: 20,
-        mousewheel: {
-          forceToAxis: true,
-          sensitivity: 0.3
-        },
-        pagination: {
-          el: root.querySelector('.pagination'),
-          type: 'fraction',
-          formatFractionCurrent: function formatFractionCurrent(number) {
-            return "0".concat(number).slice(-2);
+      if (root) {
+        var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](root, {
+          modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel, swiper__WEBPACK_IMPORTED_MODULE_0__.Pagination, swiper__WEBPACK_IMPORTED_MODULE_0__.Navigation],
+          init: false,
+          loop: true,
+          slidesPerView: 1.2,
+          spaceBetween: 20,
+          mousewheel: {
+            forceToAxis: true,
+            sensitivity: 0.3
           },
-          formatFractionTotal: function formatFractionTotal(number) {
-            return "0".concat(number).slice(-2);
+          pagination: {
+            el: root.querySelector('.pagination'),
+            type: 'fraction',
+            formatFractionCurrent: function formatFractionCurrent(number) {
+              return "0".concat(number).slice(-2);
+            },
+            formatFractionTotal: function formatFractionTotal(number) {
+              return "0".concat(number).slice(-2);
+            }
+          },
+          navigation: {
+            prevEl: root.querySelector('.slider-navigation__prev'),
+            nextEl: root.querySelector('.slider-navigation__next')
+          },
+          breakpoints: {
+            768: {
+              centeredSlides: true,
+              slidesPerView: 3,
+              spaceBetween: 80
+            }
           }
-        },
-        navigation: {
-          prevEl: root.querySelector('.slider-navigation__prev'),
-          nextEl: root.querySelector('.slider-navigation__next')
-        },
-        breakpoints: {
-          768: {
-            centeredSlides: true,
-            slidesPerView: 3,
-            spaceBetween: 80
-          }
+        });
+        if (window.matchMedia(_utils_MatchMedia__WEBPACK_IMPORTED_MODULE_2__["default"].isDesktop).matches) {
+          sliderInstance.init();
         }
-      });
-      if (window.matchMedia(_utils_MatchMedia__WEBPACK_IMPORTED_MODULE_2__["default"].isDesktop).matches) {
-        sliderInstance.init();
       }
     }
   }]);
@@ -12695,9 +12812,12 @@ var __webpack_exports__ = {};
   \****************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Classes_Sliders__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Classes/Sliders */ "./src/scripts/Classes/Sliders.js");
-/* harmony import */ var _utils_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/bootstrap */ "./src/scripts/utils/bootstrap.js");
-/* harmony import */ var _modules_servicesCards__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/servicesCards */ "./src/scripts/modules/servicesCards.js");
-/* harmony import */ var _modules_servicesCards__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_modules_servicesCards__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Classes_AttachedFiles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Classes/AttachedFiles */ "./src/scripts/Classes/AttachedFiles.js");
+/* harmony import */ var _Classes_AttachedFiles__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Classes_AttachedFiles__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/bootstrap */ "./src/scripts/utils/bootstrap.js");
+/* harmony import */ var _modules_servicesCards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/servicesCards */ "./src/scripts/modules/servicesCards.js");
+/* harmony import */ var _modules_servicesCards__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_modules_servicesCards__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 

@@ -1,0 +1,159 @@
+@use '../utils/mixins' as *;
+
+.vacancy-sidebar {
+  position: relative;
+  position: sticky;
+  top:20px;
+  height: 520px;
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    position: absolute;
+    bottom:30px;
+    left: 54px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 280px;
+   
+  }
+
+  &__title {
+    margin-bottom: 12px;
+    font-weight: 400;
+    font-size: rem(24px);
+    line-height: 133%;
+    letter-spacing: -0.01em;
+  }
+
+  &__desc {
+    margin-bottom: 24px;
+    line-height: 150%;
+  }
+ 
+}
+
+.vacancy-single {
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap:105px;
+  margin-top: var(--gap-y-m);
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap:var(--gap-y-m)
+  }
+}
+
+.vacancy-section {
+  &__title {
+    margin-bottom: 48px;
+    font-weight: 400;
+    font-size: rem(40px);
+    line-height: 120%;
+    letter-spacing: -0.02em;
+  }
+}
+
+.vacancy-list {
+  display: flex;
+  flex-direction: column;
+  gap:24px;
+  margin: 0;
+  padding: 0;
+  padding-left: 24px;
+  border-left: 1px solid var(--dark-border);
+
+  &__item {
+    font-size: rem(18px);
+    line-height: 140%;
+    letter-spacing: -0.01em;
+  }
+}
+
+.vacancy-cta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap:20px;
+
+
+  &__form {
+    padding: 40px;
+    background: var(--lt-gray-color);
+  }
+
+  &__title {
+    margin-bottom: 24px;
+    font-weight: 400;
+    font-size: rem(40px);
+    line-height: 120%;
+    letter-spacing: -0.02em;
+  }
+
+  &__desc {
+    margin-bottom: 40px;
+    font-size: rem(24px);
+    line-height: 133%;
+    letter-spacing: -0.01em;
+  }
+  
+}
+
+.vacancy-manager {
+  position: relative;
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    position: absolute;
+    bottom:40px;
+    left: 40px;
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    color:var(--white-color);
+  }
+
+  &__name {
+    margin: 0;
+    font-weight: 400;
+    font-size: rem(40px);
+    line-height: 120%;
+    letter-spacing: -0.02em;
+  }
+
+  &__position {
+    margin: 0;
+    font-size: rem(24px);
+    line-height: 133%;
+    letter-spacing: -0.01em;
+  }
+}

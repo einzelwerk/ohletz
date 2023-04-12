@@ -23,3 +23,62 @@ $breakpoints: (
 @function rem($px) {
   @return calc($px / 16px * 1rem);
 }
+
+
+@mixin h1 {
+  margin-bottom: 24px;
+  font-weight: 400;
+  font-size: rem(60px);
+  line-height: 72px;
+  
+  @include media(md) {
+    font-size: rem(36px);
+  }
+}
+
+@mixin h2 {
+  margin-bottom: 24px;
+  font-weight: 400;
+  font-size: rem(40px);
+  line-height: 48px;
+  
+  @include media(md) {
+    font-size: rem(30px);
+  }
+}
+
+@mixin h3 {
+  margin-bottom: 24px;
+  font-weight: 400;
+  font-size: rem(32px);
+  line-height: 40px;
+  @include media(md) {
+    font-size: rem(24px);
+  }
+}
+
+@mixin h4 {
+  margin-bottom: 16px;
+  font-weight: 400;
+  font-size: rem(24px);
+  line-height: 32px;
+  @include media(md) {
+    font-size: rem(20px);
+  }
+}
+
+@mixin h5 {
+  margin-bottom: 24px;
+  font-weight: 400;
+  font-size: rem(24px);
+  line-height: 32px;
+
+  @include media(md) {
+    font-size: rem(20px);
+  }
+}
+
+@mixin p {
+  font-size: rem(16px);
+  line-height: 150%;
+}

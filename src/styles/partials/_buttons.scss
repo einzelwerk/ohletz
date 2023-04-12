@@ -32,6 +32,11 @@
     gap:8px;
     align-items: center;
   }
+
+  &--back-link {
+    padding: 12px 16px;
+    font-weight: 400;
+  }
 }
 
 .accordion-button::after {

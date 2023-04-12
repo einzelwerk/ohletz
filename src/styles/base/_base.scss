@@ -1,3 +1,5 @@
+@use '../utils/mixins' as *;
+
 .visually-hidden {
   position: absolute !important;
   width: 0 !important;
@@ -12,24 +14,79 @@
   padding-top: var(--gap-y);
   padding-bottom: var(--gap-y);
 
+  &--m {
+    padding-top: var(--gap-y-m);
+    padding-bottom: var(--gap-y-m);
+  }
+
   &--no-top {
     padding-top: 0;
   }
 
-  &:last-of-type {
-    padding-bottom: 0;
+  &--hero {
+    padding-top: var(--gap-y-m);
   }
+
+  &--contacts {
+    padding-top: 0;
+    padding-bottom:calc( var(--gap-y) * 2);
+  }
+
+ 
 }
 
 .single-section {
   margin-top: 30px;
 }
 
-body {
-  overflow-x: hidden;
+
+.root {
+  overflow: clip;
 }
 
 
 .ratio  * {
   object-fit: cover;
 }
+
+.blue-text {
+  font-size: rem(60px);
+  line-height: 120%;
+  letter-spacing: -0.03em;
+  background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%);
+  // stylelint-disable-next-line
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+}
+
+
+body h1 {
+  @include h1;
+}
+
+body h2 {
+  @include h2;
+}
+
+body h3 {
+  @include h3;
+}
+
+body h4 {
+  @include h4;
+}
+
+body h5 {
+  @include h5;
+}
+
+body p {
+  @include p;
+}
+
+.editor-content {
+  max-width: 800px;
+}
+

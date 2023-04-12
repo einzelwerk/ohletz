@@ -1,9 +1,12 @@
+
+
 @import '../../../node_modules/bootstrap/scss/functions';
 @import '../../../node_modules/bootstrap/scss/variables';
 @import '../../../node_modules/bootstrap/scss/mixins';
 @import '../../../node_modules/bootstrap/scss/maps';
 @import '../../../node_modules/bootstrap/scss/utilities';
 @import '../../../node_modules/bootstrap/scss/helpers';
+
 
 $container-max-widths: (
   sm: 540px,
@@ -12,6 +15,15 @@ $container-max-widths: (
   xl: 1140px,
   xxl: 1360px
 );
+$form-floating-height:            add(62px, $input-height-border);
+$form-floating-line-height:       1.25;
+$form-floating-padding-x:         0;
+$form-floating-padding-y:         14px;
+$form-floating-input-padding-t:   26px;
+$form-floating-input-padding-b:   .14px;;
+$form-floating-label-opacity:     1;
+$form-floating-label-transform:   scale(.75) translateY(-.5rem) translateX(.15rem);
+$form-floating-transition:        opacity .1s ease-in-out, transform .1s ease-in-out;
 
 @import '../../../node_modules/bootstrap/scss/reboot';
 @import '../../../node_modules/bootstrap/scss/containers';
@@ -20,5 +32,5 @@ $container-max-widths: (
 @import '../../../node_modules/bootstrap/scss/transitions';
 @import '../../../node_modules/bootstrap/scss/accordion';
 @import '../../../node_modules/bootstrap/scss/nav';
-
+@import '../../../node_modules/bootstrap/scss/forms';
 

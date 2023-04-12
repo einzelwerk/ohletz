@@ -9,7 +9,7 @@ block content
   - const heroDesc = 'Mittelstand und Freiberufler. Wir bieten Ihnen spezialisierte rechtliche Expertise aus einer Hand.'
   - const heroImage = '@/assets/img/hero/6.jpg'
   section.section.single-section.container
-    a.back-btn.btn.btn--primary.btn--arrow(href="") 
+    a.btn.btn--primary.btn--back-link.btn--arrow(href="") 
       svg(width='32' height='32')
         use(href='./assets/sprite.svg#arrow-link')
       | Zurück zum Team
@@ -55,11 +55,11 @@ block content
     .section-heading 
       h5.section-heading__title Experten in den gleichen Rechtsgebieten
     .team-grid
-        each val in [1,1,1,1,1,1,1]
-          .team-item.swiper-slide 
-            picture.team-item__image 
-              img(src="@/assets/img/team/1.jpg" alt="")
-            .team-item__text 
-              h4.team-item__name Lukas Erdmann
-              span.team-item__position Fachanwalt für Gewerblichen Rechtsschutz, Notar
+      each val in [1,1,1,1,1,1,1]
+        .team-item.swiper-slide 
+          picture.team-item__image 
+            img(src="@/assets/img/team/1.jpg" alt="")
+          .team-item__text 
+            h4.team-item__name Lukas Erdmann
+            span.team-item__position Fachanwalt für Gewerblichen Rechtsschutz, Notar
   include ../components/cta

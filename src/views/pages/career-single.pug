@@ -1,0 +1,110 @@
+extends ../layouts/main
+
+block vars
+  - const title = 'Home';
+  - const pageName = 'home-page';
+
+block content
+  - const heroTitle = 'Rechtsanwalts- und Notarfachangestellte, Rechts- bzw. Notarfachwirte'
+  - const heroBack = true
+  - const heroImage = '@/assets/img/hero/8.jpg'
+  include ../components/hero
+  section.section.container 
+    .section-heading 
+      h2.section-heading__title Zur Verstärkung unseres Teams suchen wir zum nächstmöglichen Termin Rechtsanwalts- <span>und Notarfachangestellte,</span> Rechts- bzw. Notarfachwirte (m/w/d) in Voll- oder Teilzeit in Essen.
+    .vacancy-single 
+      article.vacancy-single__content
+        section.vacancy-single__section.vacancy-section
+          h2.vacancy-section__title Ihre Aufgaben - Anwaltsbereich:
+          ul.vacancy-section__list.vacancy-list 
+            li.vacancy-list__item Allgemeine Sekretariats- und Assistenztätigkeit
+            li.vacancy-list__item Erstellung von Schriftsätzen nach Diktat
+            li.vacancy-list__item Erstellung von Kostenrechnungen
+            li.vacancy-list__item Kontrolle von Fristen und Wiedervorlagen
+            li.vacancy-list__item Weitestgehend digitale Aktenverwaltung und Postbearbeitung
+            li.vacancy-list__item Direkte Kommunikation mit Mandanten, Gerichten, Gerichtsvollziehern und Behörden
+            li.vacancy-list__item Erstellung und Ausarbeitung von Schriftsätzen und Gutachten in enger Zusammenarbeit mit den Rechtsanwälten/innen
+        section.vacancy-single__section.vacancy-section
+          h2.vacancy-section__title Ihre Aufgaben - Anwaltsbereich:
+          ul.vacancy-section__list.vacancy-list 
+            li.vacancy-list__item Allgemeine Sekretariats- und Assistenztätigkeit
+            li.vacancy-list__item Erstellung von Schriftsätzen nach Diktat
+            li.vacancy-list__item Erstellung von Kostenrechnungen
+            li.vacancy-list__item Kontrolle von Fristen und Wiedervorlagen
+            li.vacancy-list__item Weitestgehend digitale Aktenverwaltung und Postbearbeitung
+            li.vacancy-list__item Direkte Kommunikation mit Mandanten, Gerichten, Gerichtsvollziehern und Behörden
+            li.vacancy-list__item Erstellung und Ausarbeitung von Schriftsätzen und Gutachten in enger Zusammenarbeit mit den Rechtsanwälten/innen
+        section.vacancy-single__section.vacancy-section
+          h2.vacancy-section__title Ihre Aufgaben - Anwaltsbereich:
+          ul.vacancy-section__list.vacancy-list 
+            li.vacancy-list__item Allgemeine Sekretariats- und Assistenztätigkeit
+            li.vacancy-list__item Erstellung von Schriftsätzen nach Diktat
+            li.vacancy-list__item Erstellung von Kostenrechnungen
+            li.vacancy-list__item Kontrolle von Fristen und Wiedervorlagen
+            li.vacancy-list__item Weitestgehend digitale Aktenverwaltung und Postbearbeitung
+            li.vacancy-list__item Direkte Kommunikation mit Mandanten, Gerichten, Gerichtsvollziehern und Behörden
+            li.vacancy-list__item Erstellung und Ausarbeitung von Schriftsätzen und Gutachten in enger Zusammenarbeit mit den Rechtsanwälten/innen
+        section.vacancy-single__section.vacancy-section
+          h2.vacancy-section__title Ihre Aufgaben - Anwaltsbereich:
+          ul.vacancy-section__list.vacancy-list 
+            li.vacancy-list__item Allgemeine Sekretariats- und Assistenztätigkeit
+            li.vacancy-list__item Erstellung von Schriftsätzen nach Diktat
+            li.vacancy-list__item Erstellung von Kostenrechnungen
+            li.vacancy-list__item Kontrolle von Fristen und Wiedervorlagen
+            li.vacancy-list__item Weitestgehend digitale Aktenverwaltung und Postbearbeitung
+            li.vacancy-list__item Direkte Kommunikation mit Mandanten, Gerichten, Gerichtsvollziehern und Behörden
+            li.vacancy-list__item Erstellung und Ausarbeitung von Schriftsätzen und Gutachten in enger Zusammenarbeit mit den Rechtsanwälten/innen
+      aside.vacancy-single__sidebar.vacancy-sidebar 
+        picture.vacancy-sidebar__image
+          img(src="@/assets/img/vacancy-sidebar.jpg" alt="")
+        .vacancy-sidebar__content 
+          h3.vacancy-sidebar__title Eine Frage stellen
+          .vacancy-sidebar__desc Wir helfen Ihnen gerne.<br> Kontaktieren Sie uns einfach!
+          a.vacancy-sidebar__btn.btn.btn--secondary(href="") Nachricht
+  section.section.container
+    .section
+      .vacancy-cta 
+        .vacancy-cta__form 
+          h3.vacancy-cta__title Interessiert? 
+          p.vacancy-cta__desc Dann bewerben Sie sich jetzt! Wir melden uns innerhalb von 5 Tagen bei Ihnen zurück!
+          form.main-form(action="")
+            .main-form__grid
+              .main-form__item.form-floating
+                input#main-form-name.main-form__input.form-control(type="text" placeholder=" ")
+                label.main-form__label(for="main-form-name") Name  
+              .main-form__item.form-floating
+                input#main-form-telefon.main-form__input.form-control(type="text" placeholder=" ")
+                label.main-form__label(for="main-form-telefon") Telefon
+              .main-form__item.form-floating
+                input#main-form-email.main-form__input.form-control(type="text" placeholder=" ")
+                label.main-form__label(for="main-form-email") E-Mail
+              .main-form__item.form-floating
+                input#main-form-position.main-form__input.form-control(type="text" placeholder=" ")
+                label.main-form__label(for="main-form-position") Position / Stelle
+              .main-form__item.main-form__item--file.js-attached-files
+                input#main-form-file.main-form__input.main-form__input--file.visually-hidden(type="file"  multiple)
+                label.main-form__label-file(for="main-form-file")
+                  span.main-form__label-file-text CV hochladen
+                  span.main-form__file-placeholder
+                span.attached-files-area 
+                  span.attached-files
+              .main-form__item.form-floating
+                textarea#main-form-message.main-form__input.main-form__input--textarea.form-control(type="text" placeholder=" ")
+                label.main-form__label(for="main-form-message") Ihre Nachricht
+            .main-form__checkbox.checkbox
+              input#main-form-checkbox.main-form__checkbox.checkbox__input.visually-hidden(type="checkbox" checked)
+              label.checkbox__fake(for="main-form-checkbox") 
+              .checkbox__wrapper
+                label.main-form__label-checkbox.checkbox__label(for="main-form-checkbox") Ich akzeptiere die 
+                a.checkbox__link(href="")  Datenschutzerklärung
+            button.main-form__submit.btn.btn--secondary(type="submit") Senden
+        .vacancy-cta__manager.vacancy-manager 
+          picture.vacancy-manager__image
+            img(src="@/assets/img/manager.jpg" alt="")
+          .vacancy-manager__info 
+            h4.vacancy-manager__name Sadegül Ibis
+            p.vacancy-manager__position Ihr Ansprechpartner
+
+
+
+

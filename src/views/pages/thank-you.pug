@@ -1,5 +1,15 @@
-section.section.section--hero
-  .hero
+extends ../layouts/main
+
+block vars
+  - const title = 'Home';
+  - const pageName = 'home-page';
+
+block content
+  - const heroTitle = 'Vielen Dank für Ihre Bewerbung! Wir melden uns innerhalb von 5 Tagen bei Ihnen zurück.'
+  - const heroBack = true
+  - const heroImage = '@/assets/img/hero/9.jpg'
+  section.section.section--hero.pb-0
+  .hero.m-0
     .container.d-md-flex.justify-content-between.align-items-center
       div(class=col12 ? 'col-md-12' : 'col-md-8')
         if heroBack

@@ -1,0 +1,88 @@
+extends ../layouts/main
+
+block content
+  - const heroTitle = 'Kontakt'
+  - const col12 = true
+  section.section.section--hero.pb-0
+    .hero
+      .container.d-md-flex.justify-content-between.align-items-center
+        div(class=col12 ? 'col-md-12' : 'col-md-8')
+          if heroBack
+            a.btn.btn--primary.btn--back-link.btn--arrow(href="") 
+              svg(width='24' height='24')
+                use(href='./assets/sprite.svg#arrow-link')
+              | Return
+          h1.hero__title=heroTitle
+        if heroDesc
+          .col-md-4 
+            p.hero__desc=heroDesc
+      if heroImage
+        .container-fluid.g-0
+          picture.hero__image.d-block.w-100.ratio.ratio-16x9
+            img(src=heroImage alt="")
+  section.section.section--contacts 
+    .contacts 
+      .contacts-header.container
+        .contacts-header__item
+          address.contacts-header__value Bonsiepen 13, 45136 Essen
+          .contacts-header__dropdown.contacts-dropdown
+            .contacts-dropdown__main 
+              .contacts-dropdown__item <span>Montag</span> 08:00–18:00
+                svg.contacts-dropdown__arrow(width='20' height='20')
+                  use(href='./assets/sprite.svg#arrow-down')
+            .contacts-dropdown__content
+              .contacts-dropdown__item <span>Dienstag</span> 08:00–18:00
+              .contacts-dropdown__item <span>Mittwoch</span> 08:00–18:00
+              .contacts-dropdown__item <span>Donnerstag</span> 08:00–18:00
+              .contacts-dropdown__item <span>Freitag</span> 08:00–18:00
+              .contacts-dropdown__item <span>Samstag</span> 08:00–18:00
+              .contacts-dropdown__item <span>Sonntag</span> 08:00–18:00
+        .contacts-header__item
+          a.contacts-header__value(href="")  +49 201 95 98 2-0
+          a.contacts-header__value(href="") info@ohletz.eu
+      .contacts-map 
+        picture.contacts-map__picture 
+          img(src="@/assets/img/map.jpg" alt="")
+        svg.contacts-map__pin(width='48' height='48')
+          use(href='./assets/sprite.svg#pin')
+        a.contacts-map__route(href="#" target="_blank") Routenplaner
+          svg(width='20' height='20')
+            use(href='./assets/sprite.svg#route')
+      .contacts-cta.vacancy-cta.container
+        .vacancy-cta__form 
+          h3.vacancy-cta__title Interessiert? 
+          p.vacancy-cta__desc Dann bewerben Sie sich jetzt! Wir melden uns innerhalb von 5 Tagen bei Ihnen zurück!
+          form.main-form(action="")
+            .main-form__grid
+              .main-form__item.form-floating
+                input#main-form-name.main-form__input.form-control(type="text" placeholder=" ")
+                label.main-form__label(for="main-form-name") Name  
+              .main-form__item.form-floating
+                input#main-form-telefon.main-form__input.form-control(type="text" placeholder=" ")
+                label.main-form__label(for="main-form-telefon") Telefon
+              .main-form__item.form-floating
+                input#main-form-email.main-form__input.form-control(type="text" placeholder=" ")
+                label.main-form__label(for="main-form-email") E-Mail
+              .main-form__item.form-floating
+                input#main-form-position.main-form__input.form-control(type="text" placeholder=" ")
+                label.main-form__label(for="main-form-position") Position / Stelle
+              .main-form__item.form-floating
+                input#main-form-theme.main-form__input.form-control(type="text" placeholder=" ")
+                label.main-form__label(for="main-form-theme") Betreff
+              .main-form__item.form-floating
+                textarea#main-form-message.main-form__input.main-form__input--textarea.form-control(type="text" placeholder=" ")
+                label.main-form__label(for="main-form-message") Ihre Nachricht
+            .main-form__checkbox.checkbox
+              input#main-form-checkbox.main-form__checkbox.checkbox__input.visually-hidden(type="checkbox" checked)
+              label.checkbox__fake(for="main-form-checkbox") 
+              .checkbox__wrapper
+                label.main-form__label-checkbox.checkbox__label(for="main-form-checkbox") Ich akzeptiere die 
+                a.checkbox__link(href="")  Datenschutzerklärung
+            button.main-form__submit.btn.btn--secondary(type="submit") Senden
+        .contacts-cta__image 
+          .contacts-cta__text 
+            h3.contacts-cta__title Sie sind bereits Mandant?
+            p.contacts-cta__desc Wenden Sie sich bitte unter Angabe Ihrer Mandantennummer direkt an Ihren Ansprechpartner. Die Kontaktdaten entnehmen Sie bitte aus dem Schreiben.
+          picture.contacts-cta__picture
+            img(src="@/assets/img/contacts-cta.jpg" alt="")
+
