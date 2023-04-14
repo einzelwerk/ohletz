@@ -13,8 +13,10 @@
     <div class="root">
       <header class="header container">
         <div class="header__logo logo"> <a class="logo__link" href="/"> 
-            <picture class="logo__picture"> <img src="./assets/img/logo.svg" alt=""></picture></a></div>
-        <nav class="header__nav nav"> 
+            <picture class="logo__picture">
+              <source media="(max-width:768px)" srcset="./assets/img/logo-m.svg"><img src="./assets/img/logo.svg" alt="">
+            </picture></a></div>
+        <nav class="header__nav nav hidden-mobile"> 
           <ul class="nav__list">
             <li class="nav__item"> <a class="nav__link" href="/">Startseite</a></li>
             <li class="nav__item"> <a class="nav__link" href="services.html">Rechtsgebiete</a></li>
@@ -24,10 +26,50 @@
             <li class="nav__item"> <a class="nav__link" href="team-single.html">Team single</a></li>
             <li class="nav__item"> <a class="nav__link" href="career.html">Karriere</a></li>
             <li class="nav__item"> <a class="nav__link" href="career-single.html">Karriere single</a></li>
-            <li class="nav__item"> <a class="nav__link" href="#">Kontakt</a></li>
+            <li class="nav__item"> <a class="nav__link" href="contacts.html">Kontakt</a></li>
           </ul>
         </nav><a class="header__btn btn btn--primary" href=""> <span class="btn__inner">Kontakt aufnehmen</span></a>
+        <div class="header__mobile-btn hidden-desktop js-trigger-class" data-trigger="mobile-nav"> 
+          <svg width="30" height="30">
+            <use href="./assets/sprite.svg#burger"></use>
+          </svg>
+        </div>
       </header>
+      <div class="mobile-nav-wrapper hidden-desktop" data-target="mobile-nav"> 
+        <div class="mobile-nav-wrapper__inner container">
+          <header class="header">
+            <div class="header__logo logo"> <a class="logo__link" href="/"> 
+                <picture class="logo__picture">
+                  <source media="(max-width:768px)" srcset="./assets/img/logo-m.svg"><img src="./assets/img/logo.svg" alt="">
+                </picture></a></div>
+            <div class="header__mobile-btn hidden-desktop js-trigger-class" data-trigger="mobile-nav"> 
+              <svg width="30" height="30">
+                <use href="./assets/sprite.svg#close"></use>
+              </svg>
+            </div>
+          </header>
+          <nav class="mobile-nav">
+            <ul class="mobile-nav__list"> 
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="/">Startseite</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="services.html">Rechtsgebiete</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="about-us.html">Über uns</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="cases-and-news.html">Cases / News</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="team.html">Team</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="team-single.html">Team single</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="career.html">Karriere</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="career-single.html">Karriere single</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="contacts.html">Kontakt</a></li>
+            </ul>
+          </nav>
+          <div class="footer-contacts mobile-nav-contacts"> 
+            <h4 class="footer__heading">Kontakt</h4>
+            <div class="footer-contacts__inner mobile-nav-contacts__inner"> 
+              <address class="footer-contacts__item mobile-nav-contacts__item"> Bonsiepen 13 45136 Essen</address><a class="footer-contacts__item mobile-nav-contacts__item" href="">+49 201 95 98 20</a><a class="footer-contacts__item mobile-nav-contacts__item" href="">info@ohletz.eu</a>
+            </div>
+            <div class="mobile-nav-contacts__socials footer-socials"><a class="footer-socials__item" href=""> <img class="footer-socials__image" src="./assets/img/socials/1.svg" alt=""></a><a class="footer-socials__item" href=""> <img class="footer-socials__image" src="./assets/img/socials/2.svg" alt=""></a><a class="footer-socials__item" href=""> <img class="footer-socials__image" src="./assets/img/socials/3.svg" alt=""></a></div>
+          </div>
+        </div>
+      </div>
       <div class="main">
         <section class="section section--hero pb-0">
           <div class="hero">
@@ -63,7 +105,7 @@
                 <div class="services-cards__desc"> 
                   <p>Ihr Arbeitnehmer: Die wichtigste Ressource im Unternehmen.</p>
                   <p>Im Arbeitsrecht beraten wir Arbeitnehmer und Arbeitgeber zu sämtlichen rechtlichen Fällen am Arbeitsplatz. </p>
-                </div><a class="services-cards__btn btn btn--secondary" href="">Mehr erfahren</a>
+                </div><a class="services-cards__btn btn btn--secondary" href=""><span>Mehr erfahren</span></a>
               </div>
               <div class="services-cards__item js-services-cards" style="--background:#F6E6FA" id="services-card-2">
                 <div class="services-cards__title">Arbeitsrecht</div>
@@ -71,7 +113,7 @@
                 <div class="services-cards__desc"> 
                   <p>Ihr Arbeitnehmer: Die wichtigste Ressource im Unternehmen.</p>
                   <p>Im Arbeitsrecht beraten wir Arbeitnehmer und Arbeitgeber zu sämtlichen rechtlichen Fällen am Arbeitsplatz. </p>
-                </div><a class="services-cards__btn btn btn--secondary" href="">Mehr erfahren</a>
+                </div><a class="services-cards__btn btn btn--secondary" href=""><span>Mehr erfahren</span></a>
               </div>
               <div class="services-cards__item js-services-cards" style="--background:#E7DEFF" id="services-card-3">
                 <div class="services-cards__title">Arbeitsrecht</div>
@@ -79,7 +121,7 @@
                 <div class="services-cards__desc"> 
                   <p>Ihr Arbeitnehmer: Die wichtigste Ressource im Unternehmen.</p>
                   <p>Im Arbeitsrecht beraten wir Arbeitnehmer und Arbeitgeber zu sämtlichen rechtlichen Fällen am Arbeitsplatz. </p>
-                </div><a class="services-cards__btn btn btn--secondary" href="">Mehr erfahren</a>
+                </div><a class="services-cards__btn btn btn--secondary" href=""><span>Mehr erfahren</span></a>
               </div>
               <div class="services-cards__item js-services-cards" style="--background:#DEEFFF" id="services-card-4">
                 <div class="services-cards__title">Arbeitsrecht</div>
@@ -87,7 +129,7 @@
                 <div class="services-cards__desc"> 
                   <p>Ihr Arbeitnehmer: Die wichtigste Ressource im Unternehmen.</p>
                   <p>Im Arbeitsrecht beraten wir Arbeitnehmer und Arbeitgeber zu sämtlichen rechtlichen Fällen am Arbeitsplatz. </p>
-                </div><a class="services-cards__btn btn btn--secondary" href="">Mehr erfahren</a>
+                </div><a class="services-cards__btn btn btn--secondary" href=""><span>Mehr erfahren</span></a>
               </div>
               <div class="services-cards__item js-services-cards" style="--background:#FAFFDE" id="services-card-5">
                 <div class="services-cards__title">Arbeitsrecht</div>
@@ -95,7 +137,7 @@
                 <div class="services-cards__desc"> 
                   <p>Ihr Arbeitnehmer: Die wichtigste Ressource im Unternehmen.</p>
                   <p>Im Arbeitsrecht beraten wir Arbeitnehmer und Arbeitgeber zu sämtlichen rechtlichen Fällen am Arbeitsplatz. </p>
-                </div><a class="services-cards__btn btn btn--secondary" href="">Mehr erfahren</a>
+                </div><a class="services-cards__btn btn btn--secondary" href=""><span>Mehr erfahren</span></a>
               </div>
               <div class="services-cards__item js-services-cards" style="--background:#FFFCDE" id="services-card-6">
                 <div class="services-cards__title">Arbeitsrecht</div>
@@ -103,7 +145,7 @@
                 <div class="services-cards__desc"> 
                   <p>Ihr Arbeitnehmer: Die wichtigste Ressource im Unternehmen.</p>
                   <p>Im Arbeitsrecht beraten wir Arbeitnehmer und Arbeitgeber zu sämtlichen rechtlichen Fällen am Arbeitsplatz. </p>
-                </div><a class="services-cards__btn btn btn--secondary" href="">Mehr erfahren</a>
+                </div><a class="services-cards__btn btn btn--secondary" href=""><span>Mehr erfahren</span></a>
               </div>
               <div class="services-cards__item js-services-cards" style="--background:#DDFADD" id="services-card-7">
                 <div class="services-cards__title">Arbeitsrecht</div>
@@ -111,7 +153,7 @@
                 <div class="services-cards__desc"> 
                   <p>Ihr Arbeitnehmer: Die wichtigste Ressource im Unternehmen.</p>
                   <p>Im Arbeitsrecht beraten wir Arbeitnehmer und Arbeitgeber zu sämtlichen rechtlichen Fällen am Arbeitsplatz. </p>
-                </div><a class="services-cards__btn btn btn--secondary" href="">Mehr erfahren</a>
+                </div><a class="services-cards__btn btn btn--secondary" href=""><span>Mehr erfahren</span></a>
               </div>
               <div class="services-cards__item js-services-cards" style="--background:#E4F4EF" id="services-card-8">
                 <div class="services-cards__title">Arbeitsrecht</div>
@@ -119,7 +161,7 @@
                 <div class="services-cards__desc"> 
                   <p>Ihr Arbeitnehmer: Die wichtigste Ressource im Unternehmen.</p>
                   <p>Im Arbeitsrecht beraten wir Arbeitnehmer und Arbeitgeber zu sämtlichen rechtlichen Fällen am Arbeitsplatz. </p>
-                </div><a class="services-cards__btn btn btn--secondary" href="">Mehr erfahren</a>
+                </div><a class="services-cards__btn btn btn--secondary" href=""><span>Mehr erfahren</span></a>
               </div>
             </div>
           </div>
