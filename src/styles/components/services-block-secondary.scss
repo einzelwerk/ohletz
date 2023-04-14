@@ -4,15 +4,23 @@
   $this: &;
 
   height: 500px;
+  @include media(sm) {
+    height: 300px;
+  }
 
   &__item {
     position: relative;
     height: 440px;
     transition: height .5s;
+    @include media(sm) {
+      height: 300px;
+    }
 
     &:hover {
       height: 500px;
-      
+      @include media(sm) {
+        height: 300px;
+      }
       #{$this}__arrow-icon {
         transform: translate(-50%,-50%) scale(1);
         visibility: visible;

@@ -10,6 +10,7 @@
 
   &__item {
     display: none;
+ 
 
 
     &.active {
@@ -22,7 +23,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: auto;
   border-bottom: 1px solid var(--dark-border);
+  @include media(md) {
+    justify-content: flex-start;
+  }
 
   &--left {
     justify-content: flex-start;
@@ -34,6 +39,9 @@
     padding: 23px 30px;
     color:var(--gray-color);
     transition: color .5s;
+    @include media(md) {
+      padding: 20px 16px;
+    }
 
     &:hover {
       color:var(--dark-color);

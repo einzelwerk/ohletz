@@ -1,6 +1,14 @@
 @use '../utils/mixins' as *;
 
 .card-item {
+  $this: &;
+
+  &:hover {
+    #{$this}__image img{
+      transform: scale(1.2);
+    }
+  }
+
   &__link {
     text-decoration: none;
   }
@@ -10,6 +18,9 @@
     height: 0;
     margin-bottom: 20px;
     padding-bottom: calc(320px / 440px * 100%);
+    @include media(md) {
+      padding-bottom: calc(300px / 360px * 100%);
+    }
   }
 
   &__image {
@@ -19,11 +30,13 @@
     display: block;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: .5s;
     }
   }
 
@@ -42,6 +55,10 @@
     font-weight: 400;
     font-size: rem(24px);
     line-height: 133%;
+    @include media(md) {
+      margin-bottom: 12px;
+      font-size: rem(20px);
+    }
   }
 
   &__desc {
@@ -56,26 +73,45 @@
   display: grid;
   grid-template-columns: repeat(6,1fr);
   gap:60px 20px;
+  @include media(md) {
+    grid-template-columns: 1fr;
+    gap:30px;
+  }
+
 
   &__item {
     grid-column: span 2;
+    @include media(md) {
+      grid-column: span 1;
+    }
 
     &:nth-child(8),
     &:nth-child(9), {
       grid-column: span 3;
+      @include media(md) {
+        grid-column: span 1;
+      }
     }
 
     &:nth-child(1),
     &:nth-child(16) {
       grid-column: span 6;
+      @include media(md) {
+        grid-column: span 1;
+      }
       #{$this}__image-wrapper {
-        margin-bottom: 0;
+        @include media(md,min-width) {
+          margin-bottom: 0;
         padding-bottom: calc(400px / 940px * 100%);
+        }
+       
       }
       #{$this}__link {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap:20px;
+        @include media(md,min-width) {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          gap:20px;
+        }
       }
       
     }

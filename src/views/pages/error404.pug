@@ -18,10 +18,10 @@ block content
             svg(width='24' height='24')
               use(href='./assets/sprite.svg#arrow-link')
             | Zurück
-        .row 
+        .row.d-flex.flex-column-reverse.flex-md-row
           .col-md-7.col-12   
             h1.hero__title=heroTitle
-          .col-md-5.col-12.d-flex.align-items-end.justify-content-end
+          .col-md-5.col-12.d-flex.align-items-end.justify-content-md-end
             p.blue-text 404
     if heroImage
       .container-fluid.g-0

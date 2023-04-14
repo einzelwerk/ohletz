@@ -1,7 +1,12 @@
+@use '../utils/mixins' as *;
+
 .slider-navigation {
   display: flex;
   align-items: center;
   justify-content: center;
+  @include media(md) {
+    justify-content: flex-start;
+  }
 
   &__pagination {
     margin: 0 1.3rem;

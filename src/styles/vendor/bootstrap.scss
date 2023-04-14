@@ -8,13 +8,7 @@
 @import '../../../node_modules/bootstrap/scss/helpers';
 
 
-$container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 1140px,
-  xxl: 1360px
-);
+
 $form-floating-height:            add(62px, $input-height-border);
 $form-floating-line-height:       1.25;
 $form-floating-padding-x:         0;

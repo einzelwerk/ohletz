@@ -5,11 +5,19 @@
   padding-bottom: 60px;
   color: var(--white-color);
   background: linear-gradient(180deg, #4a70b8 0%, #2e3a67 100%);
+  @include media(md) {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 
   &__inner {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 40px;
+    @include media(md) {
+      grid-template-columns: 1fr;
+      gap:30px;
+    }
   }
 
   &__content {
@@ -22,17 +30,27 @@
     font-size: rem(40px);
     line-height: 120%;
     letter-spacing: -0.02em;
+    @include media(md) {
+      font-size: rem(30px);
+    }
   }
 }
 
 .contacts-managers {
   --bs-gutter-x: 20px;
   --bs-gutter-y: 20px;
+  @include media(md) {
+    --bs-gutter-x: 4px;
+    --bs-gutter-y: 4px;
+  }
 
   &__item {
     position: relative;
     height: 0;
     padding-bottom: calc(418px / 365px * 100%);
+    @include media(md) {
+      padding-bottom: calc(240px / 162px * 100% );
+    }
   }
 
   &__image {
@@ -64,21 +82,37 @@
     margin-bottom: 12px;
     font-weight: 400;
     font-size: rem(24px);
+    line-height: 150%;
     letter-spacing: -0.01em;
+    @include media(md) {
+      margin-bottom: 4px;
+      font-size: rem(16px);
+    }
   }
 
   &__position {
     color: var(--lt-gray-color);
     line-height: 150%;
+    @include media(md) {
+      font-size: rem(12px);
+    }
   }
 }
 
 .contacts-list {
+  @include media(md) {
+    gap:20px;
+  }
+
   &__title {
     margin-bottom: 20px;
     font-weight: 400;
     font-size: rem(14px);
+    line-height: 143%;
     opacity: 0.5;
+    @include media(md) {
+      margin-bottom: 12px;
+    }
   }
 
   &__list {
@@ -92,5 +126,10 @@
     line-height: 133%;
     letter-spacing: -0.01em;
     text-decoration: none;
+   
+    
+    @include media(md) {
+      font-size: rem(20px);
+    }
   }
 }

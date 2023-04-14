@@ -1,14 +1,47 @@
 include ../utils/variables
 
 header.header.container
-    .header__logo.logo 
-      a.logo__link(href="/") 
-        picture.logo__picture 
-          img(src="@/assets/img/logo.svg", alt="")
-    nav.header__nav.nav 
-      ul.nav__list
-        each val in menu
-          li.nav__item 
-            a.nav__link(href=val.link)=val.name
-    a.header__btn.btn.btn--primary(href="") 
-      span.btn__inner Kontakt aufnehmen
+  .header__logo.logo 
+    a.logo__link(href="/") 
+      picture.logo__picture
+        source(media="(max-width:768px)" srcset="@/assets/img/logo-m.svg")
+        img(src="@/assets/img/logo.svg" alt="")
+  nav.header__nav.nav.hidden-mobile 
+    ul.nav__list
+      each val in menu
+        li.nav__item 
+          a.nav__link(href=val.link)=val.name
+  a.header__btn.btn.btn--primary(href="") 
+    span.btn__inner Kontakt aufnehmen
+  .header__mobile-btn.hidden-desktop.js-trigger-class(data-trigger="mobile-nav")  
+    svg(width='30' height='30')
+      use(href='./assets/sprite.svg#burger')
+.mobile-nav-wrapper.hidden-desktop(data-target="mobile-nav")  
+  .mobile-nav-wrapper__inner.container
+    header.header
+      .header__logo.logo 
+        a.logo__link(href="/") 
+          picture.logo__picture
+            source(media="(max-width:768px)" srcset="@/assets/img/logo-m.svg")
+            img(src="@/assets/img/logo.svg" alt="")
+      .header__mobile-btn.hidden-desktop.js-trigger-class(data-trigger="mobile-nav")  
+        svg(width='30' height='30')
+          use(href='./assets/sprite.svg#close')
+    nav.mobile-nav
+      ul.mobile-nav__list 
+        each val,index in menu
+          li.mobile-nav__item
+            a.mobile-nav__link(href=val.link)=val.name
+    .footer-contacts.mobile-nav-contacts 
+      h4.footer__heading Kontakt
+      .footer-contacts__inner.mobile-nav-contacts__inner 
+        address.footer-contacts__item.mobile-nav-contacts__item  Bonsiepen 13 45136 Essen
+        a.footer-contacts__item.mobile-nav-contacts__item(href="") +49 201 95 98 20
+        a.footer-contacts__item.mobile-nav-contacts__item(href="") info@ohletz.eu
+      .mobile-nav-contacts__socials.footer-socials
+        a.footer-socials__item(href="") 
+          img.footer-socials__image(src="@/assets/img/socials/1.svg" alt="")
+        a.footer-socials__item(href="") 
+          img.footer-socials__image(src="@/assets/img/socials/2.svg" alt="")
+        a.footer-socials__item(href="") 
+          img.footer-socials__image(src="@/assets/img/socials/3.svg" alt="")

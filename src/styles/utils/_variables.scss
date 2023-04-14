@@ -1,3 +1,5 @@
+@use './mixins' as *;
+
 $container-max-widths: (
   sm: 540px,
   md: 720px,
@@ -19,6 +21,11 @@ $container-max-widths: (
   --bs-body-bg:var(--white-color);
   --gap-y:70px;
   --gap-y-m:100px;
+
+  @include media(md) {
+    --gap-y:30px;
+    --gap-y-m:40px;
+  }
 
 }
 

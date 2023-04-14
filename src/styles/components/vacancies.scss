@@ -6,6 +6,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap:60px 20px;
+  @include media(md) {
+    grid-template-columns: 1fr;
+    gap:30px;
+  }
 
   &__link {
     text-decoration: none;
@@ -38,11 +42,18 @@
     font-weight: 400;
     font-size: rem(32px);
     line-height: 125%;
+    @include media(md) {
+      margin-bottom: 12px;
+      font-size: rem(20px);
+    }
   }
 
   &__desc {
     margin-bottom: 64px;
     line-height: 150%;
+    @include media(md) {
+      margin-bottom: 24px;
+    }
   }
 }
 
@@ -55,5 +66,9 @@
     padding: 12px 20px;
     background: var(--lt-gray-color);
     border-radius: 16px;
+    @include media(md) {
+      padding: 8px 12px;
+      font-size: rem(14px);
+    }
   }
 }

@@ -8,12 +8,16 @@ block content
   - const heroTitle = 'Anwälte und Notare'
   - const heroDesc = 'Mittelstand und Freiberufler. Wir bieten Ihnen spezialisierte rechtliche Expertise aus einer Hand.'
   - const heroImage = '@/assets/img/hero/6.jpg'
-  section.section.single-section.container
-    a.btn.btn--primary.btn--back-link.btn--arrow(href="") 
-      svg(width='32' height='32')
-        use(href='./assets/sprite.svg#arrow-link')
-      | Zurück zum Team
-    .team-single 
+  section.section.single-section
+    .container
+      a.btn.btn--primary.btn--back-link.btn--arrow(href="") 
+        svg(width='32' height='32')
+          use(href='./assets/sprite.svg#arrow-link')
+        | Zurück zum Team
+    .team-single.container-fluid.container-md.g-0
+      .team-single__mobile-info.hidden-desktop.container
+        h1.team-information__name Katharina Denker
+        h2.team-information__position Rechtsanwältin, Notarin
       .team-single__image-wrapper 
         picture.team-single__image 
           img(src="@/assets/img/team-single.jpg" alt="")
@@ -21,9 +25,9 @@ block content
           span.team-single__tags-item Handelsrecht
           span.team-single__tags-item Gesellschaftsrecht
           span.team-single__tags-item Steuerrecht
-      .team-single__information.team-information
-        h1.team-information__name Katharina Denker
-        h2.team-information__position Rechtsanwältin, Notarin
+      .team-single__information.team-information.container
+        h1.team-information__name.hidden-mobile Katharina Denker
+        h2.team-information__position.hidden-mobile Rechtsanwältin, Notarin
         .team-information__grid.information-grid 
           .information-grid__item 
             h3.information-grid__heading Sekretariat
@@ -56,10 +60,11 @@ block content
       h5.section-heading__title Experten in den gleichen Rechtsgebieten
     .team-grid
       each val in [1,1,1,1,1,1,1]
-        .team-item.swiper-slide 
-          picture.team-item__image 
-            img(src="@/assets/img/team/1.jpg" alt="")
-          .team-item__text 
-            h4.team-item__name Lukas Erdmann
-            span.team-item__position Fachanwalt für Gewerblichen Rechtsschutz, Notar
+        .team-item.swiper-slide
+          a.team-item__link(href="")  
+            picture.team-item__image 
+              img(src="@/assets/img/team/1.jpg" alt="")
+            .team-item__text 
+              h4.team-item__name Lukas Erdmann 2
+              span.team-item__position Rechtsanwalt
   include ../components/cta

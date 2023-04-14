@@ -38,5 +38,28 @@
   background: var(--white-color);
   border-radius: 20px;
   transform: translateY(50%);
+  @include media(md) {
+    gap:24px;
+    width: auto;
+    padding: 14px 18px;
+    font-size: rem(24px);
+    border-radius: 0;
+    transform: none;
+  }
+ }
+
+ &__icon {
+  @include media(md) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
  }
 }

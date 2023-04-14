@@ -279,8 +279,8 @@ var Sliders = /*#__PURE__*/function () {
           var sliderInstance = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](elem, {
             modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel],
             init: false,
-            slidesPerView: 1.2,
-            spaceBetween: 20,
+            slidesPerView: 1.1,
+            spaceBetween: 12,
             mousewheel: {
               forceToAxis: true,
               sensitivity: 0.3
@@ -331,7 +331,7 @@ var Sliders = /*#__PURE__*/function () {
           modules: [swiper__WEBPACK_IMPORTED_MODULE_0__.Mousewheel, swiper__WEBPACK_IMPORTED_MODULE_0__.Pagination, swiper__WEBPACK_IMPORTED_MODULE_0__.Navigation],
           init: false,
           loop: true,
-          slidesPerView: 1.2,
+          slidesPerView: 1,
           spaceBetween: 20,
           mousewheel: {
             forceToAxis: true,
@@ -359,9 +359,7 @@ var Sliders = /*#__PURE__*/function () {
             }
           }
         });
-        if (window.matchMedia(_utils_MatchMedia__WEBPACK_IMPORTED_MODULE_2__["default"].isDesktop).matches) {
-          sliderInstance.init();
-        }
+        sliderInstance.init();
       }
     }
   }]);
@@ -415,6 +413,31 @@ var options = {
 var observer = new IntersectionObserver(callback, options);
 servicesCards.forEach(function (elem) {
   return observer.observe(elem);
+});
+
+/***/ }),
+
+/***/ "./src/scripts/modules/toogleClass.js":
+/*!********************************************!*\
+  !*** ./src/scripts/modules/toogleClass.js ***!
+  \********************************************/
+/***/ (() => {
+
+var trigger = document.querySelectorAll('.js-trigger-class');
+trigger.forEach(function (elem) {
+  var target = document.querySelector("[data-target=\"".concat(elem.dataset.trigger, "\"]"));
+  var triggerElem = elem;
+  elem.addEventListener('click', function () {
+    target.classList.toggle('active');
+    triggerElem.classList.toggle('active');
+    if (!elem.dataset.trigger) {
+      if (elem.classList.contains('active')) {
+        triggerElem.innerHTML = 'Weniger';
+      } else {
+        triggerElem.innerHTML = 'Mehr anzeigen';
+      }
+    }
+  });
 });
 
 /***/ }),
@@ -12817,6 +12840,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/bootstrap */ "./src/scripts/utils/bootstrap.js");
 /* harmony import */ var _modules_servicesCards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/servicesCards */ "./src/scripts/modules/servicesCards.js");
 /* harmony import */ var _modules_servicesCards__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_modules_servicesCards__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _modules_toogleClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/toogleClass */ "./src/scripts/modules/toogleClass.js");
+/* harmony import */ var _modules_toogleClass__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_modules_toogleClass__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 

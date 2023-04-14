@@ -3,6 +3,11 @@
 .presentation-block {
   --bs-gutter-x:90px;
 
+  @include media(md) {
+    --bs-gutter-y:30px;
+    --bs-gutter-x:0px;
+  }
+
   &__text {
     display: flex;
     flex-direction: column;
@@ -26,6 +31,29 @@
 
   &__desc {
     line-height: 150%;
+    @include media(md) {
+      &:not(.active) {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+    }
+
+    p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+  }
+
+  &__show-more {
+    margin-top: 20px;
+    color:var(--gray-color);
+
+    
   }
 
   &__link {
@@ -38,6 +66,10 @@
     line-height: 130%;
     letter-spacing: -0.01em;
     text-decoration: none;
+    @include media(md) {
+      margin-top: 30px;
+      font-size: rem(20px);
+    }
 
    svg {
     transition: transform .5s;

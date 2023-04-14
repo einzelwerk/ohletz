@@ -1,11 +1,31 @@
+@use '../utils/mixins' as *;
+
 .header {
   display: flex;
   gap:60px;
   align-items: center;
   padding-top: 30px;
   padding-bottom: 30px;
+  @include media(md) {
+    gap:16px;
+    justify-content: space-between;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
 
   &__btn {
+    flex:none;
     margin-left: auto;
+    @include media(md) {
+      padding: 10px 12px;
+      font-size: rem(12px);
+    }
+  }
+
+  &__nav {
+    @include media(md) {
+      display: none;
+    }
   }
 }
+

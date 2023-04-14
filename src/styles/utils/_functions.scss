@@ -1,4 +1,4 @@
-@use './variables' as vars;
+
 
 @function free-place() {
   @return calc((100vw - var(--container) - 17px) / 2);

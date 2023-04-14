@@ -13,8 +13,10 @@
     <div class="root">
       <header class="header container">
         <div class="header__logo logo"> <a class="logo__link" href="/"> 
-            <picture class="logo__picture"> <img src="./assets/img/logo.svg" alt=""></picture></a></div>
-        <nav class="header__nav nav"> 
+            <picture class="logo__picture">
+              <source media="(max-width:768px)" srcset="./assets/img/logo-m.svg"><img src="./assets/img/logo.svg" alt="">
+            </picture></a></div>
+        <nav class="header__nav nav hidden-mobile"> 
           <ul class="nav__list">
             <li class="nav__item"> <a class="nav__link" href="/">Startseite</a></li>
             <li class="nav__item"> <a class="nav__link" href="services.html">Rechtsgebiete</a></li>
@@ -24,10 +26,50 @@
             <li class="nav__item"> <a class="nav__link" href="team-single.html">Team single</a></li>
             <li class="nav__item"> <a class="nav__link" href="career.html">Karriere</a></li>
             <li class="nav__item"> <a class="nav__link" href="career-single.html">Karriere single</a></li>
-            <li class="nav__item"> <a class="nav__link" href="#">Kontakt</a></li>
+            <li class="nav__item"> <a class="nav__link" href="contacts.html">Kontakt</a></li>
           </ul>
         </nav><a class="header__btn btn btn--primary" href=""> <span class="btn__inner">Kontakt aufnehmen</span></a>
+        <div class="header__mobile-btn hidden-desktop js-trigger-class" data-trigger="mobile-nav"> 
+          <svg width="30" height="30">
+            <use href="./assets/sprite.svg#burger"></use>
+          </svg>
+        </div>
       </header>
+      <div class="mobile-nav-wrapper hidden-desktop" data-target="mobile-nav"> 
+        <div class="mobile-nav-wrapper__inner container">
+          <header class="header">
+            <div class="header__logo logo"> <a class="logo__link" href="/"> 
+                <picture class="logo__picture">
+                  <source media="(max-width:768px)" srcset="./assets/img/logo-m.svg"><img src="./assets/img/logo.svg" alt="">
+                </picture></a></div>
+            <div class="header__mobile-btn hidden-desktop js-trigger-class" data-trigger="mobile-nav"> 
+              <svg width="30" height="30">
+                <use href="./assets/sprite.svg#close"></use>
+              </svg>
+            </div>
+          </header>
+          <nav class="mobile-nav">
+            <ul class="mobile-nav__list"> 
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="/">Startseite</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="services.html">Rechtsgebiete</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="about-us.html">Über uns</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="cases-and-news.html">Cases / News</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="team.html">Team</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="team-single.html">Team single</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="career.html">Karriere</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="career-single.html">Karriere single</a></li>
+              <li class="mobile-nav__item"><a class="mobile-nav__link" href="contacts.html">Kontakt</a></li>
+            </ul>
+          </nav>
+          <div class="footer-contacts mobile-nav-contacts"> 
+            <h4 class="footer__heading">Kontakt</h4>
+            <div class="footer-contacts__inner mobile-nav-contacts__inner"> 
+              <address class="footer-contacts__item mobile-nav-contacts__item"> Bonsiepen 13 45136 Essen</address><a class="footer-contacts__item mobile-nav-contacts__item" href="">+49 201 95 98 20</a><a class="footer-contacts__item mobile-nav-contacts__item" href="">info@ohletz.eu</a>
+            </div>
+            <div class="mobile-nav-contacts__socials footer-socials"><a class="footer-socials__item" href=""> <img class="footer-socials__image" src="./assets/img/socials/1.svg" alt=""></a><a class="footer-socials__item" href=""> <img class="footer-socials__image" src="./assets/img/socials/2.svg" alt=""></a><a class="footer-socials__item" href=""> <img class="footer-socials__image" src="./assets/img/socials/3.svg" alt=""></a></div>
+          </div>
+        </div>
+      </div>
       <div class="main">
         <section class="section section--hero pb-0">
           <div class="hero">
@@ -49,10 +91,11 @@
             <div class="col-md-6 col-12">
               <div class="presentation-block__text"> 
                 <h2 class="presentation-block__title">OHLETZ – wir bieten Ihnen spezialisierte rechtliche <span>Expertise aus einer Hand.</span> </h2>
-                <div class="presentation-block__desc"> 
+                <div class="presentation-block__desc" data-target="presentation-desc"> 
                   <p>Die lange Tradition von Zuverlässigkeit, persönlichem Engagement und Erfolg der Kanzlei OHLETZ findet ihre Wurzeln in der vor über 40 Jahren gegründeten Kanzlei Scheidt-Engels. Seit Anbeginn unserer Tätigkeit liegt der Kanzlei-Focus im Bereich des Wirtschafts- und Immobilienrechts (einschließlich Baurecht und Mietrecht).</p>
                   <p>Um unsere Mandanten umfassend und professionell beraten und betreuen zu können, betrachten wir es als Notwendigkeit, Ihnen unser Wissen und Können auch im Rahmen einer vertrauensvollen Notartätigkeit zur Verfügung zu stellen. Aktuell sind 8 Rechtsanwälte und Rechtsanwältinnen der Kanzlei OHLETZ in Ergänzung Ihrer anwaltlichen Tätigkeit auch als Notar/Notarinnen tätig und führen mit Unterstützung eines großartigen Teams von hochqualifizierten Mitarbeitern täglich eine Fülle von Beurkundungen und Beglaubigungen durch. </p>
                 </div>
+                <button class="hidden-desktop presentation-block__show-more js-trigger-class" type="button" data-trigger="presentation-desc">Mehr anzeigen</button>
               </div>
             </div>
             <div class="col-md-6 col-12">
@@ -60,7 +103,7 @@
             </div>
           </div>
         </section>
-        <section class="section container"> 
+        <section class="section container-md g-0">
           <picture class="ratio ratio-16x9"> <img src="./assets/img/image.jpg" alt=""></picture>
         </section>
         <section class="section container">
@@ -182,10 +225,10 @@
             </div>
           </div>
         </section>
-        <section class="section container">
+        <section class="section container-fluid g-0 pb-0">
           <div class="cta-vacancy">
             <picture class="cta-vacancy__picture"><img src="./assets/img/cta-secondary.jpg" alt=""></picture>
-            <div class="cta-vacancy__text"> 
+            <div class="container cta-vacancy__text"> 
               <h4 class="cta-vacancy__title">Herausforderungen können nur <span>gemeinsam gemeistert</span> werden</h4><a class="cta-vacancy__link" href="">Aktuelle Stellenausschreibungen
                 <svg width="24" height="24">
                   <use href="./assets/sprite.svg#arrow"></use>

@@ -7,19 +7,31 @@
   gap:92px;
   align-items: flex-start;
   margin-bottom: var(--gap-y);
+  @include media(md) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .services-nav {
-  position: sticky;
-  top:0;
-  left: 0;
+  @include media(md,min-width) {
+    position: sticky;
+    top:0;
+    left: 0;
+    display: block;
+  }
+
+  display: none;
 
   &__item {
-    padding: 25px 20px;
     color:var(--gray-color);
     background: transparent;
     border-bottom:1px solid var(--dark-border);
     transition:all .5s;
+
+    &:hover {
+      color:var(--dark-color);
+      background:var(--lt-gray-color)
+    }
 
     &--current {
       color:var(--dark-color);
@@ -29,7 +41,11 @@
   }
 
   &__link {
+    display: block;
+    padding: 25px 20px;
     text-decoration: none;
+
+   
   }
 }
 

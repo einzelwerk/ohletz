@@ -4,18 +4,45 @@
   padding-top: 60px;
   padding-bottom: 40px;
   border-top: 1px solid var(--dark-border);
+  @include media(md) {
+    padding-top: 40px;
+    padding-bottom: 32px;
+  }
 
   &__heading {
     margin: 0;
     color:var(--gray-color);
     font-weight: 400;
     font-size: rem(14px);
+    line-height: 120%;
+  }
+
+  &__logo {
+    @include media(md) {
+      grid-column: span 4;
+    }
+  }
+
+  &__nav {
+    @include media(md) {
+      grid-column: span 2;
+    }
+  }
+
+  &__contacts {
+    @include media(md) {
+      grid-column: span 4;
+    }
   }
 
   &__inner {
     display: grid;
     grid-template-columns: repeat(4,max-content);
     justify-content: space-between;
+    @include media(md) {
+      grid-template-columns: repeat(4,1fr);
+      gap:32px;
+    }
     
   }
 
@@ -27,8 +54,13 @@
 
   &__bottom {
     display: flex;
+    gap:15px;
     justify-content: space-between;
     margin-top: 126px;
+    @include media(md) {
+      flex-direction: column-reverse;
+      margin-top: 60px;
+    }
   }
 
   &__copyright {
@@ -40,11 +72,15 @@
   &__data {
     display: flex;
     gap:24px;
+    @include media(md) {
+      gap:20px;
+    }
   }
 
   &__data-link {
     font-size: rem(14px);
     text-decoration: none;
+    @include link-hover;
   }
 }
 
@@ -59,6 +95,9 @@
     &--two-columns {
       grid-template-columns: max-content max-content;
       gap:12px 50px;
+      @include media(md) {
+        grid-template-columns: 1fr;
+      }
     }
   }
 
@@ -69,6 +108,7 @@
 
   &__link {
     text-decoration: none;
+    @include link-hover;
   }
 }
 

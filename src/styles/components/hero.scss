@@ -17,6 +17,9 @@
     font-weight: 400;
     font-size: rem(60px);
     line-height: 120%;
+    @include media(md) {
+      font-size: rem(36px);
+    }
 
     span {
       background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%);
@@ -29,11 +32,18 @@
 
   &__image {
     margin-top: 40px;
+    @include media(md) {
+      --bs-aspect-ratio: 111%;
+    }
   }
 
   &__desc {
     margin-bottom: 0;
     line-height: 150%;
     text-indent: 50px;
+    @include media(md) {
+      margin-top: 20px;
+      text-indent: 0;
+    }
   }
 }

@@ -1,3 +1,5 @@
+@use '../utils/mixins' as *;
+
 .career-block {
   $this: &;
 
@@ -7,6 +9,9 @@
     justify-content: center;
     height: 100%;
     background: var(--lt-gray-color);
+    @include media(md) {
+      padding: 30px 0;
+    }
 
     &:hover {
       #{$this}__icon-circle {
@@ -23,6 +28,10 @@
     width: 180px;
     height: 180px;
     border-radius: 50%;
+    @include media(md) {
+      width: 120px;
+      height: 120px;
+    }
   }
 
   &__icon {
@@ -50,18 +59,30 @@
 
     &:nth-child(1) {
       transform: translateY(-80%);
+      @include media(md) {
+        transform: translateX(-80%);
+      }
     }
 
     &:nth-child(2) {
       transform: translateY(-40%);
+      @include media(md) {
+        transform: translateX(-40%);
+      }
     }
 
     &:nth-child(3) {
       transform: translateY(40%);
+      @include media(md) {
+        transform: translateX(40%);
+      }
     }
 
     &:nth-child(4) {
       transform: translateY(80%);
+      @include media(md) {
+        transform: translateX(80%);
+      }
     }
   }
 }

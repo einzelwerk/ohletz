@@ -3,6 +3,9 @@
 .cta-image {
   position: relative;
   min-height: 800px;
+  @include media(md) {
+    min-height: 500px;
+  }
 
   &__image {
     position: absolute;
@@ -34,6 +37,11 @@
     font-size: rem(40px);
     line-height: 120%;
     letter-spacing: -0.02em;
+    @include media(md) {
+      padding: 0;
+      padding-bottom: 30px;
+      font-size: rem(30px);
+    }
  
   }
 }

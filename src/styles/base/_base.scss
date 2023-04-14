@@ -59,6 +59,11 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 
+  @include media(md) {
+    font-size: rem(36px);
+    
+  }
+
 }
 
 
@@ -90,3 +95,21 @@ body p {
   max-width: 800px;
 }
 
+
+@include media(md) {
+  .ratio-16x9 {
+    --bs-aspect-ratio: 111% !important;
+  }
+}
+
+.hidden-desktop {
+  @include media(md, min-width) {
+    display: none;
+  }
+}
+
+.hidden-mobile {
+  @include media(md) {
+    display: none;
+  }
+}

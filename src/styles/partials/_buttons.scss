@@ -18,12 +18,38 @@
   }
 
   &--secondary {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
     color:var(--white-color);
-    background: linear-gradient(180deg, var(--dark-color) 0%, var(--dark-color) 100%);
+    background: var(--dark-color);
+
+    span {
+      position: relative;
+      z-index: 10;
+    }
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%);
+      opacity: 0;
+      transition:all .5s;
+      content:'';
+
+    }
 
     &:hover {
       color:var(--white-color);
-      background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%)
+
+      &::before {
+        opacity: 1;
+      }
+   
     }
   }
 

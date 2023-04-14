@@ -170,8 +170,8 @@ class Sliders {
           modules: [Mousewheel],
           init: false,
 
-          slidesPerView: 1.2,
-          spaceBetween: 20,
+          slidesPerView: 1.1,
+          spaceBetween: 12,
           mousewheel: {
             forceToAxis: true,
             sensitivity: 0.3,
@@ -225,7 +225,7 @@ class Sliders {
         modules: [Mousewheel, Pagination, Navigation],
         init: false,
         loop: true,
-        slidesPerView: 1.2,
+        slidesPerView: 1,
         spaceBetween: 20,
         mousewheel: {
           forceToAxis: true,
@@ -256,9 +256,9 @@ class Sliders {
         },
       });
 
-      if (window.matchMedia(breakpoints.isDesktop).matches) {
+     
         sliderInstance.init();
-      }
+     
     }
   }
 }

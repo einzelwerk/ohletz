@@ -1,0 +1,76 @@
+@use '../utils/mixins' as *;
+
+.cta-vacancy {
+  position: relative;
+  min-height: 600px;
+  @include media(md) {
+    min-height: 400px;
+  }
+
+  &__picture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__text {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 10;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 40px;
+    color:var(--white-color);
+    transform: translateX(-50%);
+    @include media(md) {
+      flex-direction: column;
+      gap:20px;
+      align-items: flex-start;
+    }
+
+  }
+
+  &__title {
+    max-width: 670px;
+    margin: 0;
+    font-size: rem(40px);
+    line-height: 120%;
+    @include media(md) {
+      font-size: rem(30px);
+    }
+
+    span {
+      color:var(--gray-color)
+    }
+  }
+
+  &__link {
+    display: flex;
+    gap:16px;
+    align-items: center;
+    font-size: rem(20px);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+
+    &:hover {
+      svg {
+        transform: translateX(10px);
+      }
+    }
+
+    svg {
+      transition: .5s;
+    }
+  }
+}

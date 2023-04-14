@@ -1,12 +1,28 @@
 @use '../utils/mixins' as *;
 
 .team-item {
+  $this: &;
+
+  &:hover {
+    #{$this}__image img{
+      transform: scale(1.2);
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+  }
+
   &__image {
     position: relative;
     display: block;
     height: 0;
     margin-bottom: 20px;
     padding-bottom: calc(500px / 440px * 100%);
+    overflow: hidden;
+    @include media(md) {
+      margin-bottom: 12px;
+    }
 
   img {
       position: absolute;
@@ -15,6 +31,7 @@
       display: block;
       width: 100%;
       height: 100%;
+      transition: .5s;
     }
   }
 
@@ -29,6 +46,10 @@
     font-size: rem(24px);
     line-height: 133%;
     letter-spacing: -0.01em;
+    @include media(md) {
+      margin-bottom: 8px;
+      font-size: rem(20px);
+    }
   }
 
   &__position {
@@ -52,13 +73,22 @@
 
 .team-single {
   display: flex;
+  flex-wrap: wrap;
   gap:20px;
-  margin-top: 40px;
   margin-bottom: 30px;
+  @include media(md) {
+    flex-direction: column;
+    gap:0;
+  }
 
   &__image-wrapper {
     position: relative;
     flex:1;
+    @include media(md) {
+      flex:none;
+      width: 100%;
+      height: 400px;
+    }
   }
 
   &__image {
@@ -88,6 +118,10 @@
     padding: 12px 20px;
     background: var(--white-color);
     border-radius: 16px;
+    @include media(md) {
+      padding: 8px 12px;
+      font-size: rem(14px);
+    }
   }
 
   &__information {
@@ -98,6 +132,9 @@
 .team-information {
   padding: 40px;
   background: var(--lt-gray-color);
+  @include media(md) {
+    padding: 30px calc(var(--bs-gutter-x) * 0.5) 30px calc(var(--bs-gutter-x) * 0.5);
+  }
 
   &__name {
     margin-bottom: 16px;
@@ -105,6 +142,9 @@
     font-size: rem(40px);
     line-height: 120%;
     letter-spacing: -0.02em;
+    @include media(md) {
+      font-size: rem(36px);
+    }
   }
 
   &__position {
@@ -125,10 +165,17 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap:32px 20px;
+  @include media(md) {
+    grid-template-columns: 1fr;
+    gap:40px;
+  }
 
   &__item {
     &--list{
       grid-column: span 2;
+      @include media(md) {
+        grid-column: auto;
+      }
     }
   }
 
@@ -136,11 +183,15 @@
     margin-bottom: 20px;
     font-weight: 400;
     font-size: rem(14px);
+    line-height: 100%;
     background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%);
 
     /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    @include media(md) {
+      margin-bottom: 16px;
+    }
   }
 
   &__value {
@@ -154,12 +205,11 @@
   }
 
   &__links-item {
+    @include link-hover;
+
+    align-self: flex-start;
     line-height: 150%;
     text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
 
     span {
       background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%);
@@ -176,6 +226,9 @@
     gap:8px 20px;
     margin: 0;
     padding: 0;
+    @include media(md) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__list-item {

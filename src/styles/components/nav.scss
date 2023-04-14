@@ -1,6 +1,9 @@
+@use '../utils/mixins' as *;
+
 .nav {
   &__list {
     display: flex;
+    flex-wrap: wrap;
     gap:32px;
     margin: 0;
     padding: 0;
@@ -12,6 +15,8 @@
   }
 
   &__link {
+    position: relative;
     text-decoration: none;
+    @include link-hover;
   }
 }

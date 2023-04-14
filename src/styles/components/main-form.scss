@@ -10,6 +10,9 @@
     grid-template-columns: 1fr 1fr;
     gap:24px;
     margin-bottom: 32px;
+    @include media(md) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__label {
@@ -19,6 +22,9 @@
 
   &__item {
     grid-column: span 2;
+    @include media(md) {
+      grid-column: 1;
+    }
 
     &:hover {
       #{$this}__label {
@@ -39,10 +45,16 @@
 
     &:nth-child(2) {
       grid-column: span 1;
+      @include media(md) {
+        grid-column: auto;
+      }
     }
 
     &:nth-child(3) {
       grid-column: span 1;
+      @include media(md) {
+        grid-column: auto;
+      }
     }
 
   }
@@ -103,6 +115,9 @@
   gap:12px;
   margin-bottom: 32px;
   cursor: pointer;
+  @include media(md) {
+    font-size: rem(12px);
+  }
 
   &__input {
     &:checked {

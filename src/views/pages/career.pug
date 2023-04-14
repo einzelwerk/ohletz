@@ -37,7 +37,7 @@ block content
         button.tabs-nav__item( id="entwicklung-tab" data-bs-toggle="tab" data-bs-target="#entwicklung-content" type="button" role="tab" aria-controls="entwicklung-content" aria-selected="false")
           span.tabs-nav__item-text Entwicklung
           span.tabs-nav__count 6
-      .tabs-content.container
+      .tabs-content
         .tabs-content__item.active(id="betriebsklima-content" role="tabpanel" aria-labelledby="betriebsklima-tab")
           .benefits.swiper.js-benefits-slider
             .benefits__grid.swiper-wrapper 
@@ -102,10 +102,11 @@ block content
       .col-md-6.col-12
         .presentation-block__text 
           h2.presentation-block__title Atmosphäre
-          .presentation-block__desc 
+          .presentation-block__desc(data-target="presentation-desc")
             p Unsere Kanzlei schätzt Menschen mit Persönlichkeit. 
             p Wir sind stolz darauf, eine Kanzlei zu sein, die auf die individuellen Bedürfnisse und Wünsche unserer Mitarbeiter eingeht. Wir fördern und unterstützen unsere Teammitglieder, damit sie ihre Fähigkeiten und Fertigkeiten optimal nutzen können. Wir glauben daran, dass ein angenehmes Arbeitsumfeld und eine offene Kommunikation den Erfolg unserer Kanzlei ausmachen.
             p Wenn Sie eine offene und herzliche Persönlichkeit besitzen und eine Leidenschaft für juristische Themen haben, sind Sie bei uns genau richtig. 
+          button.hidden-desktop.presentation-block__show-more.js-trigger-class(type="button" data-trigger="presentation-desc") Mehr anzeigen
           a.presentation-block__link(href="") Mehr Über uns
             svg(width='32' height='32')
               use(href='./assets/sprite.svg#arrow')
@@ -165,10 +166,10 @@ block content
   section.section.pb-0
     .section-heading.container 
       h2.section-heading__title.section-heading__title--centered Das sagen unsere Mitarbeiter
-    .reviews-block.swiper.js-reviews-slider 
+    .reviews-block.swiper.js-reviews-slider
       .swiper-wrapper
         each val in [1,1,1,1,1,1,1,1,1,1,1,1]
-          .swiper-slide.reviews-block__item 
+          .swiper-slide.reviews-block__item.container
             h4.reviews-block__name Leni
             p.reviews-block__desc «I was at Facebook for 6 years. I started becoming bored, demotivated, exhausted, and becoming less productive and scored a “Meets Most Expectations” on my performance review. This was fatal. For starters. Everyone should hits a “Meets All Expectations”. It goes: “Meets None Expectations”, “Meets Most Expectations”, “Meets All Expectations”, “Exceeds Expectations”, “Redefines Expectations”.»
       .slider-navigation
