@@ -256,10 +256,62 @@ class Sliders {
         },
       });
 
-     
-        sliderInstance.init();
-     
+
+      sliderInstance.init();
+
     }
+  }
+
+  static fullwidthSlider() {
+    const root = document.querySelector('.js-full-w-slider');
+    if (root) {
+      const sliderInstance = new Swiper(root, {
+        modules: [Mousewheel, Pagination, Navigation],
+        init: false,
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        mousewheel: {
+          forceToAxis: true,
+          sensitivity: 0.3,
+        },
+        pagination: {
+          el: root.querySelector('.swiper-pagination'),
+
+
+        },
+
+
+        breakpoints: {
+          768: {
+            centeredSlides: true,
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+        },
+      });
+
+
+      sliderInstance.init();
+
+    }
+  }
+
+  static slider() {
+    const sliderInstance = new Swiper('.js-slider', {
+      slidesPerView: 1.2,
+      spaceBetween:12,
+      init: false,
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+          spaceBetween:20
+
+        }
+      }
+    })
+
+    sliderInstance.init()
   }
 }
 
@@ -273,6 +325,9 @@ function slidersInit() {
   Sliders.benifitsSlider();
   Sliders.presentationSlider();
   Sliders.reviewsSlider();
+
+  Sliders.fullwidthSlider();
+  Sliders.slider()
 }
 
 document.addEventListener('DOMContentLoaded', () => {

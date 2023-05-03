@@ -1,0 +1,48 @@
+extends ../layouts/main
+
+block content
+  - const heroTitle = 'Arbeitsrecht'
+  - const heroBack = true
+  - const heroImage = '@/assets/img/hero/3.jpg'
+  include ../components/hero
+  section.section.container 
+    .content-block
+      h2.content-block__title Surfer killed by 'obvious white pointer
+      .content-block__col 
+        .editor-content 
+          p Seit über 40 Jahren verlässlicher Ansprechpartner für Konzerne, Mittelstand und Freiberufler. Wir bieten Ihnen spezialisierte rechtliche Expertise aus einer Hand.
+          p Wir sind sehr stolz auf unsere langjährigen, von Vertrauen geprägten Mandantenbeziehungen, die wir gleichermaßen zu DAX-Konzernen und einigen der größten Immobilienunternehmen Deutschlands aufgebaut haben, wie auch zu familiengeführten Unternehmen, Stiftungen und Privatpersonen. Jeder Mandant erhält sein maßgeschneidertes Angebot, gestützt durch Fachwissen und jahrzehntelange Erfahrung auf dem jeweilig gewünschten Fachgebiet. 
+        .stat-grid 
+          .stat-grid__item 
+            h3.stat-grid__title 62
+            p.stat-grid__text Erstellen und Prüfen von Arbeitsverträgen
+          .stat-grid__item
+            h3.stat-grid__title >1 killed
+            p.stat-grid__text Aufhebungsvertrag, Abwicklungsvertrag
+          .stat-grid__item
+            h3.stat-grid__title 62 000$
+            p.stat-grid__text Kündigungsschutzklagen
+          .stat-grid__item
+            h3.stat-grid__title 05
+            p.stat-grid__text Befristetes Arbeitsverhältnis
+        .editor-content 
+          p Seit über 40 Jahren verlässlicher Ansprechpartner für Konzerne, Mittelstand und Freiberufler. Wir bieten Ihnen spezialisierte rechtliche Expertise aus einer Hand.
+          p maiWir sind sehr stolz auf unsere langjährigen, von Vertrauen geprägten Mandantenbeziehungen, die wir gleichermaßen zu DAX-Konzernen und einigen der größten Immobilienunternehmen Deutschlands aufgebaut haben, wie auch zu familiengeführten Unternehmen, Stiftungen und Privatpersonen. Jeder Mandant erhält sein maßgeschneidertes Angebot, gestützt durch Fachwissen und jahrzehntelange Erfahrung auf dem jeweilig gewünschten Fachgebiet.
+  section.section
+    .swiper.full-w-slider.js-full-w-slider
+      .swiper-wrapper
+        each val in [1,2,3,4,5]
+          .swiper-slide 
+            picture 
+              img(src="@/assets/img/slider.jpg", alt="")
+      .swiper-pagination.slider-pagination
+  section.section.container 
+    h2.content-block 
+      .content-block__title Wir sind Experten für
+      .content-block__col 
+        .editor-content 
+          p Seit über 40 Jahren verlässlicher Ansprechpartner für Konzerne, Mittelstand und Freiberufler. Wir bieten Ihnen spezialisierte rechtliche Expertise aus einer Hand.
+          p Wir sind sehr stolz auf unsere langjährigen, von Vertrauen geprägten Mandantenbeziehungen, die wir gleichermaßen zu DAX-Konzernen und einigen der größten Immobilienunternehmen Deutschlands aufgebaut haben, wie auch zu familiengeführten Unternehmen, Stiftungen und Privatpersonen. Jeder Mandant erhält sein maßgeschneidertes Angebot, gestützt durch Fachwissen und jahrzehntelange Erfahrung auf dem jeweilig gewünschten Fachgebiet. 
+          h3 “Unsere notariellen Tätigkeiten erstrecken sich über die Fachgebiete Immobilienrecht, Baurecht, Gesellschaftsrecht und Erbangelegenheiten“
+          p Seit über 40 Jahren verlässlicher Ansprechpartner für Konzerne, Mittelstand und Freiberufler. Wir bieten Ihnen spezialisierte rechtliche Expertise aus einer Hand.
+          p Wir sind sehr stolz auf unsere langjährigen, von Vertrauen geprägten Mandantenbeziehungen, die wir gleichermaßen zu DAX-Konzernen und einigen der größten Immobilienunternehmen Deutschlands aufgebaut haben, wie auch zu familiengeführten Unternehmen, Stiftungen und Privatpersonen. Jeder Mandant erhält sein maßgeschneidertes Angebot, gestützt durch Fachwissen und jahrzehntelange Erfahrung auf dem jeweilig gewünschten Fachgebiet. 
