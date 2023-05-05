@@ -1,6 +1,9 @@
 /* eslint-disable import/no-unresolved */
-import Swiper, { Mousewheel, Pagination, Navigation } from 'swiper';
+import Swiper, { Mousewheel, Pagination, Navigation, Grid } from 'swiper';
 import 'swiper/css';
+import 'swiper/css/grid';
+
+
 
 import breakpoints from '../utils/MatchMedia';
 
@@ -300,15 +303,39 @@ class Sliders {
   static slider() {
     const sliderInstance = new Swiper('.js-slider', {
       slidesPerView: 1.2,
-      spaceBetween:12,
+      spaceBetween: 12,
       init: false,
       breakpoints: {
         768: {
           slidesPerView: 2,
-          spaceBetween:20
+          spaceBetween: 20
 
         }
       }
+    })
+
+    sliderInstance.init()
+  }
+
+  static facts() {
+    const sliderInstance = new Swiper('.js-facts-slider', {
+      modules: [Grid, Navigation],
+      slidesPerView: 1,
+      spaceBetween: 0,
+      grid: {
+        rows: 2,
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 4,
+        },
+      },
+      navigation: {
+        prevEl: '.facts-slider__prev',
+        nextEl: '.facts-slider__next',
+      },
+      init: false,
+
     })
 
     sliderInstance.init()
@@ -328,6 +355,7 @@ function slidersInit() {
 
   Sliders.fullwidthSlider();
   Sliders.slider()
+  Sliders.facts()
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -10,6 +10,26 @@ block content
   - const heroImage = '@/assets/img/hero/4.jpg'
   include ../components/hero
   include ../components/presentation-block
+  section.section.container 
+    .section-heading 
+      h2.section-heading__title Key facts
+      .section-heading__text
+        p.section-heading__desc Wir sprechen viele Sprachen des Rechts, vor allem aber IHRE - überall und immer an Ihrer Seite!
+    .swiper.js-facts-slider.facts-slider
+      .swiper-wrapper
+        each val in [1,2,3,4,5,6,7,8] 
+          .swiper-slide 
+            .facts-item 
+              span.facts-item__value ca. 6.000
+              p.facts-item__text Jährliche Urkundsgeschäfte von unserer Kanzlei
+    .facts-slider__navigation
+      button.facts-slider__prev
+        svg(width='20' height='20')
+          use(href='./assets/sprite.svg#ArrowRight')
+      button.facts-slider__next
+        svg(width='20' height='20')
+          use(href='./assets/sprite.svg#ArrowLeft')
+
   include ../components/image
   section.section.container
     .section-heading 
@@ -33,16 +53,16 @@ block content
       .swiper-wrapper 
         .swiper-slide 
           picture.w-100
-            img(src="@/assets/img/slider1.jpg", alt="")
+            img(src="@/assets/img/slider1.jpg" alt="")
         .swiper-slide 
           picture.w-100
-            img(src="@/assets/img/slider2.jpg", alt="")
+            img(src="@/assets/img/slider2.jpg" alt="")
         .swiper-slide 
           picture.w-100
-            img(src="@/assets/img/slider1.jpg", alt="")
+            img(src="@/assets/img/slider1.jpg" alt="")
         .swiper-slide 
           picture.w-100
-            img(src="@/assets/img/slider2.jpg", alt="")
+            img(src="@/assets/img/slider2.jpg" alt="")
   include ../components/cta-image
   include ../components/team-block
   include ../components/cta-vacancy
