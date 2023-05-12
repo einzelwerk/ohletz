@@ -7,6 +7,7 @@
   &__item {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     height: 100%;
     padding: 20px;
     background: #DEEFFF;
@@ -22,7 +23,6 @@
   }
 
   &__title {
-    margin-bottom: 1.5rem;
     font-weight: 400;
     font-size: rem(24px);
     line-height: 133%;
