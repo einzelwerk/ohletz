@@ -1,21 +1,22 @@
 include ../utils/variables
 
-header.header.container
-  .header__logo.logo 
-    a.logo__link(href="/") 
-      picture.logo__picture
-        source(media="(max-width:768px)" srcset="@/assets/img/logo-m.svg")
-        img(src="@/assets/img/logo.svg" alt="")
-  nav.header__nav.nav.hidden-mobile 
-    ul.nav__list
-      each val in menu
-        li.nav__item 
-          a.nav__link(href=val.link)=val.name
-  a.header__btn.btn.btn--primary(href="") 
-    span.btn__inner Kontakt aufnehmen
-  .header__mobile-btn.hidden-desktop.js-trigger-class(data-trigger="mobile-nav")  
-    svg(width='30' height='30')
-      use(href='./assets/sprite.svg#burger')
+header.header
+  .container.header__inner
+    .header__logo.logo 
+      a.logo__link(href="/") 
+        picture.logo__picture
+          source(media="(max-width:768px)" srcset="@/assets/img/logo-m.svg")
+          img(src="@/assets/img/logo.svg" alt="")
+    nav.header__nav.nav.hidden-mobile 
+      ul.nav__list
+        each val in menu
+          li.nav__item 
+            a.nav__link(href=val.link)=val.name
+    a.header__btn.btn.btn--primary(href="") 
+      span.btn__inner Kontakt aufnehmen
+    .header__mobile-btn.hidden-desktop.js-trigger-class(data-trigger="mobile-nav")  
+      svg(width='30' height='30')
+        use(href='./assets/sprite.svg#burger')
 .mobile-nav-wrapper.hidden-desktop(data-target="mobile-nav")  
   .mobile-nav-wrapper__inner.container
     header.header

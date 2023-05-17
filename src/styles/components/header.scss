@@ -1,11 +1,33 @@
 @use '../utils/mixins' as *;
 
 .header {
-  display: flex;
-  gap:60px;
-  align-items: center;
+ 
   padding-top: 30px;
   padding-bottom: 30px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  &__inner {
+    display: flex;
+    gap:60px;
+    align-items: center;
+  }
+
+  &--scrolled {
+    position: fixed;
+    transform: translateY(-100%);
+    transition: .5s;
+    background: var(--white-color);
+    z-index: 100;
+    border-bottom: 1px solid var(--dark-border);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    &--active {
+      transform: translateY(0%);
+    }
+  }
   @include media(md) {
     gap:16px;
     justify-content: space-between;
