@@ -97,6 +97,30 @@ observer.observe(document.body, {
 
 /***/ }),
 
+/***/ 186:
+/***/ (() => {
+
+var header = document.querySelector('.header');
+var previousScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+var headerHeight = header.offsetHeight;
+function handleScroll() {
+  var currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+  if (currentScrollPosition < previousScrollPosition) {
+    header.classList.add('header--scrolled--active');
+  } else {
+    header.classList.remove('header--scrolled--active');
+  }
+  if (currentScrollPosition > 2 * headerHeight) {
+    header.classList.add('header--scrolled');
+  } else {
+    header.classList.remove('header--scrolled');
+  }
+  previousScrollPosition = currentScrollPosition;
+}
+window.addEventListener('scroll', handleScroll);
+
+/***/ }),
+
 /***/ 457:
 /***/ (() => {
 
@@ -11036,12 +11060,18 @@ accordion.forEach(function (elem) {
 var servicesCards = __webpack_require__(457);
 // EXTERNAL MODULE: ./src/scripts/modules/toogleClass.js
 var toogleClass = __webpack_require__(452);
+// EXTERNAL MODULE: ./src/scripts/modules/fixedHeader.js
+var fixedHeader = __webpack_require__(186);
 ;// CONCATENATED MODULE: ./src/scripts/app.js
 
 
 
 
 
+
+(function calcHeaderHeight() {
+  document.documentElement.style.setProperty('--header-height', "".concat(document.querySelector('.header').offsetHeight, "px"));
+})();
 })();
 
 /******/ })()
