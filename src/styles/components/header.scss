@@ -19,7 +19,7 @@
   }
 
   &--scrolled {
-    position: fixed;
+    position: fixed !important;
     z-index: 100;
     padding-top: 15px;
     padding-bottom: 15px;
