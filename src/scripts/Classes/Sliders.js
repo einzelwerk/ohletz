@@ -227,8 +227,8 @@ class Sliders {
       const sliderInstance = new Swiper(root, {
         modules: [Mousewheel, Pagination, Navigation],
         init: false,
-        loop: true,
         slidesPerView: 1,
+
         spaceBetween: 20,
         mousewheel: {
           forceToAxis: true,
@@ -253,6 +253,7 @@ class Sliders {
         breakpoints: {
           768: {
             centeredSlides: true,
+            initialSlide: 1,
             slidesPerView: 3,
             spaceBetween: 80,
           },
