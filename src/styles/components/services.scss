@@ -8,7 +8,8 @@
   align-items: flex-start;
   margin-bottom: var(--gap-y);
   @include media(md) {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -58,6 +59,9 @@
     padding: 40px;
     background: var(--background);
     border-radius: 24px;
+    @include media(md) {
+      padding: 20px 16px;
+    }
   }
 
   &__title {
@@ -66,6 +70,10 @@
     font-size: rem(40px);
     line-height: 120%;
     letter-spacing: -0.02em;
+    @include media(md) {
+      margin-bottom: 20px;
+      font-size: rem(22px);
+    }
   }
 
   &__image {
@@ -75,6 +83,10 @@
     margin-bottom: 32px;
     overflow: hidden;
     border-radius: 8px;
+    @include media(md) {
+      height: 180px;
+      margin-bottom: 20px;
+    }
 
     img {
       display: block;

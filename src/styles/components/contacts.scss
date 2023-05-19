@@ -255,3 +255,35 @@
     }
   }
 }
+
+.pin {
+  $this: &;
+  
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  &:hover {
+
+    #{$this}__content {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &__content {
+    position: absolute;
+    bottom: 100%;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    align-items: center;
+    margin-bottom: .5rem;
+    padding: 1.5rem;
+    background: var(--white-color);
+    border-radius: 12px;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s;
+  }
+}

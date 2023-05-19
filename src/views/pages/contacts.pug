@@ -43,8 +43,13 @@ block content
       .contacts-map 
         picture.contacts-map__picture 
           img(src="@/assets/img/map.jpg" alt="")
-        svg.contacts-map__pin(width='48' height='48')
-          use(href='./assets/sprite.svg#pin')
+        .contacts-map__pin.pin
+          .pin__content 
+            address Bonsiepen 13, 45136 Essen
+            a(href="") +49 201 95 98 2-0
+            a(href="") info@ohletz.eu
+          svg(width='48' height='48')
+            use(href='./assets/sprite.svg#pin')
         a.contacts-map__route(href="#" target="_blank") Routenplaner
           svg(width='20' height='20')
             use(href='./assets/sprite.svg#route')
