@@ -208,6 +208,11 @@
     letter-spacing: -0.01em;
     @include media(md) {
       font-size: rem(16px);
+      background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%);
+
+      /* stylelint-disable-next-line property-no-vendor-prefix */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   }
 }

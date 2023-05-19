@@ -180,8 +180,8 @@
     position: relative;
     @include media(md) {
       display: flex;
-      flex-direction: column;
       gap:24px;
+      align-items: center;
     }
 
   }
