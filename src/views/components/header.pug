@@ -19,15 +19,16 @@ header.header
         use(href='./assets/sprite.svg#burger')
 .mobile-nav-wrapper.hidden-desktop(data-target="mobile-nav")  
   .mobile-nav-wrapper__inner.container
-    header.header
-      .header__logo.logo 
-        a.logo__link(href="/") 
-          picture.logo__picture
-            source(media="(max-width:768px)" srcset="@/assets/img/logo-m.svg")
-            img(src="@/assets/img/logo.svg" alt="")
-      .header__mobile-btn.hidden-desktop.js-trigger-class(data-trigger="mobile-nav")  
-        svg(width='30' height='30')
-          use(href='./assets/sprite.svg#close')
+    header.header.header--mobile
+      .header__inner
+        .header__logo.logo 
+          a.logo__link(href="/") 
+            picture.logo__picture
+              source(media="(max-width:768px)" srcset="@/assets/img/logo-m.svg")
+              img(src="@/assets/img/logo.svg" alt="")
+        .header__mobile-btn.hidden-desktop.js-trigger-class(data-trigger="mobile-nav")  
+          svg(width='30' height='30')
+            use(href='./assets/sprite.svg#close')
     nav.mobile-nav
       ul.mobile-nav__list 
         each val,index in menu

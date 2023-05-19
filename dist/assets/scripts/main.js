@@ -11069,6 +11069,7 @@ var fixedHeader = __webpack_require__(186);
 
 
 
+
 (function calcHeaderHeight() {
   document.documentElement.style.setProperty('--header-height', "".concat(document.querySelector('.header').offsetHeight, "px"));
 })();
