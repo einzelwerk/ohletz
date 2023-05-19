@@ -10911,7 +10911,6 @@ var Sliders = /*#__PURE__*/function () {
         var sliderInstance = new core(root, {
           modules: [Mousewheel, Pagination, Navigation],
           init: false,
-          loop: true,
           slidesPerView: 1,
           spaceBetween: 20,
           mousewheel: {
@@ -10935,6 +10934,7 @@ var Sliders = /*#__PURE__*/function () {
           breakpoints: {
             768: {
               centeredSlides: true,
+              initialSlide: 1,
               slidesPerView: 3,
               spaceBetween: 80
             }

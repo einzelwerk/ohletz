@@ -15,6 +15,7 @@
 
   &__index{
     display: block;
+    margin-bottom: 1.5rem;
     background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%);
 
     /* stylelint-disable-next-line property-no-vendor-prefix */
@@ -23,6 +24,7 @@
   }
 
   &__title {
+    margin: 0;
     font-weight: 400;
     font-size: rem(24px);
     line-height: 133%;
