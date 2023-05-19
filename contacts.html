@@ -109,9 +109,14 @@
             </div>
             <div class="contacts-map"> 
               <picture class="contacts-map__picture"> <img src="./assets/img/map.jpg" alt=""></picture>
-              <svg class="contacts-map__pin" width="48" height="48">
-                <use href="./assets/sprite.svg#pin"></use>
-              </svg><a class="contacts-map__route" href="#" target="_blank">Routenplaner
+              <div class="contacts-map__pin pin">
+                <div class="pin__content"> 
+                  <address>Bonsiepen 13, 45136 Essen</address><a href="">+49 201 95 98 2-0</a><a href="">info@ohletz.eu</a>
+                </div>
+                <svg width="48" height="48">
+                  <use href="./assets/sprite.svg#pin"></use>
+                </svg>
+              </div><a class="contacts-map__route" href="#" target="_blank">Routenplaner
                 <svg width="20" height="20">
                   <use href="./assets/sprite.svg#route"></use>
                 </svg></a>
