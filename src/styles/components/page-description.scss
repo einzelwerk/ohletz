@@ -10,13 +10,20 @@
     font-size: rem(40px);
     line-height: 120%;
     letter-spacing: -0.02em;
+
+    span {
+      background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%);
+      /* stylelint-disable-next-line property-no-vendor-prefix */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
     @include media(md) {
       font-size: rem(30px);
     }
   }
 
   &__text {
-    font-size: rem(32px);
+  font-size: rem(32px);
     line-height: 125%;
     letter-spacing: -0.015em;
     @include media(md) {

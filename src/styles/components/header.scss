@@ -1,13 +1,12 @@
 @use '../utils/mixins' as *;
 
 .header {
- 
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
   padding-top: 30px;
   padding-bottom: 30px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
 
   &__inner {
     display: flex;
@@ -17,13 +16,14 @@
 
   &--scrolled {
     position: fixed;
-    transform: translateY(-100%);
-    transition: .5s;
-    background: var(--white-color);
     z-index: 100;
-    border-bottom: 1px solid var(--dark-border);
     padding-top: 15px;
     padding-bottom: 15px;
+    background: var(--white-color);
+    border-bottom: 1px solid var(--dark-border);
+    transform: translateY(-100%);
+    transition: .5s;
+
     &--active {
       transform: translateY(0%);
     }
