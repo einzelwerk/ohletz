@@ -20,6 +20,20 @@
     transition: color .5s ease;
   }
 
+  &__label-file {
+    position: relative;
+
+    &:hover {
+      color:var(--dark-color);
+      cursor: pointer;
+    }
+  }
+
+  &__clip-icon {
+    position: absolute;
+    right: 0;
+  }
+
   &__item {
     grid-column: span 2;
     @include media(md) {
