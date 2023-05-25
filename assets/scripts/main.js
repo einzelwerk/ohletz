@@ -511,8 +511,7 @@ headings.forEach(function (t) {
     scrollTrigger: {
       trigger: t,
       start: 'top 80%',
-      end: '+=300px center',
-      markers: true
+      end: '+=300px center'
     }
   });
   timeline.fromTo(t, {
@@ -557,8 +556,7 @@ gsap_all__WEBPACK_IMPORTED_MODULE_1__.ScrollTrigger.create({
   start: "top 20px",
   end: "bottom bottom",
   pin: sticky,
-  pinSpacing: false,
-  markers: true
+  pinSpacing: false
 });
 
 /***/ }),
