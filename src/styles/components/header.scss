@@ -9,6 +9,7 @@
     top: 0;
     right: 0;
     left: 0;
+    z-index: 100;
   }
 
   &__inner {
@@ -21,6 +22,7 @@
   &--scrolled {
     position: fixed !important;
     z-index: 100;
+    display: none;
     padding-top: 15px;
     padding-bottom: 15px;
     background: var(--white-color);
@@ -29,6 +31,7 @@
     transition: .5s;
 
     &--active {
+      display: block;
       transform: translateY(0%);
     }
   }

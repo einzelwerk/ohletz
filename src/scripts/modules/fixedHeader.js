@@ -11,7 +11,7 @@ function handleScroll() {
     header.classList.remove('header--scrolled--active');
   }
 
-  if (currentScrollPosition > 2 * headerHeight) {
+  if (currentScrollPosition > 6 * headerHeight) {
     header.classList.add('header--scrolled');
   } else {
     header.classList.remove('header--scrolled');
