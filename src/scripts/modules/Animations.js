@@ -51,7 +51,7 @@ headings.forEach(t => {
       trigger: t,
       start: 'top 80%',
       end: '+=300px center',
-      markers: true,
+
 
     }
   })
@@ -106,11 +106,11 @@ const sticky = document.querySelector('.sticky');
 
 
 ScrollTrigger.create({
-  trigger:  sticky.parentElement , 
+  trigger: sticky.parentElement,
   scrub: 0.5,
   start: "top 20px",
-  end: "bottom bottom", 
+  end: "bottom bottom",
   pin: sticky,
   pinSpacing: false,
-  markers: true,
+
 });
