@@ -97,6 +97,21 @@ observer.observe(document.body, {
 
 /***/ }),
 
+/***/ 92:
+/***/ (() => {
+
+document.addEventListener('click', function (e) {
+  if (e.target.closest('.js-dropdown-toggle')) {
+    e.target.closest('.js-dropdown-toggle').querySelector('.js-dropdown-content').classList.toggle('active');
+    e.target.closest('.js-dropdown-toggle').querySelector('.contacts-dropdown__arrow').classList.toggle('active');
+  } else {
+    document.querySelector('.js-dropdown-content').classList.remove('active');
+    document.querySelector('.contacts-dropdown__arrow').classList.remove('active');
+  }
+});
+
+/***/ }),
+
 /***/ 186:
 /***/ (() => {
 
@@ -22004,15 +22019,20 @@ var sticky = document.querySelector('.sticky');
 
 // })
 
-ScrollTrigger_ScrollTrigger.create({
-  trigger: sticky.parentElement,
-  scrub: 0.5,
-  start: "top 20px",
-  end: "bottom bottom",
-  pin: sticky,
-  pinSpacing: false
-});
+if (sticky) {
+  ScrollTrigger_ScrollTrigger.create({
+    trigger: sticky.parentElement,
+    scrub: 0.5,
+    start: "top 20px",
+    end: "bottom bottom",
+    pin: sticky,
+    pinSpacing: false
+  });
+}
+// EXTERNAL MODULE: ./src/scripts/modules/Dropdown.js
+var Dropdown = __webpack_require__(92);
 ;// CONCATENATED MODULE: ./src/scripts/app.js
+
 
 
 
