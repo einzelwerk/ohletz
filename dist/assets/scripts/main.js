@@ -105,8 +105,9 @@ document.addEventListener('click', function (e) {
     e.target.closest('.js-dropdown-toggle').querySelector('.js-dropdown-content').classList.toggle('active');
     e.target.closest('.js-dropdown-toggle').querySelector('.contacts-dropdown__arrow').classList.toggle('active');
   } else {
-    document.querySelector('.js-dropdown-content').classList.remove('active');
-    document.querySelector('.contacts-dropdown__arrow').classList.remove('active');
+    var _document$querySelect, _document$querySelect2;
+    (_document$querySelect = document.querySelector('.js-dropdown-content')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.classList.remove('active');
+    (_document$querySelect2 = document.querySelector('.contacts-dropdown__arrow')) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.classList.remove('active');
   }
 });
 
@@ -10994,6 +10995,10 @@ var Sliders = /*#__PURE__*/function () {
         spaceBetween: 12,
         init: false,
         loop: true,
+        mousewheel: {
+          forceToAxis: true,
+          sensitivity: 0.3
+        },
         breakpoints: {
           768: {
             slidesPerView: 2,
@@ -11018,9 +11023,32 @@ var Sliders = /*#__PURE__*/function () {
             slidesPerView: 4
           }
         },
+        mousewheel: {
+          forceToAxis: true,
+          sensitivity: 0.3
+        },
         navigation: {
           prevEl: '.facts-slider__prev',
           nextEl: '.facts-slider__next'
+        },
+        init: false
+      });
+      sliderInstance.init();
+    }
+  }, {
+    key: "contactsBlock",
+    value: function contactsBlock() {
+      var sliderInstance = new core('.js-contacts-block-slider', {
+        modules: [Pagination],
+        slidesPerView: 1,
+        spaceBetween: 20,
+        pagination: {
+          el: document.querySelector('.js-contacts-block-slider').querySelector('.slider-pagination')
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 3
+          }
         },
         init: false
       });
@@ -11042,6 +11070,7 @@ function slidersInit() {
   Sliders.fullwidthSlider();
   Sliders.slider();
   Sliders.facts();
+  Sliders.contactsBlock();
 }
 document.addEventListener('DOMContentLoaded', function () {
   slidersInit();

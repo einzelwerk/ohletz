@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import Swiper, { Mousewheel, Pagination, Navigation, Grid } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/grid';
+import 'swiper/css/bundle';
+
 
 
 
@@ -15,7 +15,6 @@ class Sliders {
         modules: [Mousewheel],
         init: false,
         loop: true,
-
         slidesPerView: 1.2,
         spaceBetween: 20,
         mousewheel: {
@@ -306,6 +305,7 @@ class Sliders {
       slidesPerView: 1.2,
       spaceBetween: 12,
       init: false,
+      loop: true,
       breakpoints: {
         768: {
           slidesPerView: 2,
