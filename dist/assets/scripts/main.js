@@ -10716,7 +10716,6 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 
 
-
 var Sliders = /*#__PURE__*/function () {
   function Sliders() {
     _classCallCheck(this, Sliders);
@@ -10994,6 +10993,7 @@ var Sliders = /*#__PURE__*/function () {
         slidesPerView: 1.2,
         spaceBetween: 12,
         init: false,
+        loop: true,
         breakpoints: {
           768: {
             slidesPerView: 2,

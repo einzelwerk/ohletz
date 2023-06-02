@@ -105,12 +105,14 @@ const sticky = document.querySelector('.sticky');
 
 
 
-ScrollTrigger.create({
-  trigger: sticky.parentElement,
-  scrub: 0.5,
-  start: "top 20px",
-  end: "bottom bottom",
-  pin: sticky,
-  pinSpacing: false,
+if (sticky) {
+  ScrollTrigger.create({
+    trigger: sticky.parentElement,
+    scrub: 0.5,
+    start: "top 20px",
+    end: "bottom bottom",
+    pin: sticky,
+    pinSpacing: false,
 
-});
+  });
+}

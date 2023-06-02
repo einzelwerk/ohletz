@@ -25,12 +25,12 @@ block content
       .contacts-header.container
         .contacts-header__item
           address.contacts-header__value Bonsiepen 13, 45136 Essen
-          .contacts-header__dropdown.contacts-dropdown
-            .contacts-dropdown__main 
+          button.contacts-header__dropdown.contacts-dropdown.js-dropdown-toggle
+            .contacts-dropdown__main
               .contacts-dropdown__item <span>Montag</span> 08:00–18:00
                 svg.contacts-dropdown__arrow(width='20' height='20')
                   use(href='./assets/sprite.svg#arrow-down')
-            .contacts-dropdown__content
+            .contacts-dropdown__content.js-dropdown-content
               .contacts-dropdown__item <span>Dienstag</span> 08:00–18:00
               .contacts-dropdown__item <span>Mittwoch</span> 08:00–18:00
               .contacts-dropdown__item <span>Donnerstag</span> 08:00–18:00

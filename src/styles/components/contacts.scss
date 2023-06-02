@@ -60,17 +60,6 @@
   font-size: rem(20px);
   cursor: pointer;
 
-  &:hover {
-    #{$this}__content {
-     transform: translateY(0%);
-     visibility: visible;
-     opacity: 1;
-    }
-
-    #{$this}__arrow {
-      transform: rotate(180deg);
-    }
-  }
 
   &__item {
     display: flex;
@@ -84,6 +73,10 @@
 
   &__arrow {
     transition: .5s;
+
+    &.active {
+      transform: rotate(180deg);
+    }
   }
   
 
@@ -104,6 +97,12 @@
     visibility: hidden;
     opacity: 0;
     transition: .5s;
+
+    &.active {
+      transform: translateY(0%);
+         visibility: visible;
+         opacity: 1;
+    }
 
     &::before {
       position: absolute;
