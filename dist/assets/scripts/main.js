@@ -11089,15 +11089,21 @@ var tab = __webpack_require__(471);
 ;// CONCATENATED MODULE: ./src/scripts/utils/bootstrap.js
 
 
-var accordion = document.querySelectorAll(".bs-accordion");
+var accordion = document.querySelectorAll('.bs-accordion');
 accordion.forEach(function (elem) {
-  elem.addEventListener("show.bs.collapse", function (e) {
-    e.target.closest(".accordion__item").classList.add("active");
+  elem.addEventListener('show.bs.collapse', function (e) {
+    e.target.closest('.accordion__item').classList.add('active');
   });
 });
 accordion.forEach(function (elem) {
-  elem.addEventListener("hide.bs.collapse", function (e) {
-    e.target.closest(".accordion__item").classList.remove("active");
+  elem.addEventListener('hide.bs.collapse', function (e) {
+    e.target.closest('.accordion__item').classList.remove('active');
+  });
+});
+var accordionItem = document.querySelectorAll('.accordion__item');
+accordionItem.forEach(function (t) {
+  t.addEventListener('mouseover', function (e) {
+    e.currentTarget.querySelector('button').click();
   });
 });
 // EXTERNAL MODULE: ./src/scripts/modules/servicesCards.js
@@ -21977,11 +21983,9 @@ gsapWithCSS.set('.hero__title, hero__desc, .section-heading__desc', {
 });
 function heroSplit() {
   var headings = new SplitText(document.querySelector('.hero__title'), {
-    type: "lines, chars"
+    type: 'lines, chars'
   });
-  var tl = gsapWithCSS.timeline({
-    duration: 1
-  });
+  var tl = gsapWithCSS.timeline({});
   tl.set(headings.lines, {
     overflow: 'hidden'
   });
@@ -22052,8 +22056,8 @@ if (sticky) {
   ScrollTrigger_ScrollTrigger.create({
     trigger: sticky.parentElement,
     scrub: 0.5,
-    start: "top 20px",
-    end: "bottom bottom",
+    start: 'top 20px',
+    end: 'bottom bottom',
     pin: sticky,
     pinSpacing: false
   });

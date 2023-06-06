@@ -7,6 +7,8 @@ import 'swiper/css/bundle';
 
 import breakpoints from '../utils/MatchMedia';
 
+
+
 class Sliders {
   static aboutUs() {
     const root = document.querySelector('.js-about-us-slider');
@@ -306,6 +308,10 @@ class Sliders {
       spaceBetween: 12,
       init: false,
       loop: true,
+      mousewheel: {
+        forceToAxis: true,
+        sensitivity: 0.3,
+      },
       breakpoints: {
         768: {
           slidesPerView: 2,
@@ -331,10 +337,35 @@ class Sliders {
           slidesPerView: 4,
         },
       },
+      mousewheel: {
+        forceToAxis: true,
+        sensitivity: 0.3,
+      },
       navigation: {
         prevEl: '.facts-slider__prev',
         nextEl: '.facts-slider__next',
       },
+      init: false,
+
+    })
+
+    sliderInstance.init()
+  }
+
+  static contactsBlock() {
+    const sliderInstance = new Swiper('.js-contacts-block-slider', {
+      modules: [Pagination],
+      slidesPerView: 1,
+      spaceBetween: 20,
+      pagination: {
+        el: document.querySelector('.js-contacts-block-slider').querySelector('.slider-pagination')
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 3,
+        },
+      },
+
       init: false,
 
     })
@@ -357,6 +388,7 @@ function slidersInit() {
   Sliders.fullwidthSlider();
   Sliders.slider()
   Sliders.facts()
+  Sliders.contactsBlock()
 }
 
 document.addEventListener('DOMContentLoaded', () => {
