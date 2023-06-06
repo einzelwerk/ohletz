@@ -11,7 +11,7 @@
 
   &__heading {
     margin: 0;
-    color:var(--gray-color);
+    color: var(--gray-color);
     font-weight: 400;
     font-size: rem(14px);
     line-height: 120%;
@@ -37,24 +37,23 @@
 
   &__inner {
     display: grid;
-    grid-template-columns: repeat(4,max-content);
+    grid-template-columns: repeat(4, max-content);
     justify-content: space-between;
     @include media(md) {
-      grid-template-columns: repeat(4,1fr);
-      gap:32px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
     }
-    
   }
 
   &__col {
     display: flex;
     flex-flow: column wrap;
-    gap:20px;
+    gap: 20px;
   }
 
   &__bottom {
     display: flex;
-    gap:15px;
+    gap: 15px;
     justify-content: space-between;
     margin-top: 126px;
     @include media(md) {
@@ -64,16 +63,16 @@
   }
 
   &__copyright {
-    color:var(--gray-color);
+    color: var(--gray-color);
     font-size: rem(14px);
     line-height: 143%;
   }
 
   &__data {
     display: flex;
-    gap:24px;
+    gap: 24px;
     @include media(md) {
-      gap:20px;
+      gap: 20px;
     }
   }
 
@@ -88,13 +87,13 @@
   &__list {
     display: grid;
     grid-template-columns: 1fr;
-    gap:12px;
+    gap: 12px;
     margin: 0;
     padding: 0;
 
     &--two-columns {
       grid-template-columns: max-content max-content;
-      gap:12px 50px;
+      gap: 12px 50px;
       @include media(md) {
         grid-template-columns: 1fr;
       }
@@ -116,7 +115,7 @@
   &__inner {
     display: flex;
     flex-direction: column;
-    gap:12px;
+    gap: 12px;
   }
 
   &__item {
@@ -128,12 +127,19 @@
 
 .footer-socials {
   display: flex;
-  gap:12px;
+  gap: 12px;
 
   &__item {
     display: block;
     width: 24px;
     height: 24px;
+
+    svg {
+      transition: 0.5s;
+    }
+    &:hover {
+      color: var(--gray-color);
+    }
   }
 
   &__image {

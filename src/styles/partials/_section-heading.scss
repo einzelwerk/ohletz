@@ -2,13 +2,19 @@
 
 .section-heading {
   display: flex;
-  gap:240px;
+  gap: 240px;
   justify-content: space-between;
   margin-bottom: 48px;
   @include media(md) {
     flex-direction: column;
-    gap:20px;
+    gap: 20px;
     margin-bottom: 30px;
+  }
+
+  &__link {
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   &__title {
@@ -26,7 +32,7 @@
     }
 
     span {
-      background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%);
+      background: linear-gradient(180deg, #4a70b8 0%, #2e3a67 100%);
       /* stylelint-disable-next-line property-no-vendor-prefix */
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -50,5 +56,4 @@
       margin-bottom: 0;
     }
   }
-  
 }

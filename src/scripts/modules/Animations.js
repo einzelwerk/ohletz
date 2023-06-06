@@ -35,7 +35,7 @@ const smoother = ScrollSmoother.create({
   effects: true,
 });
 
-smoother.effects('img', { speed: 'auto' });
+smoother.effects('.hero img', { speed: 'auto' });
 
 const headings = document.querySelectorAll('.section-heading__title');
 

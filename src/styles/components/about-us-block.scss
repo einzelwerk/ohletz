@@ -4,62 +4,67 @@
   position: relative;
   overflow: visible;
 
- &__image {
-  position: relative;
-  display: block;
-  height: 0;
-  padding-bottom: calc(600px / 670px * 100%);
-
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
+  &__image {
+    position: relative;
     display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
- }
+    height: 0;
+    padding-bottom: calc(600px / 670px * 100%);
 
- &__link {
-  position: absolute;
-  bottom:0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 735px;
-  padding: 40px 32px;
-  font-size: rem(32px);
-  line-height: 125%;
-  letter-spacing: -0.015em;
-  text-decoration: none;
-  background: var(--white-color);
-  border-radius: 20px;
-  transform: translateY(50%);
-  @include media(md) {
-    gap:24px;
-    width: auto;
-    padding: 14px 18px;
-    font-size: rem(24px);
-    border-radius: 0;
-    transform: none;
-  }
- }
-
- &__icon {
-  @include media(md) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-
-    svg {
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
   }
- }
+
+  &__link {
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 735px;
+    padding: 40px 32px;
+    font-size: rem(32px);
+    line-height: 125%;
+    letter-spacing: -0.015em;
+    text-decoration: none;
+    background: var(--white-color);
+    border-radius: 20px;
+    transform: translateY(50%);
+    transition: 0.5s;
+    &:hover {
+      background: var(--dark-color);
+      color: var(--white-color);
+    }
+    @include media(md) {
+      gap: 24px;
+      width: auto;
+      padding: 14px 18px;
+      font-size: rem(24px);
+      border-radius: 0;
+      transform: none;
+    }
+  }
+
+  &__icon {
+    @include media(md) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 }

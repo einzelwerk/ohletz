@@ -10,8 +10,9 @@
 
   &__pagination {
     margin: 0 1.3rem;
-    color:var(--gray-color);
+    color: var(--gray-color);
     line-height: 150%;
+    width: auto;
   }
 
   &__btn {
@@ -21,9 +22,9 @@
     width: 42px;
     height: 42px;
     background: transparent;
-    border:1px solid var(--dark-border);
+    border: 1px solid var(--dark-border);
     border-radius: 16px;
-    transition: background .5s;
+    transition: background 0.5s;
 
     &:hover {
       background: var(--white-color);
@@ -31,16 +32,15 @@
   }
 }
 
-
 .slider-pagination {
   display: flex;
   justify-content: center;
   margin-top: 48px;
 
-  --swiper-pagination-bullet-width:85px;
-  --swiper-pagination-bullet-height:4px;
-  --swiper-pagination-bullet-border-radius:0%;
-  --swiper-pagination-bullet-inactive-color:#fff;
-  --swiper-pagination-bullet-inactive-opacity:0.2;
-  --swiper-pagination-color:#fff;
+  --swiper-pagination-bullet-width: 85px;
+  --swiper-pagination-bullet-height: 4px;
+  --swiper-pagination-bullet-border-radius: 0%;
+  --swiper-pagination-bullet-inactive-color: #fff;
+  --swiper-pagination-bullet-inactive-opacity: 0.2;
+  --swiper-pagination-color: #fff;
 }

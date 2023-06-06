@@ -17,7 +17,7 @@ accordion.forEach((elem) => {
 const accordionItem = document.querySelectorAll('.accordion__item');
 
 accordionItem.forEach((t) => {
-  t.addEventListener('mouseover', (e) => {
+  t.addEventListener('mouseenter', (e) => {
     e.currentTarget.querySelector('button').click();
   });
 });
