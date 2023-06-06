@@ -11102,7 +11102,7 @@ accordion.forEach(function (elem) {
 });
 var accordionItem = document.querySelectorAll('.accordion__item');
 accordionItem.forEach(function (t) {
-  t.addEventListener('mouseover', function (e) {
+  t.addEventListener('mouseenter', function (e) {
     e.currentTarget.querySelector('button').click();
   });
 });
@@ -22004,7 +22004,7 @@ var smoother = ScrollSmoother.create({
   smooth: 1,
   effects: true
 });
-smoother.effects('img', {
+smoother.effects('.hero img', {
   speed: 'auto'
 });
 var headings = document.querySelectorAll('.section-heading__title');

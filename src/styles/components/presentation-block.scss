@@ -1,11 +1,11 @@
 @use '../utils/mixins' as *;
 
 .presentation-block {
-  --bs-gutter-x:90px;
+  --bs-gutter-x: 90px;
 
   @include media(md) {
-    --bs-gutter-y:30px;
-    --bs-gutter-x:0px;
+    --bs-gutter-y: 30px;
+    --bs-gutter-x: 0px;
   }
 
   &__text {
@@ -21,7 +21,7 @@
     line-height: 120%;
 
     span {
-      background: linear-gradient(180deg, #4A70B8 0%, #2E3A67 100%);
+      background: linear-gradient(180deg, #4a70b8 0%, #2e3a67 100%);
 
       /* stylelint-disable-next-line property-no-vendor-prefix */
       -webkit-background-clip: text;
@@ -32,28 +32,32 @@
   &__desc {
     line-height: 150%;
     @include media(md) {
+      &.active {
+        p {
+          display: block;
+        }
+      }
       &:not(.active) {
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
       }
-
     }
 
     p {
+      @include media(md) {
+        display: none;
+      }
       &:last-child {
         margin-bottom: 0;
       }
     }
-    
   }
 
   &__show-more {
     margin-top: 20px;
-    color:var(--gray-color);
-
-    
+    color: var(--gray-color);
   }
 
   &__image {
@@ -85,9 +89,9 @@
       font-size: rem(20px);
     }
 
-   svg {
-    transition: transform .5s;
-   }
+    svg {
+      transition: transform 0.5s;
+    }
 
     &:hover {
       svg {
