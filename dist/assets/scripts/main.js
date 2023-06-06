@@ -1970,6 +1970,8 @@ var __webpack_exports__ = {};
 (() => {
 "use strict";
 
+// EXTERNAL MODULE: ./src/scripts/Classes/AttachedFiles.js
+var AttachedFiles = __webpack_require__(296);
 ;// CONCATENATED MODULE: ./node_modules/ssr-window/ssr-window.esm.js
 /**
  * SSR Window 4.0.2
@@ -11080,38 +11082,6 @@ window.addEventListener('resize', function () {
     slidersInit();
   }, 1000);
 });
-// EXTERNAL MODULE: ./src/scripts/Classes/AttachedFiles.js
-var AttachedFiles = __webpack_require__(296);
-// EXTERNAL MODULE: ./node_modules/bootstrap/js/dist/collapse.js
-var collapse = __webpack_require__(863);
-// EXTERNAL MODULE: ./node_modules/bootstrap/js/dist/tab.js
-var tab = __webpack_require__(471);
-;// CONCATENATED MODULE: ./src/scripts/utils/bootstrap.js
-
-
-var accordion = document.querySelectorAll('.bs-accordion');
-accordion.forEach(function (elem) {
-  elem.addEventListener('show.bs.collapse', function (e) {
-    e.target.closest('.accordion__item').classList.add('active');
-  });
-});
-accordion.forEach(function (elem) {
-  elem.addEventListener('hide.bs.collapse', function (e) {
-    e.target.closest('.accordion__item').classList.remove('active');
-  });
-});
-var accordionItem = document.querySelectorAll('.accordion__item');
-accordionItem.forEach(function (t) {
-  t.addEventListener('mouseenter', function (e) {
-    e.currentTarget.querySelector('button').click();
-  });
-});
-// EXTERNAL MODULE: ./src/scripts/modules/servicesCards.js
-var servicesCards = __webpack_require__(457);
-// EXTERNAL MODULE: ./src/scripts/modules/toogleClass.js
-var toogleClass = __webpack_require__(452);
-// EXTERNAL MODULE: ./src/scripts/modules/fixedHeader.js
-var fixedHeader = __webpack_require__(186);
 ;// CONCATENATED MODULE: ./node_modules/gsap/gsap-core.js
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
@@ -22064,6 +22034,36 @@ if (sticky) {
 }
 // EXTERNAL MODULE: ./src/scripts/modules/Dropdown.js
 var Dropdown = __webpack_require__(92);
+// EXTERNAL MODULE: ./src/scripts/modules/fixedHeader.js
+var fixedHeader = __webpack_require__(186);
+// EXTERNAL MODULE: ./src/scripts/modules/servicesCards.js
+var servicesCards = __webpack_require__(457);
+// EXTERNAL MODULE: ./src/scripts/modules/toogleClass.js
+var toogleClass = __webpack_require__(452);
+// EXTERNAL MODULE: ./node_modules/bootstrap/js/dist/collapse.js
+var collapse = __webpack_require__(863);
+// EXTERNAL MODULE: ./node_modules/bootstrap/js/dist/tab.js
+var tab = __webpack_require__(471);
+;// CONCATENATED MODULE: ./src/scripts/utils/bootstrap.js
+
+
+var accordion = document.querySelectorAll('.bs-accordion');
+accordion.forEach(function (elem) {
+  elem.addEventListener('show.bs.collapse', function (e) {
+    e.target.closest('.accordion__item').classList.add('active');
+  });
+});
+accordion.forEach(function (elem) {
+  elem.addEventListener('hide.bs.collapse', function (e) {
+    e.target.closest('.accordion__item').classList.remove('active');
+  });
+});
+var accordionItem = document.querySelectorAll('.accordion__item');
+accordionItem.forEach(function (t) {
+  t.addEventListener('mouseenter', function (e) {
+    e.currentTarget.querySelector('button').click();
+  });
+});
 ;// CONCATENATED MODULE: ./src/scripts/app.js
 
 
@@ -22077,6 +22077,14 @@ var Dropdown = __webpack_require__(92);
 (function calcHeaderHeight() {
   document.documentElement.style.setProperty('--header-height', "".concat(document.querySelector('.header').offsetHeight, "px"));
 })();
+
+// eslint-disable-next-line no-restricted-globals
+var el = document.querySelector(location.hash);
+if (el) window.scrollTo({
+  top: el.offsetTop,
+  left: 0,
+  behavior: 'instant'
+});
 })();
 
 /******/ })()
