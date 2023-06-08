@@ -1,15 +1,18 @@
-import './Classes/Sliders';
+import 'the-new-css-reset/css/reset.css';
 import './Classes/AttachedFiles';
+import './Classes/Sliders';
+import './modules/Animations';
+import './modules/Dropdown';
+import './modules/fixedHeader';
+import './modules/servicesCards';
+import './modules/toogleClass';
 import './utils/bootstrap';
-import './modules/servicesCards'
-import './modules/toogleClass'
-import './modules/fixedHeader'
-import './modules/Animations'
-import "the-new-css-reset/css/reset.css";
-import './modules/Dropdown'
 
-(
-  function calcHeaderHeight() {
-    document.documentElement.style.setProperty('--header-height', `${document.querySelector('.header').offsetHeight}px`)
-  }
-)()
+(function calcHeaderHeight() {
+  document.documentElement.style.setProperty('--header-height', `${document.querySelector('.header').offsetHeight}px`);
+})();
+
+// eslint-disable-next-line no-restricted-globals
+const el = document.querySelector(location.hash);
+
+if (el) window.scrollTo({ top: el.offsetTop, left: 0, behavior: 'instant' });
