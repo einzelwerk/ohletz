@@ -4,10 +4,6 @@
   $this: &;
 
   &:hover {
-    #{$this}__image img {
-      filter: grayscale(80%);
-    }
-
     #{$this}__name {
       &::before {
         transform: scale3d(1, 1, 1);
