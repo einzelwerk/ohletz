@@ -7,7 +7,9 @@
     --bs-gutter-y: 30px;
     --bs-gutter-x: 0px;
   }
-
+  @include media(md) {
+    flex-direction: column-reverse;
+  }
   &__text {
     display: flex;
     flex-direction: column;
