@@ -275,6 +275,7 @@
   &__link {
     line-height: 150%;
     text-decoration: none;
+    @include link-hover;
   }
 
   &__desc {
