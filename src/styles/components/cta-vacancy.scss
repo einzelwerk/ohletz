@@ -4,7 +4,7 @@
   position: relative;
   min-height: 600px;
   @include media(md) {
-    min-height: 400px;
+    min-height: 567px;
   }
 
   &__picture {
@@ -31,14 +31,13 @@
     align-items: flex-end;
     justify-content: space-between;
     padding-bottom: 40px;
-    color:var(--white-color);
+    color: var(--white-color);
     transform: translateX(-50%);
     @include media(md) {
       flex-direction: column;
-      gap:20px;
+      gap: 20px;
       align-items: flex-start;
     }
-
   }
 
   &__title {
@@ -51,13 +50,13 @@
     }
 
     span {
-      color:var(--gray-color)
+      color: var(--gray-color);
     }
   }
 
   &__link {
     display: flex;
-    gap:16px;
+    gap: 16px;
     align-items: center;
     font-size: rem(20px);
     letter-spacing: -0.01em;
@@ -70,7 +69,7 @@
     }
 
     svg {
-      transition: .5s;
+      transition: 0.5s;
     }
   }
 }
