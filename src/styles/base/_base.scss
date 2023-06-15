@@ -95,7 +95,7 @@ body p {
   b,
   strong {
     font-weight: 600;
-    color: var(--black);
+    color: var(--dark-color);
   }
 
   h2 {
@@ -178,11 +178,11 @@ body p {
   }
 
   a {
-    color: var(--accent-purple);
+    color: blue;
     text-decoration: underline;
 
     &:hover {
-      color: #7e32e0;
+      color: blueviolet;
     }
   }
 
@@ -204,7 +204,7 @@ body p {
       margin-top: 9px;
       margin-right: 8px;
 
-      background: var(--black);
+      background: var(--dark-color);
       border-radius: 1px;
     }
   }
