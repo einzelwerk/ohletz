@@ -1,13 +1,8 @@
 /* eslint-disable import/no-unresolved */
-import Swiper, { Mousewheel, Pagination, Navigation, Grid } from 'swiper';
+import Swiper, { Grid, Mousewheel, Navigation, Pagination } from 'swiper';
 import 'swiper/css/bundle';
 
-
-
-
 import breakpoints from '../utils/MatchMedia';
-
-
 
 class Sliders {
   static aboutUs() {
@@ -248,7 +243,6 @@ class Sliders {
         navigation: {
           prevEl: root.querySelector('.slider-navigation__prev'),
           nextEl: root.querySelector('.slider-navigation__next'),
-
         },
 
         breakpoints: {
@@ -261,9 +255,7 @@ class Sliders {
         },
       });
 
-
       sliderInstance.init();
-
     }
   }
 
@@ -282,10 +274,7 @@ class Sliders {
         },
         pagination: {
           el: root.querySelector('.swiper-pagination'),
-
-
         },
-
 
         breakpoints: {
           768: {
@@ -296,9 +285,7 @@ class Sliders {
         },
       });
 
-
       sliderInstance.init();
-
     }
   }
 
@@ -315,13 +302,12 @@ class Sliders {
       breakpoints: {
         768: {
           slidesPerView: 2,
-          spaceBetween: 20
+          spaceBetween: 20,
+        },
+      },
+    });
 
-        }
-      }
-    })
-
-    sliderInstance.init()
+    sliderInstance.init();
   }
 
   static facts() {
@@ -346,10 +332,9 @@ class Sliders {
         nextEl: '.facts-slider__next',
       },
       init: false,
+    });
 
-    })
-
-    sliderInstance.init()
+    sliderInstance.init();
   }
 
   static contactsBlock() {
@@ -358,7 +343,9 @@ class Sliders {
       slidesPerView: 1,
       spaceBetween: 20,
       pagination: {
-        el: document.querySelector('.js-contacts-block-slider').querySelector('.slider-pagination')
+        el: document.querySelector('.js-contacts-block-slider').querySelector('.slider-pagination'),
+        type: 'bullets',
+        clickable: true,
       },
       breakpoints: {
         768: {
@@ -367,10 +354,9 @@ class Sliders {
       },
 
       init: false,
+    });
 
-    })
-
-    sliderInstance.init()
+    sliderInstance.init();
   }
 }
 
@@ -386,9 +372,9 @@ function slidersInit() {
   Sliders.reviewsSlider();
 
   Sliders.fullwidthSlider();
-  Sliders.slider()
-  Sliders.facts()
-  Sliders.contactsBlock()
+  Sliders.slider();
+  Sliders.facts();
+  Sliders.contactsBlock();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

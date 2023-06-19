@@ -22081,12 +22081,16 @@ accordionItem.forEach(function (t) {
 })();
 
 // eslint-disable-next-line no-restricted-globals
-var el = document.querySelector(location.hash);
-if (el) window.scrollTo({
-  top: el.offsetTop,
-  left: 0,
-  behavior: 'instant'
-});
+var _location = location,
+  hash = _location.hash;
+if (hash) {
+  var el = document.querySelector(hash);
+  if (el) window.scrollTo({
+    top: el.offsetTop,
+    left: 0,
+    behavior: 'instant'
+  });
+}
 })();
 
 /******/ })()
