@@ -11077,7 +11077,7 @@ function slidersInit() {
   Sliders.facts();
   Sliders.contactsBlock();
 }
-document.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('load', function () {
   slidersInit();
 });
 window.addEventListener('resize', function () {

@@ -343,7 +343,7 @@ class Sliders {
       slidesPerView: 1,
       spaceBetween: 20,
       pagination: {
-        el: document.querySelector('.js-contacts-block-slider').querySelector('.slider-pagination'),
+        el: document.querySelector('.js-contacts-block-slider')?.querySelector('.slider-pagination'),
         type: 'bullets',
         clickable: true,
       },
