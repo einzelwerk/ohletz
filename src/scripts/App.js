@@ -13,6 +13,9 @@ import './utils/bootstrap';
 })();
 
 // eslint-disable-next-line no-restricted-globals
-const el = document.querySelector(location.hash);
+const { hash } = location;
+if (hash) {
+  const el = document.querySelector(hash);
 
-if (el) window.scrollTo({ top: el.offsetTop, left: 0, behavior: 'instant' });
+  if (el) window.scrollTo({ top: el.offsetTop, left: 0, behavior: 'instant' });
+}

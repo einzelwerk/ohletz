@@ -11040,12 +11040,13 @@ var Sliders = /*#__PURE__*/function () {
   }, {
     key: "contactsBlock",
     value: function contactsBlock() {
+      var _document$querySelect;
       var sliderInstance = new core('.js-contacts-block-slider', {
         modules: [Pagination],
         slidesPerView: 1,
         spaceBetween: 20,
         pagination: {
-          el: document.querySelector('.js-contacts-block-slider').querySelector('.slider-pagination'),
+          el: (_document$querySelect = document.querySelector('.js-contacts-block-slider')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.querySelector('.slider-pagination'),
           type: 'bullets',
           clickable: true
         },
