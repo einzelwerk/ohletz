@@ -379,13 +379,3 @@ function slidersInit() {
 }
 
 slidersInit();
-
-window.addEventListener('load', () => {
-  slidersInit();
-});
-
-window.addEventListener('resize', () => {
-  setTimeout(() => {
-    slidersInit();
-  }, 1000);
-});

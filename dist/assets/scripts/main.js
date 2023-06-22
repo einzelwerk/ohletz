@@ -10731,7 +10731,6 @@ var Sliders = /*#__PURE__*/function () {
         var sliderInstance = new core(root, {
           modules: [Mousewheel],
           init: false,
-          loop: true,
           slidesPerView: 1.2,
           spaceBetween: 20,
           mousewheel: {
@@ -10755,7 +10754,6 @@ var Sliders = /*#__PURE__*/function () {
         var sliderInstance = new core(root, {
           modules: [Mousewheel],
           init: false,
-          loop: true,
           slidesPerView: 1.2,
           spaceBetween: 20,
           mousewheel: {
@@ -10779,7 +10777,6 @@ var Sliders = /*#__PURE__*/function () {
         var sliderInstance = new core(root, {
           modules: [Mousewheel],
           init: false,
-          loop: true,
           slidesPerView: 1.2,
           spaceBetween: 20,
           mousewheel: {
@@ -10803,7 +10800,6 @@ var Sliders = /*#__PURE__*/function () {
         var sliderInstance = new core(root, {
           modules: [Mousewheel],
           init: false,
-          loop: true,
           slidesPerView: 1.2,
           spaceBetween: 20,
           mousewheel: {
@@ -10827,7 +10823,6 @@ var Sliders = /*#__PURE__*/function () {
         var sliderInstance = new core(root, {
           modules: [Mousewheel],
           init: false,
-          loop: true,
           slidesPerView: 1.2,
           spaceBetween: 20,
           mousewheel: {
@@ -10968,7 +10963,6 @@ var Sliders = /*#__PURE__*/function () {
         var sliderInstance = new core(root, {
           modules: [Mousewheel, Pagination, Navigation],
           init: false,
-          loop: true,
           slidesPerView: 1,
           spaceBetween: 20,
           mousewheel: {
@@ -10996,7 +10990,6 @@ var Sliders = /*#__PURE__*/function () {
         slidesPerView: 1.2,
         spaceBetween: 12,
         init: false,
-        loop: true,
         mousewheel: {
           forceToAxis: true,
           sensitivity: 0.3
