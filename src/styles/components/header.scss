@@ -14,9 +14,12 @@
 
   &__inner {
     display: flex;
-    gap:60px;
+    gap: 60px;
     align-items: center;
     justify-content: space-between;
+    @include media(md) {
+      gap: 20px;
+    }
   }
 
   &--scrolled {
@@ -28,7 +31,7 @@
     background: var(--white-color);
     border-bottom: 1px solid var(--dark-border);
     transform: translateY(-100%);
-    transition: .5s;
+    transition: 0.5s;
 
     &--active {
       display: block;
@@ -36,14 +39,14 @@
     }
   }
   @include media(md) {
-    gap:16px;
+    gap: 16px;
     justify-content: space-between;
     padding-top: 8px;
     padding-bottom: 8px;
   }
 
   &__btn {
-    flex:none;
+    flex: none;
     margin-left: auto;
     @include media(md) {
       padding: 10px 12px;
@@ -57,4 +60,3 @@
     }
   }
 }
-

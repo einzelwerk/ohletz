@@ -11045,6 +11045,7 @@ var Sliders = /*#__PURE__*/function () {
         modules: [Pagination],
         slidesPerView: 1,
         spaceBetween: 20,
+        watchSlidesProgress: true,
         pagination: {
           el: (_document$querySelect = document.querySelector('.js-contacts-block-slider')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.querySelector('.slider-pagination'),
           type: 'bullets',
@@ -11077,6 +11078,7 @@ function slidersInit() {
   Sliders.facts();
   Sliders.contactsBlock();
 }
+slidersInit();
 window.addEventListener('load', function () {
   slidersInit();
 });
