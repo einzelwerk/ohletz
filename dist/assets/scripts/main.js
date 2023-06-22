@@ -11079,14 +11079,6 @@ function slidersInit() {
   Sliders.contactsBlock();
 }
 slidersInit();
-window.addEventListener('load', function () {
-  slidersInit();
-});
-window.addEventListener('resize', function () {
-  setTimeout(function () {
-    slidersInit();
-  }, 1000);
-});
 ;// CONCATENATED MODULE: ./node_modules/gsap/gsap-core.js
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 

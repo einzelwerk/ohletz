@@ -17,6 +17,7 @@
     font-weight: 400;
     font-size: rem(60px);
     line-height: 120%;
+    word-break: break-word;
     @include media(md) {
       font-size: rem(36px);
     }

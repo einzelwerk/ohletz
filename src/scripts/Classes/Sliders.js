@@ -342,6 +342,7 @@ class Sliders {
       modules: [Pagination],
       slidesPerView: 1,
       spaceBetween: 20,
+      watchSlidesProgress: true,
       pagination: {
         el: document.querySelector('.js-contacts-block-slider')?.querySelector('.slider-pagination'),
         type: 'bullets',
@@ -376,6 +377,8 @@ function slidersInit() {
   Sliders.facts();
   Sliders.contactsBlock();
 }
+
+slidersInit();
 
 window.addEventListener('load', () => {
   slidersInit();

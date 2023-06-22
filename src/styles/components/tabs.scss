@@ -1,17 +1,14 @@
 @use '../utils/mixins' as *;
 
 .section-tabs {
-  padding-bottom:var(--gap-y);
+  padding-bottom: var(--gap-y);
 }
-
 
 .tabs-content {
   margin-top: 30px;
 
   &__item {
     display: none;
- 
-
 
     &.active {
       display: block;
@@ -37,18 +34,19 @@
     display: flex;
     align-items: center;
     padding: 23px 30px;
-    color:var(--gray-color);
-    transition: color .5s;
+    color: var(--gray-color);
+    transition: color 0.5s;
     @include media(md) {
       padding: 20px 16px;
+      white-space: nowrap;
     }
 
     &:hover {
-      color:var(--dark-color);
+      color: var(--dark-color);
     }
 
     &.active {
-      color:var(--dark-color);
+      color: var(--dark-color);
       border-bottom: 1px solid var(--dark-color);
     }
   }
@@ -56,10 +54,9 @@
   &__count {
     margin-left: 10px;
     padding: 5px;
-    color:var(--gray-color);
+    color: var(--gray-color);
     font-size: rem(12px);
     background: var(--lt-gray-color);
     border-radius: 6px;
-
   }
 }

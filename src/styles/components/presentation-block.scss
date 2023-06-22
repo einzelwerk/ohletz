@@ -48,9 +48,6 @@
     }
 
     p {
-      @include media(md) {
-        display: none;
-      }
       &:last-child {
         margin-bottom: 0;
       }
