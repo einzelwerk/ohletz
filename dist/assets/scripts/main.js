@@ -21956,7 +21956,8 @@ gsapWithCSS.set('.hero__title, hero__desc, .section-heading__desc', {
 });
 function heroSplit() {
   var headings = new SplitText(document.querySelector('.hero__title'), {
-    type: 'lines, chars'
+    type: 'lines, chars',
+    tag: 'span'
   });
   var tl = gsapWithCSS.timeline({});
   tl.set(headings.lines, {

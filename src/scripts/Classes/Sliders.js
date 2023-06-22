@@ -377,7 +377,7 @@ function slidersInit() {
   Sliders.contactsBlock();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
   slidersInit();
 });
 
