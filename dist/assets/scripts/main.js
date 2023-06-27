@@ -21942,7 +21942,7 @@ gsapWithCSS.set('.hero__title, hero__desc, .section-heading__desc', {
   autoAlpha: 0
 });
 function heroSplit() {
-  var headings = new SplitText(document.querySelector('.hero__title'), {
+  var headings = new SplitText(document.querySelectorAll('.hero__title'), {
     type: 'lines, chars',
     tag: 'span'
   });

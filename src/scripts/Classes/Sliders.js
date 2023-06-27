@@ -11,7 +11,7 @@ class Sliders {
       const sliderInstance = new Swiper(root, {
         modules: [Mousewheel],
         init: false,
-        loop: true,
+
         slidesPerView: 1.2,
         spaceBetween: 20,
         mousewheel: {
@@ -36,7 +36,6 @@ class Sliders {
       const sliderInstance = new Swiper(root, {
         modules: [Mousewheel],
         init: false,
-        loop: true,
 
         slidesPerView: 1.2,
         spaceBetween: 20,
@@ -62,7 +61,6 @@ class Sliders {
       const sliderInstance = new Swiper(root, {
         modules: [Mousewheel],
         init: false,
-        loop: true,
 
         slidesPerView: 1.2,
         spaceBetween: 20,
@@ -88,7 +86,6 @@ class Sliders {
       const sliderInstance = new Swiper(root, {
         modules: [Mousewheel],
         init: false,
-        loop: true,
 
         slidesPerView: 1.2,
         spaceBetween: 20,
@@ -114,7 +111,6 @@ class Sliders {
       const sliderInstance = new Swiper(root, {
         modules: [Mousewheel],
         init: false,
-        loop: true,
 
         slidesPerView: 1.2,
         spaceBetween: 20,
@@ -265,7 +261,7 @@ class Sliders {
       const sliderInstance = new Swiper(root, {
         modules: [Mousewheel, Pagination, Navigation],
         init: false,
-        loop: true,
+
         slidesPerView: 1,
         spaceBetween: 20,
         mousewheel: {
@@ -294,7 +290,7 @@ class Sliders {
       slidesPerView: 1.2,
       spaceBetween: 12,
       init: false,
-      loop: true,
+
       mousewheel: {
         forceToAxis: true,
         sensitivity: 0.3,
