@@ -5,7 +5,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 gsap.set('.hero__title, hero__desc, .section-heading__desc', { autoAlpha: 0 });
 
 function heroSplit() {
-  const headings = new SplitText(document.querySelector('.hero__title'), {
+  const headings = new SplitText(document.querySelectorAll('.hero__title'), {
     type: 'lines, chars',
     tag: 'span',
   });
