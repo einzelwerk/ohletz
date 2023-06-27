@@ -169,12 +169,6 @@
     }
   }
 
-  .contacts-cta__text {
-    @include media(md) {
-      display: none;
-    }
-  }
-
   &__info {
     position: absolute;
     bottom: 40px;
