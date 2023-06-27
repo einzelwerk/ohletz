@@ -174,12 +174,10 @@ trigger.forEach(function (elem) {
   elem.addEventListener('click', function () {
     target.classList.toggle('active');
     triggerElem.classList.toggle('active');
-    if (!elem.dataset.trigger) {
-      if (elem.classList.contains('active')) {
-        triggerElem.innerHTML = 'Weniger';
-      } else {
-        triggerElem.innerHTML = 'Mehr anzeigen';
-      }
+    if (elem.classList.contains('active')) {
+      triggerElem.innerHTML = 'Weniger';
+    } else {
+      triggerElem.innerHTML = 'Mehr anzeigen';
     }
   });
 });

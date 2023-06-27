@@ -40,10 +40,9 @@
         }
       }
       &:not(.active) {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        p:not(:first-child) {
+          display: none;
+        }
       }
     }
 
