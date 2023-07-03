@@ -33,16 +33,25 @@
 
   &__desc {
     line-height: 150%;
+    margin-bottom: 1rem;
     @include media(md) {
       &.active {
-        p {
-          display: block;
+        height: auto;
+        &:after {
+          content: none;
         }
       }
-      &:not(.active) {
-        p:not(:first-child) {
-          display: none;
-        }
+      height: 125px;
+      overflow: hidden;
+      position: relative;
+      &:after {
+        content: '';
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 85px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
       }
     }
 

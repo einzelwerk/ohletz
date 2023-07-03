@@ -104,3 +104,5 @@ if (sticky) {
     pinSpacing: false,
   });
 }
+
+export default smoother;

@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import Swiper, { Grid, Mousewheel, Navigation, Pagination } from 'swiper';
+import Swiper, { Autoplay, Grid, Mousewheel, Navigation, Pagination } from 'swiper';
 import 'swiper/css/bundle';
 
 import breakpoints from '../utils/MatchMedia';
@@ -9,9 +9,11 @@ class Sliders {
     const root = document.querySelector('.js-about-us-slider');
     if (root) {
       const sliderInstance = new Swiper(root, {
-        modules: [Mousewheel],
+        modules: [Mousewheel, Autoplay],
         init: false,
-
+        autoplay: {
+          delay: 2000,
+        },
         slidesPerView: 1.2,
         spaceBetween: 20,
         mousewheel: {
@@ -287,9 +289,13 @@ class Sliders {
 
   static slider() {
     const sliderInstance = new Swiper('.js-slider', {
+      modules: [Mousewheel, Autoplay],
       slidesPerView: 1.2,
       spaceBetween: 12,
       init: false,
+      autoplay: {
+        delay: 2000,
+      },
 
       mousewheel: {
         forceToAxis: true,

@@ -6,11 +6,5 @@ trigger.forEach((elem) => {
   elem.addEventListener('click', () => {
     target.classList.toggle('active');
     triggerElem.classList.toggle('active');
-
-    if (elem.classList.contains('active')) {
-      triggerElem.innerHTML = 'Weniger';
-    } else {
-      triggerElem.innerHTML = 'Mehr anzeigen';
-    }
   });
 });
