@@ -164,6 +164,24 @@ servicesCards.forEach(function (elem) {
 
 /***/ }),
 
+/***/ 922:
+/***/ (() => {
+
+var presentationButton = document.querySelector('.js-show-more');
+if (presentationButton) {
+  presentationButton.addEventListener('click', function () {
+    document.querySelector('.presentation-block__desc').classList.toggle('active');
+    presentationButton.classList.toggle('active');
+    if (document.querySelector('.presentation-block__desc').classList.contains('active')) {
+      presentationButton.innerHTML = 'Weniger';
+    } else {
+      presentationButton.innerHTML = 'Mehr anzeigen';
+    }
+  });
+}
+
+/***/ }),
+
 /***/ 452:
 /***/ (() => {
 
@@ -174,11 +192,6 @@ trigger.forEach(function (elem) {
   elem.addEventListener('click', function () {
     target.classList.toggle('active');
     triggerElem.classList.toggle('active');
-    if (elem.classList.contains('active')) {
-      triggerElem.innerHTML = 'Weniger';
-    } else {
-      triggerElem.innerHTML = 'Mehr anzeigen';
-    }
   });
 });
 
@@ -9279,7 +9292,7 @@ function Autoplay({
   };
   const onVisibilityChange = () => {
     if (swiper.destroyed || !swiper.autoplay.running) return;
-    const document = getDocument();
+    const document = ssr_window_esm_getDocument();
     if (document.visibilityState === 'hidden') {
       pausedByInteraction = true;
       pause(true);
@@ -9310,11 +9323,11 @@ function Autoplay({
     swiper.el.removeEventListener('pointerleave', onPointerLeave);
   };
   const attachDocumentEvents = () => {
-    const document = getDocument();
+    const document = ssr_window_esm_getDocument();
     document.addEventListener('visibilitychange', onVisibilityChange);
   };
   const detachDocumentEvents = () => {
-    const document = getDocument();
+    const document = ssr_window_esm_getDocument();
     document.removeEventListener('visibilitychange', onVisibilityChange);
   };
   on('init', () => {
@@ -10727,8 +10740,11 @@ var Sliders = /*#__PURE__*/function () {
       var root = document.querySelector('.js-about-us-slider');
       if (root) {
         var sliderInstance = new core(root, {
-          modules: [Mousewheel],
+          modules: [Mousewheel, Autoplay],
           init: false,
+          autoplay: {
+            delay: 2000
+          },
           slidesPerView: 1.2,
           spaceBetween: 20,
           mousewheel: {
@@ -10985,9 +11001,13 @@ var Sliders = /*#__PURE__*/function () {
     key: "slider",
     value: function slider() {
       var sliderInstance = new core('.js-slider', {
+        modules: [Mousewheel, Autoplay],
         slidesPerView: 1.2,
         spaceBetween: 12,
         init: false,
+        autoplay: {
+          delay: 2000
+        },
         mousewheel: {
           forceToAxis: true,
           sensitivity: 0.3
@@ -22021,12 +22041,15 @@ if (sticky) {
     pinSpacing: false
   });
 }
+/* harmony default export */ const Animations = (smoother);
 // EXTERNAL MODULE: ./src/scripts/modules/Dropdown.js
 var Dropdown = __webpack_require__(92);
 // EXTERNAL MODULE: ./src/scripts/modules/fixedHeader.js
 var fixedHeader = __webpack_require__(186);
 // EXTERNAL MODULE: ./src/scripts/modules/servicesCards.js
 var servicesCards = __webpack_require__(457);
+// EXTERNAL MODULE: ./src/scripts/modules/togglePresentationBlock.js
+var togglePresentationBlock = __webpack_require__(922);
 // EXTERNAL MODULE: ./src/scripts/modules/toogleClass.js
 var toogleClass = __webpack_require__(452);
 // EXTERNAL MODULE: ./node_modules/bootstrap/js/dist/collapse.js
@@ -22049,7 +22072,10 @@ accordion.forEach(function (elem) {
 });
 var accordionItem = document.querySelectorAll('.accordion__item');
 accordionItem.forEach(function (t) {
-  t.addEventListener('mouseenter', function (e) {
+  t.addEventListener('mouseover', function (e) {
+    e.currentTarget.querySelector('button').click();
+  });
+  t.addEventListener('mouseout', function (e) {
     e.currentTarget.querySelector('button').click();
   });
 });
@@ -22057,11 +22083,16 @@ accordionItem.forEach(function (t) {
 
 
 
+// eslint-disable-next-line import/no-duplicates
 
 
 
 
 
+
+
+
+// eslint-disable-next-line import/no-duplicates
 
 (function calcHeaderHeight() {
   document.documentElement.style.setProperty('--header-height', "".concat(document.querySelector('.header').offsetHeight, "px"));
@@ -22070,14 +22101,19 @@ accordionItem.forEach(function (t) {
 // eslint-disable-next-line no-restricted-globals
 var _location = location,
   hash = _location.hash;
-if (hash) {
-  var el = document.querySelector(hash);
-  if (el) window.scrollTo({
-    top: el.offsetTop,
-    left: 0,
-    behavior: 'instant'
+window.addEventListener('load', function () {
+  if (hash) {
+    var el = document.querySelector(hash);
+    if (el) Animations.scrollTo(el, true, 'center center');
+  }
+});
+document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    var el = document.querySelector(hash);
+    if (el) Animations.scrollTo(el, true, 'center center');
   });
-}
+});
 })();
 
 /******/ })()
