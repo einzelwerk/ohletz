@@ -167,17 +167,18 @@ servicesCards.forEach(function (elem) {
 /***/ 922:
 /***/ (() => {
 
-var presentationButton = document.querySelectorAll('.js-show-more');
-if (presentationButton) {
-  presentationButton.forEach(function (el) {
+var presentationButtons = document.querySelectorAll('.js-show-more');
+if (presentationButtons) {
+  presentationButtons.forEach(function (el) {
     el.addEventListener('click', function () {
+      var elem = el;
       var desc = el.closest('.presentation-block').querySelector('.presentation-block__desc');
       desc.classList.toggle('active');
       el.classList.toggle('active');
-      if (desc.classList.contains('active')) {
-        presentationButton.innerHTML = 'Weniger';
+      if (elem.classList.contains('active')) {
+        elem.innerHTML = 'Weniger';
       } else {
-        presentationButton.innerHTML = 'Mehr anzeigen';
+        elem.innerHTML = 'Mehr anzeigen';
       }
     });
   });
