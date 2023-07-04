@@ -1,16 +1,17 @@
-const presentationButton = document.querySelectorAll('.js-show-more');
+const presentationButtons = document.querySelectorAll('.js-show-more');
 
-if (presentationButton) {
-  presentationButton.forEach((el) => {
+if (presentationButtons) {
+  presentationButtons.forEach((el) => {
     el.addEventListener('click', () => {
+      const elem = el;
       const desc = el.closest('.presentation-block').querySelector('.presentation-block__desc');
       desc.classList.toggle('active');
 
       el.classList.toggle('active');
-      if (desc.classList.contains('active')) {
-        presentationButton.innerHTML = 'Weniger';
+      if (elem.classList.contains('active')) {
+        elem.innerHTML = 'Weniger';
       } else {
-        presentationButton.innerHTML = 'Mehr anzeigen';
+        elem.innerHTML = 'Mehr anzeigen';
       }
     });
   });

@@ -22108,14 +22108,14 @@ var _location = location,
 window.addEventListener('load', function () {
   if (hash) {
     var el = document.querySelector(hash);
-    if (el) Animations.scrollTo(el, true, 'center center');
+    if (el) Animations.scrollTo(el, true, 'top');
   }
 });
 document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
     var el = document.querySelector(hash);
-    if (el) Animations.scrollTo(el, true, 'center center');
+    if (el) Animations.scrollTo(el, true, 'top');
   });
 });
 })();
