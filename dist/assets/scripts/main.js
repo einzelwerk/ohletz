@@ -10747,7 +10747,7 @@ var Sliders = /*#__PURE__*/function () {
           modules: [Mousewheel, Autoplay],
           init: false,
           autoplay: {
-            delay: 2000
+            delay: 3000
           },
           slidesPerView: 1.2,
           spaceBetween: 20,

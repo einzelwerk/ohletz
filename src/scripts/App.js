@@ -23,7 +23,7 @@ window.addEventListener('load', () => {
   if (hash) {
     const el = document.querySelector(hash);
 
-    if (el) smoother.scrollTo(el, true, 'center center');
+    if (el) smoother.scrollTo(el, true, 'top');
   }
 });
 
@@ -33,6 +33,6 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 
     const el = document.querySelector(hash);
 
-    if (el) smoother.scrollTo(el, true, 'center center');
+    if (el) smoother.scrollTo(el, true, 'top');
   });
 });
