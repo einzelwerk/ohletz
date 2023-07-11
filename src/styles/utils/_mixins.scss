@@ -7,7 +7,7 @@ $breakpoints: (
   md: 769px,
   lg: 960px,
   xl: 1140px,
-  xxl: 1360px
+  xxl: 1360px,
 );
 
 @mixin media($breakpoint, $minmax: max-width) {
@@ -24,13 +24,12 @@ $breakpoints: (
   @return calc($px / 16px * 1rem);
 }
 
-
 @mixin h1 {
   margin-bottom: 24px;
   font-weight: 400;
   font-size: rem(60px);
   line-height: 72px;
-  
+
   @include media(md) {
     font-size: rem(36px);
   }
@@ -41,7 +40,7 @@ $breakpoints: (
   font-weight: 400;
   font-size: rem(40px);
   line-height: 48px;
-  
+
   @include media(md) {
     font-size: rem(30px);
   }
@@ -79,13 +78,13 @@ $breakpoints: (
 }
 
 @mixin p {
-  font-size: rem(16px);
+  font-size: inherit;
   line-height: 150%;
 }
 
 @mixin link-hover {
   position: relative;
-  
+
   &:hover {
     &::before {
       transform: scale3d(1, 1, 1);
@@ -106,5 +105,4 @@ $breakpoints: (
     content: '';
     pointer-events: none;
   }
-
 }
