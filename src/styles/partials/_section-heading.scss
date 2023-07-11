@@ -5,6 +5,10 @@
   gap: 240px;
   justify-content: space-between;
   margin-bottom: 48px;
+  &--col {
+    flex-direction: column;
+    gap: 2rem;
+  }
   @include media(md) {
     flex-direction: column;
     gap: 20px;
