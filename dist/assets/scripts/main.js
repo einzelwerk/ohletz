@@ -22061,6 +22061,7 @@ var collapse = __webpack_require__(863);
 // EXTERNAL MODULE: ./node_modules/bootstrap/js/dist/tab.js
 var tab = __webpack_require__(471);
 ;// CONCATENATED MODULE: ./src/scripts/utils/bootstrap.js
+/* eslint-disable no-param-reassign */
 
 
 var accordion = document.querySelectorAll('.bs-accordion');
@@ -22081,6 +22082,27 @@ accordionItem.forEach(function (t) {
   });
   t.addEventListener('mouseout', function (e) {
     e.currentTarget.querySelector('button').click();
+  });
+});
+var accordionButton = document.querySelectorAll('.accordion-item');
+function bootstrap_collapse(t) {
+  var height = t.closest('.accordion-item').querySelector('.accordion-content').offsetHeight;
+  t.closest('.accordion-item').querySelector('.accordion-collapse').style.height = "".concat(height, "px");
+  t.classList.add('active');
+}
+function collapseHide(t) {
+  t.closest('.accordion-item').querySelector('.accordion-collapse').style.height = '0px';
+  t.classList.remove('active');
+}
+accordionButton.forEach(function (t) {
+  t.addEventListener('click', function (e) {
+    bootstrap_collapse(t, e);
+  });
+  t.addEventListener('mouseover', function (e) {
+    bootstrap_collapse(t, e);
+  });
+  t.addEventListener('mouseout', function (e) {
+    collapseHide(t, e);
   });
 });
 ;// CONCATENATED MODULE: ./src/scripts/app.js
