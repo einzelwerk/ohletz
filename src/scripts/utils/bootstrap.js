@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/tab';
 
@@ -22,5 +23,30 @@ accordionItem.forEach((t) => {
   });
   t.addEventListener('mouseout', (e) => {
     e.currentTarget.querySelector('button').click();
+  });
+});
+
+const accordionButton = document.querySelectorAll('.accordion-item');
+
+function collapse(t) {
+  const height = t.closest('.accordion-item').querySelector('.accordion-content').offsetHeight;
+  t.closest('.accordion-item').querySelector('.accordion-collapse').style.height = `${height}px`;
+  t.classList.add('active');
+}
+
+function collapseHide(t) {
+  t.closest('.accordion-item').querySelector('.accordion-collapse').style.height = '0px';
+  t.classList.remove('active');
+}
+
+accordionButton.forEach((t) => {
+  t.addEventListener('click', (e) => {
+    collapse(t, e);
+  });
+  t.addEventListener('mouseover', (e) => {
+    collapse(t, e);
+  });
+  t.addEventListener('mouseout', (e) => {
+    collapseHide(t, e);
   });
 });
