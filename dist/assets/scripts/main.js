@@ -21959,10 +21959,8 @@ SplitText.register = SplitText_initCore;
 
 ;// CONCATENATED MODULE: ./src/scripts/modules/Animations.js
 
+
 gsapWithCSS.registerPlugin(ScrollTrigger_ScrollTrigger, ScrollSmoother, SplitText);
-gsapWithCSS.set('.hero__title, hero__desc, .section-heading__desc', {
-  autoAlpha: 0
-});
 function heroSplit() {
   var headings = new SplitText(document.querySelectorAll('.hero__title'), {
     type: 'lines, chars',
@@ -21990,31 +21988,38 @@ var smoother = ScrollSmoother.create({
 smoother.effects('.hero img', {
   speed: 'auto'
 });
-var headings = document.querySelectorAll('.section-heading__title');
-headings.forEach(function (t) {
-  var timeline = gsapWithCSS.timeline({
-    scrollTrigger: {
-      trigger: t,
-      start: 'top 80%',
-      end: '+=300px center'
-    }
-  });
-  timeline.fromTo(t, {
-    autoAlpha: 0,
-    y: 50
-  }, {
-    autoAlpha: 1,
-    y: 0
-  });
-  timeline.fromTo('.section-heading__desc', {
-    autoAlpha: 0,
-    y: 50
-  }, {
-    autoAlpha: 1,
-    y: 0
-  });
+window.addEventListener('load', function () {
+  if (MatchMedia.isDesktop) {
+    heroSplit();
+    gsapWithCSS.set('.hero__title, hero__desc, .section-heading__desc', {
+      autoAlpha: 0
+    });
+    var headings = document.querySelectorAll('.section-heading__title');
+    headings.forEach(function (t) {
+      var timeline = gsapWithCSS.timeline({
+        scrollTrigger: {
+          trigger: t,
+          start: 'top 80%',
+          end: '+=300px center'
+        }
+      });
+      timeline.fromTo(t, {
+        autoAlpha: 0,
+        y: 50
+      }, {
+        autoAlpha: 1,
+        y: 0
+      });
+      timeline.fromTo('.section-heading__desc', {
+        autoAlpha: 0,
+        y: 50
+      }, {
+        autoAlpha: 1,
+        y: 0
+      });
+    });
+  }
 });
-window.addEventListener('load', heroSplit);
 
 //  scroll to archon
 
@@ -22030,11 +22035,6 @@ archonLinks.forEach(function (t) {
 //  sticky
 
 var sticky = document.querySelector('.sticky');
-
-// sticky.forEach(t => {
-
-// })
-
 if (sticky) {
   ScrollTrigger_ScrollTrigger.create({
     trigger: sticky.parentElement,

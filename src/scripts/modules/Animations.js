@@ -1,8 +1,7 @@
 import { gsap, ScrollSmoother, ScrollTrigger, SplitText } from 'gsap/all';
+import breakpoints from '../utils/MatchMedia';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
-
-gsap.set('.hero__title, hero__desc, .section-heading__desc', { autoAlpha: 0 });
 
 function heroSplit() {
   const headings = new SplitText(document.querySelectorAll('.hero__title'), {
@@ -38,42 +37,47 @@ const smoother = ScrollSmoother.create({
 
 smoother.effects('.hero img', { speed: 'auto' });
 
-const headings = document.querySelectorAll('.section-heading__title');
+window.addEventListener('load', () => {
+  if (breakpoints.isDesktop) {
+    heroSplit();
+    gsap.set('.hero__title, hero__desc, .section-heading__desc', { autoAlpha: 0 });
 
-headings.forEach((t) => {
-  const timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: t,
-      start: 'top 80%',
-      end: '+=300px center',
-    },
-  });
+    const headings = document.querySelectorAll('.section-heading__title');
 
-  timeline.fromTo(
-    t,
-    {
-      autoAlpha: 0,
-      y: 50,
-    },
-    {
-      autoAlpha: 1,
-      y: 0,
-    },
-  );
-  timeline.fromTo(
-    '.section-heading__desc',
-    {
-      autoAlpha: 0,
-      y: 50,
-    },
-    {
-      autoAlpha: 1,
-      y: 0,
-    },
-  );
+    headings.forEach((t) => {
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: t,
+          start: 'top 80%',
+          end: '+=300px center',
+        },
+      });
+
+      timeline.fromTo(
+        t,
+        {
+          autoAlpha: 0,
+          y: 50,
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+        },
+      );
+      timeline.fromTo(
+        '.section-heading__desc',
+        {
+          autoAlpha: 0,
+          y: 50,
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+        },
+      );
+    });
+  }
 });
-
-window.addEventListener('load', heroSplit);
 
 //  scroll to archon
 
@@ -89,10 +93,6 @@ archonLinks.forEach((t) => {
 //  sticky
 
 const sticky = document.querySelector('.sticky');
-
-// sticky.forEach(t => {
-
-// })
 
 if (sticky) {
   ScrollTrigger.create({
