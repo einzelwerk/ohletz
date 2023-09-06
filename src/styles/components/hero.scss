@@ -22,20 +22,12 @@
       font-size: rem(36px);
     }
 
-    span {
+    .blue {
       background: linear-gradient(180deg, #4a70b8 0%, #2e3a67 100%);
 
       /* stylelint-disable-next-line property-no-vendor-prefix */
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-
-      div {
-        background: linear-gradient(180deg, #4a70b8 0%, #2e3a67 100%);
-
-        /* stylelint-disable-next-line property-no-vendor-prefix */
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
     }
   }
 

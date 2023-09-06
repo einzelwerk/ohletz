@@ -38,7 +38,7 @@ const smoother = ScrollSmoother.create({
 smoother.effects('.hero img', { speed: 'auto' });
 
 window.addEventListener('load', () => {
-  if (breakpoints.isDesktop) {
+  if (window.matchMedia(breakpoints.isDesktop).matches) {
     heroSplit();
     gsap.set('.hero__title, hero__desc, .section-heading__desc', { autoAlpha: 0 });
 

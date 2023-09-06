@@ -21989,7 +21989,7 @@ smoother.effects('.hero img', {
   speed: 'auto'
 });
 window.addEventListener('load', function () {
-  if (MatchMedia.isDesktop) {
+  if (window.matchMedia(MatchMedia.isDesktop).matches) {
     heroSplit();
     gsapWithCSS.set('.hero__title, hero__desc, .section-heading__desc', {
       autoAlpha: 0
