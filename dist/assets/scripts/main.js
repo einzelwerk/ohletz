@@ -89,10 +89,14 @@ var observer = new MutationObserver(function () {
     return new AttachedFiles(elem);
   });
 });
-observer.observe(document.body, {
-  childList: true,
-  subtree: true,
-  characterDataOldValue: true
+window.addEventListener('load', function () {
+  if (observer) {
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterDataOldValue: true
+    });
+  }
 });
 
 /***/ }),
@@ -140,7 +144,7 @@ window.addEventListener('scroll', handleScroll);
 /***/ 457:
 /***/ (() => {
 
-var servicesCards = document.querySelectorAll(".js-services-cards");
+var servicesCards = document.querySelectorAll('.js-services-cards');
 var callback = function callback(entries) {
   entries.forEach(function (entry) {
     var elem = entry;
@@ -149,17 +153,17 @@ var callback = function callback(entries) {
       document.querySelectorAll('.services-nav__item').forEach(function (el) {
         el.classList.remove('services-nav__item--current');
       });
-      document.querySelector(".services-nav__item[data-id=\"".concat(target.id, "\"]")).classList.add("services-nav__item--current");
+      document.querySelector(".services-nav__item[data-id=\"".concat(target.id, "\"]")).classList.add('services-nav__item--current');
     }
   });
 };
 var options = {
-  rootMargin: "0px 0px 75px 0px",
+  rootMargin: '0px 0px 75px 0px',
   threshold: 0.5
 };
-var observer = new IntersectionObserver(callback, options);
+var InterObserver = new IntersectionObserver(callback, options);
 servicesCards.forEach(function (elem) {
-  return observer.observe(elem);
+  return InterObserver.observe(elem);
 });
 
 /***/ }),
@@ -11100,7 +11104,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
 /*!
- * GSAP 3.11.5
+ * GSAP 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -11420,7 +11424,7 @@ _parseRelative = function _parseRelative(start, value) {
   child._next = child._prev = child.parent = null; // don't delete the _dp just so we can revert if necessary. But parent should be null to indicate the item isn't in a linked list.
 },
     _removeFromParent = function _removeFromParent(child, onlyIfParentHasAutoRemove) {
-  child.parent && (!onlyIfParentHasAutoRemove || child.parent.autoRemoveChildren) && child.parent.remove(child);
+  child.parent && (!onlyIfParentHasAutoRemove || child.parent.autoRemoveChildren) && child.parent.remove && child.parent.remove(child);
   child._act = 0;
 },
     _uncache = function _uncache(animation, child) {
@@ -11496,8 +11500,8 @@ _totalTimeToTime = (clampedTotalTime, duration, repeat, repeatDelay, yoyo) => {
 _postAddChecks = function _postAddChecks(timeline, child) {
   var t;
 
-  if (child._time || child._initted && !child._dur) {
-    //in case, for example, the _start is moved on a tween that has already rendered. Imagine it's at its end state, then the startTime is moved WAY later (after the end of this timeline), it should render at its beginning.
+  if (child._time || !child._dur && child._initted || child._start < timeline._time && (child._dur || !child.add)) {
+    // in case, for example, the _start is moved on a tween that has already rendered, or if it's being inserted into a timeline BEFORE where the playhead is currently. Imagine it's at its end state, then the startTime is moved WAY later (after the end of this timeline), it should render at its beginning. Special case: if it's a timeline (has .add() method) and no duration, we can skip rendering because the user may be populating it AFTER adding it to a parent timeline (unconventional, but possible, and we wouldn't want it to get removed if the parent's autoRemoveChildren is true).
     t = _parentToChildTotalTime(timeline.rawTime(), child);
 
     if (!child._dur || _clamp(0, child.totalDuration(), t) - child._tTime > _tinyNum) {
@@ -12098,63 +12102,62 @@ distribute = function distribute(v) {
     _quickTween,
     _registerPluginQueue = [],
     _createPlugin = function _createPlugin(config) {
-  if (!_windowExists()) {
-    _registerPluginQueue.push(config);
+  if (_windowExists() && config) {
+    // edge case: some build tools may pass in a null/undefined value
+    config = !config.name && config["default"] || config; //UMD packaging wraps things oddly, so for example MotionPathHelper becomes {MotionPathHelper:MotionPathHelper, default:MotionPathHelper}.
 
-    return;
-  }
+    var name = config.name,
+        isFunc = _isFunction(config),
+        Plugin = name && !isFunc && config.init ? function () {
+      this._props = [];
+    } : config,
+        //in case someone passes in an object that's not a plugin, like CustomEase
+    instanceDefaults = {
+      init: _emptyFunc,
+      render: _renderPropTweens,
+      add: _addPropTween,
+      kill: _killPropTweensOf,
+      modifier: _addPluginModifier,
+      rawVars: 0
+    },
+        statics = {
+      targetTest: 0,
+      get: 0,
+      getSetter: _getSetter,
+      aliases: {},
+      register: 0
+    };
 
-  config = !config.name && config["default"] || config; //UMD packaging wraps things oddly, so for example MotionPathHelper becomes {MotionPathHelper:MotionPathHelper, default:MotionPathHelper}.
+    _wake();
 
-  var name = config.name,
-      isFunc = _isFunction(config),
-      Plugin = name && !isFunc && config.init ? function () {
-    this._props = [];
-  } : config,
-      //in case someone passes in an object that's not a plugin, like CustomEase
-  instanceDefaults = {
-    init: _emptyFunc,
-    render: _renderPropTweens,
-    add: _addPropTween,
-    kill: _killPropTweensOf,
-    modifier: _addPluginModifier,
-    rawVars: 0
-  },
-      statics = {
-    targetTest: 0,
-    get: 0,
-    getSetter: _getSetter,
-    aliases: {},
-    register: 0
-  };
+    if (config !== Plugin) {
+      if (_plugins[name]) {
+        return;
+      }
 
-  _wake();
+      _setDefaults(Plugin, _setDefaults(_copyExcluding(config, instanceDefaults), statics)); //static methods
 
-  if (config !== Plugin) {
-    if (_plugins[name]) {
-      return;
+
+      _merge(Plugin.prototype, _merge(instanceDefaults, _copyExcluding(config, statics))); //instance methods
+
+
+      _plugins[Plugin.prop = name] = Plugin;
+
+      if (config.targetTest) {
+        _harnessPlugins.push(Plugin);
+
+        _reservedProps[name] = 1;
+      }
+
+      name = (name === "css" ? "CSS" : name.charAt(0).toUpperCase() + name.substr(1)) + "Plugin"; //for the global name. "motionPath" should become MotionPathPlugin
     }
 
-    _setDefaults(Plugin, _setDefaults(_copyExcluding(config, instanceDefaults), statics)); //static methods
+    _addGlobal(name, Plugin);
 
-
-    _merge(Plugin.prototype, _merge(instanceDefaults, _copyExcluding(config, statics))); //instance methods
-
-
-    _plugins[Plugin.prop = name] = Plugin;
-
-    if (config.targetTest) {
-      _harnessPlugins.push(Plugin);
-
-      _reservedProps[name] = 1;
-    }
-
-    name = (name === "css" ? "CSS" : name.charAt(0).toUpperCase() + name.substr(1)) + "Plugin"; //for the global name. "motionPath" should become MotionPathPlugin
+    config.register && config.register(gsap, Plugin, PropTween);
+  } else {
+    config && _registerPluginQueue.push(config);
   }
-
-  _addGlobal(name, Plugin);
-
-  config.register && config.register(gsap, Plugin, PropTween);
 },
 
 /*
@@ -12955,7 +12958,7 @@ var Animation = /*#__PURE__*/function () {
       animation = animation._dp;
     }
 
-    return !this.parent && this._sat ? this._sat.vars.immediateRender ? -1 : this._sat.globalTime(rawTime) : time; // the _startAt tweens for .fromTo() and .from() that have immediateRender should always be FIRST in the timeline (important for context.revert()). "_sat" stands for _startAtTween, referring to the parent tween that created the _startAt. We must discern if that tween had immediateRender so that we can know whether or not to prioritize it in revert().
+    return !this.parent && this._sat ? this._sat.vars.immediateRender ? -Infinity : this._sat.globalTime(rawTime) : time; // the _startAt tweens for .fromTo() and .from() that have immediateRender should always be FIRST in the timeline (important for context.revert()). "_sat" stands for _startAtTween, referring to the parent tween that created the _startAt. We must discern if that tween had immediateRender so that we can know whether or not to prioritize it in revert().
   };
 
   _proto.repeat = function repeat(value) {
@@ -13276,7 +13279,8 @@ var Timeline = /*#__PURE__*/function (_Animation) {
           var rewinding = yoyo && prevIteration & 1,
               doesWrap = rewinding === (yoyo && iteration & 1);
           iteration < prevIteration && (rewinding = !rewinding);
-          prevTime = rewinding ? 0 : dur;
+          prevTime = rewinding ? 0 : tTime % dur ? dur : tTime; // if the playhead is landing exactly at the end of an iteration, use that totalTime rather than only the duration, otherwise it'll skip the 2nd render since it's effectively at the same time.
+
           this._lock = 1;
           this.render(prevTime || (isYoyo ? 0 : _roundPrecise(iteration * cycleDuration)), suppressEvents, !dur)._lock = 0;
           this._tTime = tTime; // if a user gets the iteration() inside the onRepeat, for example, it should be accurate.
@@ -14064,7 +14068,7 @@ _forceAllPropTweens,
           immediateRender: immediateRender,
           //zero-duration tweens render immediately by default, but if we're not specifically instructed to render this tween immediately, we should skip this and merely _init() to record the starting values (rendering them immediately would push them to completion which is wasteful in that case - we'd have to render(-1) immediately after)
           stagger: 0,
-          parent: parent //ensures that nested tweens that had a stagger are handled properly, like gsap.from(".class", {y:gsap.utils.wrap([-100,100])})
+          parent: parent //ensures that nested tweens that had a stagger are handled properly, like gsap.from(".class", {y: gsap.utils.wrap([-100,100]), stagger: 0.5})
 
         }, cleanVars);
         harnessVars && (p[harness.prop] = harnessVars); // in case someone does something like .from(..., {css:{}})
@@ -14950,6 +14954,7 @@ var _media = [],
     _listeners = {},
     _emptyArray = [],
     _lastMediaTime = 0,
+    _contextID = 0,
     _dispatch = function _dispatch(type) {
   return (_listeners[type] || _emptyArray).map(function (f) {
     return f();
@@ -15005,6 +15010,8 @@ var Context = /*#__PURE__*/function () {
     this._r = []; // returned/cleanup functions
 
     this.isReverted = false;
+    this.id = _contextID++; // to work around issues that frameworks like Vue cause by making things into Proxies which make it impossible to do something like _media.indexOf(this) because "this" would no longer refer to the Context instance itself - it'd refer to a Proxy! We needed a way to identify the context uniquely
+
     func && this.add(func);
   }
 
@@ -15082,13 +15089,13 @@ var Context = /*#__PURE__*/function () {
           t: t
         };
       }).sort(function (a, b) {
-        return b.g - a.g || -1;
+        return b.g - a.g || -Infinity;
       }).forEach(function (o) {
         return o.t.revert(revert);
       }); // note: all of the _startAt tweens should be reverted in reverse order that they were created, and they'll all have the same globalTime (-1) so the " || -1" in the sort keeps the order properly.
 
       this.data.forEach(function (e) {
-        return !(e instanceof Animation) && e.revert && e.revert(revert);
+        return !(e instanceof Tween) && e.revert && e.revert(revert);
       });
 
       this._r.forEach(function (f) {
@@ -15105,9 +15112,12 @@ var Context = /*#__PURE__*/function () {
     this.clear();
 
     if (matchMedia) {
-      var i = _media.indexOf(this);
+      var i = _media.length;
 
-      !!~i && _media.splice(i, 1);
+      while (i--) {
+        // previously, we checked _media.indexOf(this), but some frameworks like Vue enforce Proxy objects that make it impossible to get the proper result that way, so we must use a unique ID number instead.
+        _media[i].id === this.id && _media.splice(i, 1);
+      }
     }
   };
 
@@ -15135,6 +15145,8 @@ var gsap_core_MatchMedia = /*#__PURE__*/function () {
         mq,
         p,
         active;
+    _context && !context.selector && (context.selector = _context.selector); // in case a context is created inside a context. Like a gsap.matchMedia() that's inside a scoped gsap.context()
+
     this.contexts.push(context);
     func = context.add("onMatch", func);
     context.queries = conditions;
@@ -15523,7 +15535,7 @@ var gsap = _gsap.registerPlugin({
   }
 }, _buildModifierPlugin("roundProps", _roundModifier), _buildModifierPlugin("modifiers"), _buildModifierPlugin("snap", snap)) || _gsap; //to prevent the core plugins from being dropped via aggressive tree shaking, we must include them in the variable declaration in this way.
 
-Tween.version = Timeline.version = gsap.version = "3.11.5";
+Tween.version = Timeline.version = gsap.version = "3.12.2";
 _coreReady = 1;
 _windowExists() && _wake();
 var Power0 = _easeMap.Power0,
@@ -15550,7 +15562,7 @@ var Power0 = _easeMap.Power0,
 
 ;// CONCATENATED MODULE: ./node_modules/gsap/CSSPlugin.js
 /*!
- * CSSPlugin 3.11.5
+ * CSSPlugin 3.12.2
  * https://greensock.com
  *
  * Copyright 2008-2023, GreenSock. All rights reserved.
@@ -15636,7 +15648,7 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
   var target = this.target,
       style = target.style;
 
-  if (property in _transformProps) {
+  if (property in _transformProps && style) {
     this.tfm = this.tfm || {};
 
     if (property !== "transform") {
@@ -17139,7 +17151,7 @@ function Observer_defineProperties(target, props) { for (var i = 0; i < props.le
 function Observer_createClass(Constructor, protoProps, staticProps) { if (protoProps) Observer_defineProperties(Constructor.prototype, protoProps); if (staticProps) Observer_defineProperties(Constructor, staticProps); return Constructor; }
 
 /*!
- * Observer 3.11.5
+ * Observer 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -17165,9 +17177,6 @@ var Observer_gsap,
     Observer_context,
     _getGSAP = function _getGSAP() {
   return Observer_gsap || typeof window !== "undefined" && (Observer_gsap = window.gsap) && Observer_gsap.registerPlugin && Observer_gsap;
-},
-    Observer_passThrough = function _passThrough(p) {
-  return p;
 },
     _startup = 1,
     _observers = [],
@@ -17261,8 +17270,8 @@ var Observer_gsap,
     return arguments.length ? Observer_win.scrollTo(_horizontal.sc(), value) : Observer_win.pageYOffset || Observer_doc[_scrollTop] || _docEl[_scrollTop] || _body[_scrollTop] || 0;
   })
 },
-    _getTarget = function _getTarget(t) {
-  return Observer_gsap.utils.toArray(t)[0] || (typeof t === "string" && Observer_gsap.config().nullTargetWarn !== false ? console.warn("Element not found:", t) : null);
+    _getTarget = function _getTarget(t, self) {
+  return (self && self._ctx && self._ctx.selector || Observer_gsap.utils.toArray)(t)[0] || (typeof t === "string" && Observer_gsap.config().nullTargetWarn !== false ? console.warn("Element not found:", t) : null);
 },
     _getScrollFunc = function _getScrollFunc(element, _ref) {
   var s = _ref.s,
@@ -17274,7 +17283,7 @@ var Observer_gsap,
       offset = sc === _vertical.sc ? 1 : 2;
 
   !~i && (i = _scrollers.push(element) - 1);
-  _scrollers[i + offset] || element.addEventListener("scroll", _onScroll); // clear the cache when a scroll occurs
+  _scrollers[i + offset] || _addListener(element, "scroll", _onScroll); // clear the cache when a scroll occurs
 
   var prev = _scrollers[i + offset],
       func = prev || (_scrollers[i + offset] = _scrollCacheFunc(_getProxyProp(element, s), true) || (_isViewport(element) ? sc : _scrollCacheFunc(function (value) {
@@ -17799,7 +17808,7 @@ var Observer_Observer = /*#__PURE__*/function () {
 
   return Observer;
 }();
-Observer_Observer.version = "3.11.5";
+Observer_Observer.version = "3.12.2";
 
 Observer_Observer.create = function (vars) {
   return new Observer_Observer(vars);
@@ -17821,7 +17830,7 @@ _getGSAP() && Observer_gsap.registerPlugin(Observer_Observer);
 
 ;// CONCATENATED MODULE: ./node_modules/gsap/ScrollTrigger.js
 /*!
- * ScrollTrigger 3.11.5
+ * ScrollTrigger 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -17862,6 +17871,8 @@ var ScrollTrigger_gsap,
     _fixIOSBug,
     ScrollTrigger_context,
     _scrollRestoration,
+    _div100vh,
+    _100vh,
     _limitCallbacks,
     // if true, we'll only trigger callbacks if the active state toggles, so if you scroll immediately past both the start and end positions of a ScrollTrigger (thus inactive to inactive), neither its onEnter nor onLeave will be called. This is useful during startup.
 ScrollTrigger_startup = 1,
@@ -17869,6 +17880,14 @@ ScrollTrigger_startup = 1,
     _time1 = ScrollTrigger_getTime(),
     _lastScrollTime = 0,
     _enabled = 0,
+    _parseClamp = function _parseClamp(value, type, self) {
+  var clamp = ScrollTrigger_isString(value) && (value.substr(0, 6) === "clamp(" || value.indexOf("max") > -1);
+  self["_" + type + "Clamp"] = clamp;
+  return clamp ? value.substr(6, value.length - 7) : value;
+},
+    _keepClamp = function _keepClamp(value, clamp) {
+  return clamp && (!ScrollTrigger_isString(value) || value.substr(0, 6) !== "clamp(") ? "clamp(" + value + ")" : value;
+},
     _rafBugFix = function _rafBugFix() {
   return _enabled && requestAnimationFrame(_rafBugFix);
 },
@@ -17894,10 +17913,13 @@ _pointerDownHandler = function _pointerDownHandler() {
     ScrollTrigger_isViewport = function _isViewport(e) {
   return !!~ScrollTrigger_root.indexOf(e);
 },
+    _getViewportDimension = function _getViewportDimension(dimensionProperty) {
+  return (dimensionProperty === "Height" ? _100vh : ScrollTrigger_win["inner" + dimensionProperty]) || ScrollTrigger_docEl["client" + dimensionProperty] || ScrollTrigger_body["client" + dimensionProperty];
+},
     _getBoundsFunc = function _getBoundsFunc(element) {
   return _getProxyProp(element, "getBoundingClientRect") || (ScrollTrigger_isViewport(element) ? function () {
     _winOffsets.width = ScrollTrigger_win.innerWidth;
-    _winOffsets.height = ScrollTrigger_win.innerHeight;
+    _winOffsets.height = _100vh;
     return _winOffsets;
   } : function () {
     return _getBounds(element);
@@ -17910,7 +17932,7 @@ _pointerDownHandler = function _pointerDownHandler() {
   return (a = _getProxyProp(scroller, "getBoundingClientRect")) ? function () {
     return a()[d];
   } : function () {
-    return (isViewport ? ScrollTrigger_win["inner" + d2] : scroller["client" + d2]) || 0;
+    return (isViewport ? _getViewportDimension(d2) : scroller["client" + d2]) || 0;
   };
 },
     _getOffsetsFunc = function _getOffsetsFunc(element, isViewport) {
@@ -17923,7 +17945,7 @@ _pointerDownHandler = function _pointerDownHandler() {
       d2 = _ref2.d2,
       d = _ref2.d,
       a = _ref2.a;
-  return Math.max(0, (s = "scroll" + d2) && (a = _getProxyProp(element, s)) ? a() - _getBoundsFunc(element)()[d] : ScrollTrigger_isViewport(element) ? (ScrollTrigger_docEl[s] || ScrollTrigger_body[s]) - (ScrollTrigger_win["inner" + d2] || ScrollTrigger_docEl["client" + d2] || ScrollTrigger_body["client" + d2]) : element[s] - element["offset" + d2]);
+  return Math.max(0, (s = "scroll" + d2) && (a = _getProxyProp(element, s)) ? a() - _getBoundsFunc(element)()[d] : ScrollTrigger_isViewport(element) ? (ScrollTrigger_docEl[s] || ScrollTrigger_body[s]) - _getViewportDimension(d2) : element[s] - element["offset" + d2]);
 },
     _iterateAutoRefresh = function _iterateAutoRefresh(func, events) {
   for (var i = 0; i < _autoRefresh.length; i += 3) {
@@ -17942,21 +17964,6 @@ _pointerDownHandler = function _pointerDownHandler() {
     ScrollTrigger_isObject = function _isObject(value) {
   return typeof value === "object";
 },
-    _callIfFunc = function _callIfFunc(value) {
-  return ScrollTrigger_isFunction(value) && value();
-},
-    _combineFunc = function _combineFunc(f1, f2) {
-  return function () {
-    var result1 = _callIfFunc(f1),
-        result2 = _callIfFunc(f2);
-
-    return function () {
-      _callIfFunc(result1);
-
-      _callIfFunc(result2);
-    };
-  };
-},
     _endAnimation = function _endAnimation(animation, reversed, pause) {
   return animation && animation.progress(reversed ? 0 : 1) && pause && animation.pause();
 },
@@ -17967,8 +17974,6 @@ _pointerDownHandler = function _pointerDownHandler() {
   }
 },
     _abs = Math.abs,
-    ScrollTrigger_scrollLeft = "scrollLeft",
-    ScrollTrigger_scrollTop = "scrollTop",
     _left = "left",
     _top = "top",
     _right = "right",
@@ -18279,6 +18284,13 @@ _revertRecorded = function _revertRecorded(media) {
     });
   }
 },
+    _refresh100vh = function _refresh100vh() {
+  ScrollTrigger_body.appendChild(_div100vh);
+
+  _100vh = _div100vh.offsetHeight || ScrollTrigger_win.innerHeight;
+
+  ScrollTrigger_body.removeChild(_div100vh);
+},
     _refreshAll = function _refreshAll(force, skipRevert) {
   if (_lastScrollTime && !force) {
     ScrollTrigger_addListener(ScrollTrigger_ScrollTrigger, "scrollEnd", _softRefresh);
@@ -18286,10 +18298,12 @@ _revertRecorded = function _revertRecorded(media) {
     return;
   }
 
+  _refresh100vh();
+
   _refreshingAll = ScrollTrigger_ScrollTrigger.isRefreshing = true;
 
   _scrollers.forEach(function (obj) {
-    return ScrollTrigger_isFunction(obj) && obj.cacheID++ && (obj.rec = obj());
+    return ScrollTrigger_isFunction(obj) && ++obj.cacheID && (obj.rec = obj());
   }); // force the clearing of the cache because some browsers take a little while to dispatch the "scroll" event and the user may have changed the scroll position and then called ScrollTrigger.refresh() right away
 
 
@@ -18323,9 +18337,11 @@ _revertRecorded = function _revertRecorded(media) {
   });
 
   _triggers.forEach(function (t) {
-    return t.vars.end === "max" && t.setPositions(t.start, Math.max(t.start + 1, _maxScroll(t.scroller, t._dir)));
-  }); // the scroller's max scroll position may change after all the ScrollTriggers refreshed (like pinning could push it down), so we need to loop back and correct any with end: "max".
+    // the scroller's max scroll position may change after all the ScrollTriggers refreshed (like pinning could push it down), so we need to loop back and correct any with end: "max". Same for anything with a clamped end
+    var max = _maxScroll(t.scroller, t._dir);
 
+    (t.vars.end === "max" || t._endClamp && t.end > max) && t.setPositions(t.start, Math.max(t.start + 1, max), true);
+  });
 
   refreshInits.forEach(function (result) {
     return result && result.render && result.render(-1);
@@ -18522,7 +18538,7 @@ _revertRecorded = function _revertRecorded(media) {
 // 	_getSizeFunc(scroller, isViewport, direction);
 // 	return _parsePosition(position, _getTarget(trigger), _getSizeFunc(scroller, isViewport, direction)(), direction, _getScrollFunc(scroller, direction)(), 0, 0, 0, _getOffsetsFunc(scroller, isViewport)(), isViewport ? 0 : parseFloat(_getComputedStyle(scroller)["border" + direction.p2 + _Width]) || 0, 0, containerAnimation ? containerAnimation.duration() : _maxScroll(scroller), containerAnimation);
 // },
-ScrollTrigger_parsePosition = function _parsePosition(value, trigger, scrollerSize, direction, scroll, marker, markerScroller, self, scrollerBounds, borderWidth, useFixedPosition, scrollerMax, containerAnimation) {
+ScrollTrigger_parsePosition = function _parsePosition(value, trigger, scrollerSize, direction, scroll, marker, markerScroller, self, scrollerBounds, borderWidth, useFixedPosition, scrollerMax, containerAnimation, clampZeroProp) {
   ScrollTrigger_isFunction(value) && (value = value(self));
 
   if (ScrollTrigger_isString(value) && value.substr(0, 3) === "max") {
@@ -18534,6 +18550,7 @@ ScrollTrigger_parsePosition = function _parsePosition(value, trigger, scrollerSi
       p2,
       element;
   containerAnimation && containerAnimation.seek(0);
+  isNaN(value) || (value = +value); // convert a string number like "45" to an actual number
 
   if (!ScrollTrigger_isNumber(value)) {
     ScrollTrigger_isFunction(trigger) && (trigger = trigger(self));
@@ -18542,7 +18559,7 @@ ScrollTrigger_parsePosition = function _parsePosition(value, trigger, scrollerSi
         localOffset,
         globalOffset,
         display;
-    element = _getTarget(trigger) || ScrollTrigger_body;
+    element = _getTarget(trigger, self) || ScrollTrigger_body;
     bounds = _getBounds(element) || {};
 
     if ((!bounds || !bounds.left && !bounds.top) && _getComputedStyle(element).display === "none") {
@@ -18561,6 +18578,11 @@ ScrollTrigger_parsePosition = function _parsePosition(value, trigger, scrollerSi
   } else {
     containerAnimation && (value = ScrollTrigger_gsap.utils.mapRange(containerAnimation.scrollTrigger.start, containerAnimation.scrollTrigger.end, 0, scrollerMax, value));
     markerScroller && _positionMarker(markerScroller, scrollerSize, direction, true);
+  }
+
+  if (clampZeroProp) {
+    self[clampZeroProp] = value || -0.001;
+    value < 0 && (value = 0);
   }
 
   if (marker) {
@@ -18633,6 +18655,11 @@ ScrollTrigger_parsePosition = function _parsePosition(value, trigger, scrollerSi
     return value;
   };
 },
+    _shiftMarker = function _shiftMarker(marker, direction, value) {
+  var vars = {};
+  vars[direction.p] = "+=" + value;
+  ScrollTrigger_gsap.set(marker, vars);
+},
     // _mergeAnimations = animations => {
 // 	let tl = gsap.timeline({smoothChildTiming: true}).startTime(Math.min(...animations.map(a => a.globalTime(0))));
 // 	animations.forEach(a => {let time = a.totalTime(); tl.add(a); a.totalTime(time); });
@@ -18644,9 +18671,7 @@ _getTweenCreator = function _getTweenCreator(scroller, direction) {
   var getScroll = _getScrollFunc(scroller, direction),
       prop = "_scroll" + direction.p2,
       // add a tweenable property to the scroller that's a getter/setter function, like _scrollTop or _scrollLeft. This way, if someone does gsap.killTweensOf(scroller) it'll kill the scroll tween.
-  lastScroll1,
-      lastScroll2,
-      getTween = function getTween(scrollTo, vars, initialValue, change1, change2) {
+  getTween = function getTween(scrollTo, vars, initialValue, change1, change2) {
     var tween = getTween.tween,
         onComplete = vars.onComplete,
         modifiers = {};
@@ -18661,7 +18686,6 @@ _getTweenCreator = function _getTweenCreator(scroller, direction) {
 
     change1 = change1 || scrollTo - initialValue;
     tween && tween.kill();
-    lastScroll1 = Math.round(initialValue);
     vars[prop] = scrollTo;
     vars.modifiers = modifiers;
 
@@ -18700,6 +18724,9 @@ _getTweenCreator = function _getTweenCreator(scroller, direction) {
 var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
   function ScrollTrigger(vars, animation) {
     ScrollTrigger_coreInitted || ScrollTrigger.register(ScrollTrigger_gsap) || console.warn("Please gsap.registerPlugin(ScrollTrigger)");
+
+    ScrollTrigger_context(this);
+
     this.init(vars, animation);
   }
 
@@ -18757,6 +18784,7 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
         getScrollerOffsets = _getOffsetsFunc(scroller, isViewport),
         lastSnap = 0,
         lastRefresh = 0,
+        prevProgress = 0,
         scrollFunc = _getScrollFunc(scroller, direction),
         tweenTo,
         pinCache,
@@ -18770,6 +18798,7 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
         markerStartTrigger,
         markerEndTrigger,
         markerVars,
+        executingOnRefresh,
         change,
         pinOriginalState,
         pinActiveState,
@@ -18792,14 +18821,13 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
         scrubSmooth,
         snapDurClamp,
         snapDelayedCall,
-        prevProgress,
         prevScroll,
         prevAnimProgress,
         caMarkerSetter,
-        customRevertReturn;
+        customRevertReturn; // for the sake of efficiency, _startClamp/_endClamp serve like a truthy value indicating that clamping was enabled on the start/end, and ALSO store the actual pre-clamped numeric value. We tap into that in ScrollSmoother for speed effects. So for example, if start="clamp(top bottom)" results in a start of -100 naturally, it would get clamped to 0 but -100 would be stored in _startClamp.
 
-    ScrollTrigger_context(self);
 
+    self._startClamp = self._endClamp = false;
     self._dir = direction;
     anticipatePin *= 45;
     self.scroller = scroller;
@@ -18828,7 +18856,7 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
       } else {
         scrubTween ? scrubTween.duration(value) : scrubTween = ScrollTrigger_gsap.to(animation, {
           ease: "expo",
-          totalProgress: "+=0.001",
+          totalProgress: "+=0",
           duration: scrubSmooth,
           paused: true,
           onComplete: function onComplete() {
@@ -18840,17 +18868,14 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
 
     if (animation) {
       animation.vars.lazy = false;
-      animation._initted || animation.vars.immediateRender !== false && vars.immediateRender !== false && animation.duration() && animation.render(0, true, true);
+      animation._initted && !self.isReverted || animation.vars.immediateRender !== false && vars.immediateRender !== false && animation.duration() && animation.render(0, true, true); // special case: if this ScrollTrigger gets re-initted, a from() tween with a stagger could get initted initially and then reverted on the re-init which means it'll need to get rendered again here to properly display things. Otherwise, See https://greensock.com/forums/topic/36777-scrollsmoother-splittext-nextjs/ and https://codepen.io/GreenSock/pen/eYPyPpd?editors=0010
+
       self.animation = animation.pause();
       animation.scrollTrigger = self;
       self.scrubDuration(scrub);
-      scrubTween && scrubTween.resetTo && scrubTween.resetTo("totalProgress", 0); // otherwise the initial scrub progress value would start at 0.001 which normally is no big deal, but for containerAnimation it can be noticeable since the range is so tiny.
-
       snap1 = 0;
       id || (id = animation.vars.id);
     }
-
-    _triggers.push(self);
 
     if (snap) {
       // TODO: potential idea: use legitimate CSS scroll snapping by pushing invisible elements into the DOM that serve as snap positions, and toggle the document.scrollingElement.style.scrollSnapType onToggle. See https://codepen.io/GreenSock/pen/JjLrgWM for a quick proof of concept.
@@ -18930,7 +18955,7 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
     }
 
     id && (_ids[id] = self);
-    trigger = self.trigger = _getTarget(trigger || pin); // if a trigger has some kind of scroll-related effect applied that could contaminate the "y" or "x" position (like a ScrollSmoother effect), we needed a way to temporarily revert it, so we use the stRevert property of the gsCache. It can return another function that we'll call at the end so it can return to its normal state.
+    trigger = self.trigger = _getTarget(trigger || pin !== true && pin); // if a trigger has some kind of scroll-related effect applied that could contaminate the "y" or "x" position (like a ScrollSmoother effect), we needed a way to temporarily revert it, so we use the stRevert property of the gsCache. It can return another function that we'll call at the end so it can return to its normal state.
 
     customRevertReturn = trigger && trigger._gsap && trigger._gsap.stRevert;
     customRevertReturn && (customRevertReturn = customRevertReturn(self));
@@ -19029,10 +19054,6 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
 
       if (r !== self.isReverted) {
         if (r) {
-          // if (!self.scroll.rec && (_refreshing || _refreshingAll)) {
-          // 	self.scroll.rec = scrollFunc();
-          // 	_refreshingAll && scrollFunc(0);
-          // }
           prevScroll = Math.max(scrollFunc(), self.scroll.rec || 0); // record the scroll so we can revert later (repositioning/pinning things can affect scroll position). In the static refresh() method, we first record all the scroll positions as a reference.
 
           prevProgress = self.progress;
@@ -19064,7 +19085,8 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
       }
     };
 
-    self.refresh = function (soft, force) {
+    self.refresh = function (soft, force, position, pinOffset) {
+      // position is typically only defined if it's coming from setPositions() - it's a way to skip the normal parsing. pinOffset is also only from setPositions() and is mostly related to fancy stuff we need to do in ScrollSmoother with effects
       if ((_refreshing || !self.enabled) && !force) {
         return;
       }
@@ -19077,9 +19099,9 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
 
       !_refreshingAll && onRefreshInit && onRefreshInit(self);
       _refreshing = self;
-      lastRefresh = ScrollTrigger_getTime();
 
-      if (tweenTo.tween) {
+      if (tweenTo.tween && !position) {
+        // we skip this if a position is passed in because typically that's from .setPositions() and it's best to allow in-progress snapping to continue.
         tweenTo.tween.kill();
         tweenTo.tween = 0;
       }
@@ -19096,11 +19118,11 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
           max = containerAnimation ? containerAnimation.duration() : _maxScroll(scroller, direction),
           isFirstRefresh = change <= 0.01,
           offset = 0,
-          otherPinOffset = 0,
-          parsedEnd = vars.end,
+          otherPinOffset = pinOffset || 0,
+          parsedEnd = ScrollTrigger_isObject(position) ? position.end : vars.end,
           parsedEndTrigger = vars.endTrigger || trigger,
-          parsedStart = vars.start || (vars.start === 0 || !trigger ? 0 : pin ? "0 0" : "0 100%"),
-          pinnedContainer = self.pinnedContainer = vars.pinnedContainer && _getTarget(vars.pinnedContainer),
+          parsedStart = ScrollTrigger_isObject(position) ? position.start : vars.start || (vars.start === 0 || !trigger ? 0 : pin ? "0 0" : "0 100%"),
+          pinnedContainer = self.pinnedContainer = vars.pinnedContainer && _getTarget(vars.pinnedContainer, self),
           triggerIndex = trigger && Math.max(0, _triggers.indexOf(self)) || 0,
           i = triggerIndex,
           cs,
@@ -19113,7 +19135,15 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
           oppositeScroll,
           initted,
           revertedPins,
-          forcedOverflow;
+          forcedOverflow,
+          markerStartOffset,
+          markerEndOffset;
+
+      if (markers && ScrollTrigger_isObject(position)) {
+        // if we alter the start/end positions with .setPositions(), it generally feeds in absolute NUMBERS which don't convey information about where to line up the markers, so to keep it intuitive, we record how far the trigger positions shift after applying the new numbers and then offset by that much in the opposite direction. We do the same to the associated trigger markers too of course.
+        markerStartOffset = ScrollTrigger_gsap.getProperty(markerStartTrigger, direction.p);
+        markerEndOffset = ScrollTrigger_gsap.getProperty(markerEndTrigger, direction.p);
+      }
 
       while (i--) {
         // user might try to pin the same element more than once, so we must find any prior triggers with the same pin, revert them, and determine how long they're pinning so that we can offset things appropriately. Make sure we revert from last to first so that things "rewind" properly.
@@ -19137,7 +19167,8 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
       }
 
       ScrollTrigger_isFunction(parsedStart) && (parsedStart = parsedStart(self));
-      start = ScrollTrigger_parsePosition(parsedStart, trigger, size, direction, scrollFunc(), markerStart, markerStartTrigger, self, scrollerBounds, borderWidth, useFixedPosition, max, containerAnimation) || (pin ? -0.001 : 0);
+      parsedStart = _parseClamp(parsedStart, "start", self);
+      start = ScrollTrigger_parsePosition(parsedStart, trigger, size, direction, scrollFunc(), markerStart, markerStartTrigger, self, scrollerBounds, borderWidth, useFixedPosition, max, containerAnimation, self._startClamp && "_startClamp") || (pin ? -0.001 : 0);
       ScrollTrigger_isFunction(parsedEnd) && (parsedEnd = parsedEnd(self));
 
       if (ScrollTrigger_isString(parsedEnd) && !parsedEnd.indexOf("+=")) {
@@ -19151,8 +19182,8 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
         }
       }
 
-      end = Math.max(start, ScrollTrigger_parsePosition(parsedEnd || (parsedEndTrigger ? "100% 0" : max), parsedEndTrigger, size, direction, scrollFunc() + offset, markerEnd, markerEndTrigger, self, scrollerBounds, borderWidth, useFixedPosition, max, containerAnimation)) || -0.001;
-      change = end - start || (start -= 0.01) && 0.001;
+      parsedEnd = _parseClamp(parsedEnd, "end", self);
+      end = Math.max(start, ScrollTrigger_parsePosition(parsedEnd || (parsedEndTrigger ? "100% 0" : max), parsedEndTrigger, size, direction, scrollFunc() + offset, markerEnd, markerEndTrigger, self, scrollerBounds, borderWidth, useFixedPosition, max, containerAnimation, self._endClamp && "_endClamp")) || -0.001;
       offset = 0;
       i = triggerIndex;
 
@@ -19161,9 +19192,9 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
         curPin = curTrigger.pin;
 
         if (curPin && curTrigger.start - curTrigger._pinPush <= start && !containerAnimation && curTrigger.end > 0) {
-          cs = curTrigger.end - curTrigger.start;
+          cs = curTrigger.end - (self._startClamp ? Math.max(0, curTrigger.start) : curTrigger.start);
 
-          if ((curPin === trigger && curTrigger.start - curTrigger._pinPush < start || curPin === pinnedContainer) && !ScrollTrigger_isNumber(parsedStart)) {
+          if ((curPin === trigger && curTrigger.start - curTrigger._pinPush < start || curPin === pinnedContainer) && isNaN(parsedStart)) {
             // numeric start values shouldn't be offset at all - treat them as absolute
             offset += cs * (1 - curTrigger.progress);
           }
@@ -19174,6 +19205,14 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
 
       start += offset;
       end += offset;
+      self._startClamp && (self._startClamp += offset);
+
+      if (self._endClamp && !_refreshingAll) {
+        self._endClamp = end || -0.001;
+        end = Math.min(end, _maxScroll(scroller, direction));
+      }
+
+      change = end - start || (start -= 0.01) && 0.001;
 
       if (isFirstRefresh) {
         // on the very first refresh(), the prevProgress couldn't have been accurate yet because the start/end were never calculated, so we set it here. Before 3.11.5, it could lead to an inaccurate scroll position restoration with snapping.
@@ -19204,7 +19243,11 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
             style: forcedOverflow,
             value: forcedOverflow["overflow" + direction.a.toUpperCase()]
           };
-          forcedOverflow.style["overflow" + direction.a.toUpperCase()] = "scroll";
+
+          if (isViewport && _getComputedStyle(ScrollTrigger_body)["overflow" + direction.a.toUpperCase()] !== "scroll") {
+            // avoid an extra scrollbar if BOTH <html> and <body> have overflow set to "scroll"
+            forcedOverflow.style["overflow" + direction.a.toUpperCase()] = "scroll";
+          }
         }
 
         _swapPinIn(pin, spacer, cs);
@@ -19301,27 +19344,50 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
       }
 
       self.revert(false, true);
+      lastRefresh = ScrollTrigger_getTime();
 
       if (snapDelayedCall) {
-        lastSnap = -1;
-        self.isActive && scrollFunc(start + change * prevProgress); // just so snapping gets re-enabled, clear out any recorded last value
+        lastSnap = -1; // just so snapping gets re-enabled, clear out any recorded last value
+        // self.isActive && scrollFunc(start + change * prevProgress); // previously this line was here to ensure that when snapping kicks in, it's from the previous progress but in some cases that's not desirable, like an all-page ScrollTrigger when new content gets added to the page, that'd totally change the progress.
 
         snapDelayedCall.restart(true);
       }
 
       _refreshing = 0;
-      animation && isToggle && (animation._initted || prevAnimProgress) && animation.progress() !== prevAnimProgress && animation.progress(prevAnimProgress, true).render(animation.time(), true, true); // must force a re-render because if saveStyles() was used on the target(s), the styles could have been wiped out during the refresh().
+      animation && isToggle && (animation._initted || prevAnimProgress) && animation.progress() !== prevAnimProgress && animation.progress(prevAnimProgress || 0, true).render(animation.time(), true, true); // must force a re-render because if saveStyles() was used on the target(s), the styles could have been wiped out during the refresh().
 
       if (isFirstRefresh || prevProgress !== self.progress || containerAnimation) {
         // ensures that the direction is set properly (when refreshing, progress is set back to 0 initially, then back again to wherever it needs to be) and that callbacks are triggered.
         animation && !isToggle && animation.totalProgress(containerAnimation && start < -0.001 && !prevProgress ? ScrollTrigger_gsap.utils.normalize(start, end, 0) : prevProgress, true); // to avoid issues where animation callbacks like onStart aren't triggered.
 
-        self.progress = (scroll1 - start) / change === prevProgress ? 0 : prevProgress;
+        self.progress = isFirstRefresh || (scroll1 - start) / change === prevProgress ? 0 : prevProgress;
       }
 
       pin && pinSpacing && (spacer._pinOffset = Math.round(self.progress * pinChange));
       scrubTween && scrubTween.invalidate();
-      onRefresh && !_refreshingAll && onRefresh(self); // when refreshing all, we do extra work to correct pinnedContainer sizes and ensure things don't exceed the maxScroll, so we should do all the refreshes at the end after all that work so that the start/end values are corrected.
+
+      if (!isNaN(markerStartOffset)) {
+        // numbers were passed in for the position which are absolute, so instead of just putting the markers at the very bottom of the viewport, we figure out how far they shifted down (it's safe to assume they were originally positioned in closer relation to the trigger element with values like "top", "center", a percentage or whatever, so we offset that much in the opposite direction to basically revert them to the relative position thy were at previously.
+        markerStartOffset -= ScrollTrigger_gsap.getProperty(markerStartTrigger, direction.p);
+        markerEndOffset -= ScrollTrigger_gsap.getProperty(markerEndTrigger, direction.p);
+
+        _shiftMarker(markerStartTrigger, direction, markerStartOffset);
+
+        _shiftMarker(markerStart, direction, markerStartOffset - (pinOffset || 0));
+
+        _shiftMarker(markerEndTrigger, direction, markerEndOffset);
+
+        _shiftMarker(markerEnd, direction, markerEndOffset - (pinOffset || 0));
+      }
+
+      isFirstRefresh && !_refreshingAll && self.update(); // edge case - when you reload a page when it's already scrolled down, some browsers fire a "scroll" event before DOMContentLoaded, triggering an updateAll(). If we don't update the self.progress as part of refresh(), then when it happens next, it may record prevProgress as 0 when it really shouldn't, potentially causing a callback in an animation to fire again.
+
+      if (onRefresh && !_refreshingAll && !executingOnRefresh) {
+        // when refreshing all, we do extra work to correct pinnedContainer sizes and ensure things don't exceed the maxScroll, so we should do all the refreshes at the end after all that work so that the start/end values are corrected.
+        executingOnRefresh = true;
+        onRefresh(self);
+        executingOnRefresh = false;
+      }
     };
 
     self.getVelocity = function () {
@@ -19417,7 +19483,7 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
               scrubTween.invalidate().restart();
             }
           } else if (animation) {
-            animation.totalProgress(clipped, !!_refreshing);
+            animation.totalProgress(clipped, !!(_refreshing && (lastRefresh || reset)));
           }
         }
 
@@ -19509,8 +19575,7 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
 
         ScrollTrigger_addListener(scroller, "resize", _onResize);
 
-        ScrollTrigger_addListener(isViewport ? ScrollTrigger_doc : scroller, "scroll", ScrollTrigger_onScroll);
-
+        isViewport || ScrollTrigger_addListener(scroller, "scroll", ScrollTrigger_onScroll);
         onRefreshInit && ScrollTrigger_addListener(ScrollTrigger, "refreshInit", onRefreshInit);
 
         if (reset !== false) {
@@ -19526,17 +19591,22 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
       return snap && tweenTo ? tweenTo.tween : scrubTween;
     };
 
-    self.setPositions = function (newStart, newEnd) {
+    self.setPositions = function (newStart, newEnd, keepClamp, pinOffset) {
       // doesn't persist after refresh()! Intended to be a way to override values that were set during refresh(), like you could set it in onRefresh()
-      if (pin) {
-        pinStart += newStart - start;
-        pinChange += newEnd - newStart - change;
-        pinSpacing === _padding && self.adjustPinSpacing(newEnd - newStart - change);
+      if (containerAnimation) {
+        // convert ratios into scroll positions. Remember, start/end values on ScrollTriggers that have a containerAnimation refer to the time (in seconds), NOT scroll positions.
+        var st = containerAnimation.scrollTrigger,
+            duration = containerAnimation.duration(),
+            _change = st.end - st.start;
+
+        newStart = st.start + _change * newStart / duration;
+        newEnd = st.start + _change * newEnd / duration;
       }
 
-      self.start = start = newStart;
-      self.end = end = newEnd;
-      change = newEnd - newStart;
+      self.refresh(false, false, {
+        start: _keepClamp(newStart, keepClamp && !!self._startClamp),
+        end: _keepClamp(newEnd, keepClamp && !!self._endClamp)
+      }, pinOffset);
       self.update();
     };
 
@@ -19575,7 +19645,7 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
 
           ScrollTrigger_removeListener(scroller, "resize", _onResize);
 
-          ScrollTrigger_removeListener(scroller, "scroll", ScrollTrigger_onScroll);
+          isViewport || ScrollTrigger_removeListener(scroller, "scroll", ScrollTrigger_onScroll);
         }
       }
     };
@@ -19626,11 +19696,26 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
       vars.onKill && vars.onKill(self);
     };
 
+    _triggers.push(self);
+
     self.enable(false, false);
     customRevertReturn && customRevertReturn(self);
-    !animation || !animation.add || change ? self.refresh() : ScrollTrigger_gsap.delayedCall(0.01, function () {
-      return start || end || self.refresh();
-    }) && (change = 0.01) && (start = end = 0); // if the animation is a timeline, it may not have been populated yet, so it wouldn't render at the proper place on the first refresh(), thus we should schedule one for the next tick. If "change" is defined, we know it must be re-enabling, thus we can refresh() right away.
+
+    if (animation && animation.add && !change) {
+      // if the animation is a timeline, it may not have been populated yet, so it wouldn't render at the proper place on the first refresh(), thus we should schedule one for the next tick. If "change" is defined, we know it must be re-enabling, thus we can refresh() right away.
+      var updateFunc = self.update; // some browsers may fire a scroll event BEFORE a tick elapses and/or the DOMContentLoaded fires. So there's a chance update() will be called BEFORE a refresh() has happened on a Timeline-attached ScrollTrigger which means the start/end won't be calculated yet. We don't want to add conditional logic inside the update() method (like check to see if end is defined and if not, force a refresh()) because that's a function that gets hit a LOT (performance). So we swap out the real update() method for this one that'll re-attach it the first time it gets called and of course forces a refresh().
+
+      self.update = function () {
+        self.update = updateFunc;
+        start || end || self.refresh();
+      };
+
+      ScrollTrigger_gsap.delayedCall(0.01, self.update);
+      change = 0.01;
+      start = end = 0;
+    } else {
+      self.refresh();
+    }
 
     pin && _queueRefreshAll(); // pinning could affect the positions of other things, so make sure we queue a full refresh()
   };
@@ -19704,6 +19789,12 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
 
       if (ScrollTrigger_body) {
         _enabled = 1;
+        _div100vh = document.createElement("div"); // to solve mobile browser address bar show/hide resizing, we shouldn't rely on window.innerHeight. Instead, use a <div> with its height set to 100vh and measure that since that's what the scrolling is based on anyway and it's not affected by address bar showing/hiding.
+
+        _div100vh.style.height = "100vh";
+        _div100vh.style.position = "absolute";
+
+        _refresh100vh();
 
         _rafBugFix();
 
@@ -19884,7 +19975,7 @@ var ScrollTrigger_ScrollTrigger = /*#__PURE__*/function () {
 
   return ScrollTrigger;
 }();
-ScrollTrigger_ScrollTrigger.version = "3.11.5";
+ScrollTrigger_ScrollTrigger.version = "3.12.2";
 
 ScrollTrigger_ScrollTrigger.saveStyles = function (targets) {
   return targets ? _toArray(targets).forEach(function (target) {
@@ -20350,7 +20441,7 @@ function ScrollSmoother_defineProperties(target, props) { for (var i = 0; i < pr
 function ScrollSmoother_createClass(Constructor, protoProps, staticProps) { if (protoProps) ScrollSmoother_defineProperties(Constructor.prototype, protoProps); if (staticProps) ScrollSmoother_defineProperties(Constructor, staticProps); return Constructor; }
 
 /*!
- * ScrollSmoother 3.11.5
+ * ScrollSmoother 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -20384,12 +20475,11 @@ var ScrollSmoother_gsap,
 },
     _bonusValidated = 1,
     //<name>ScrollSmoother</name>
-ScrollSmoother_isViewport = function _isViewport(e) {
-  return !!~ScrollSmoother_root.indexOf(e);
-},
-    ScrollSmoother_getTime = Date.now,
-    ScrollSmoother_round = function _round(value) {
+ScrollSmoother_round = function _round(value) {
   return Math.round(value * 100000) / 100000 || 0;
+},
+    ScrollSmoother_maxScroll = function _maxScroll(scroller) {
+  return ScrollSmoother_ScrollTrigger.maxScroll(scroller || ScrollSmoother_win);
 },
     _autoDistance = function _autoDistance(el, progress) {
   // for calculating the distance (and offset) for elements with speed: "auto". Progress is for if it's "above the fold" (negative start position), so we can crop as little as possible.
@@ -20406,7 +20496,7 @@ ScrollSmoother_isViewport = function _isViewport(e) {
   if (change > 0) {
     // if the image starts at the BOTTOM of the container, adjust things so that it shows as much of the image as possible while still covering.
     ratio = b2.height / (ScrollSmoother_win.innerHeight + b2.height);
-    extraChange = ratio === 0.5 ? b2.height * 2 : Math.min(b2.height, -change * ratio / (2 * ratio - 1)) * 2 * (progress || 1);
+    extraChange = ratio === 0.5 ? b2.height * 2 : Math.min(b2.height, Math.abs(-change * ratio / (2 * ratio - 1))) * 2 * (progress || 1);
     offset += progress ? -extraChange * progress : -extraChange / 2; // whatever the offset, we must double that in the opposite direction to compensate.
 
     change += extraChange;
@@ -20529,7 +20619,7 @@ var ScrollSmoother = /*#__PURE__*/function () {
     },
         resizeObserver = typeof ResizeObserver !== "undefined" && vars.autoResize !== false && new ResizeObserver(function () {
       if (!ScrollSmoother_ScrollTrigger.isRefreshing) {
-        var max = ScrollSmoother_ScrollTrigger.maxScroll(wrapper);
+        var max = ScrollSmoother_maxScroll(wrapper) * speed;
         max < -currentY && scrollTop(max); // if the user scrolled down to the bottom, for example, and then the page resizes smaller, we should adjust things accordingly right away so that the scroll position isn't past the very end.
 
         _onResizeDelayedCall.restart(true);
@@ -20547,35 +20637,94 @@ var ScrollSmoother = /*#__PURE__*/function () {
       ScrollSmoother_ScrollTrigger.isInViewport(e.target) || e.target === lastFocusElement || _this.scrollTo(e.target, false, "center center");
       lastFocusElement = e.target;
     },
-        adjustParallaxPosition = function adjustParallaxPosition(triggers, createdAfterEffectWasApplied) {
-      var pins, start, dif, markers;
-      effects.forEach(function (st) {
-        pins = st.pins;
-        markers = st.markers;
-        triggers.forEach(function (trig) {
-          if (st.trigger && trig.trigger && st !== trig && (trig.trigger === st.trigger || trig.pinnedContainer === st.trigger || st.trigger.contains(trig.trigger))) {
-            start = trig.start;
-            dif = (start - st.start - st.offset) / st.ratio - (start - st.start); // createdAfterEffectWasApplied && (dif -= (gsap.getProperty(st.trigger, "y") - st.startY) / st.ratio); // the effect applied a y offset, so if the ScrollTrigger was created after that, it'll be based on that position so we must compensate. Later we added code to ScrollTrigger to roll back in this situation anyway, so this isn't necessary. Saving it in case a situation arises where it comes in handy.
+        _transformPosition = function _transformPosition(position, st) {
+      // feed in a position (start or end scroll value) and a ScrollTrigger that's associated with a parallax effect and it'll spit back the adjusted position based on the movement of the trigger. For example, if the trigger goes at a speed of 0.5 while in the viewport, we must push the start/end values of OTHER ScrollTriggers that use that same trigger further down to compensate.
+      if (position < st.start) {
+        return position;
+      }
 
-            pins.forEach(function (p) {
-              return dif -= p.distance / st.ratio - p.distance;
-            });
-            trig.setPositions(start + dif, trig.end + dif);
-            trig.markerStart && markers.push(ScrollSmoother_gsap.quickSetter([trig.markerStart, trig.markerEnd], "y", "px"));
+      var ratio = isNaN(st.ratio) ? 1 : st.ratio,
+          change = st.end - st.start,
+          distance = position - st.start,
+          offset = st.offset || 0,
+          pins = st.pins || [],
+          pinOffset = pins.offset || 0,
+          progressOffset = st._startClamp && st.start <= 0 || st.pins && st.pins.offset ? 0 : st._endClamp && st.end === ScrollSmoother_maxScroll() ? 1 : 0.5;
+      pins.forEach(function (p) {
+        // remove any pinning space/distance
+        change -= p.distance;
 
-            if (trig.pin && trig.end > 0) {
-              dif = trig.end - trig.start;
-              pins.push({
-                start: trig.start,
-                end: trig.end,
-                distance: dif,
-                trig: trig
-              });
-              st.setPositions(st.start, st.end + dif);
-              st.vars.onRefresh(st);
+        if (p.nativeStart <= position) {
+          distance -= p.distance;
+        }
+      });
+
+      if (pinOffset) {
+        // edge case when a clamped effect starts mid-pin; we've gotta compensate for the smaller change amount (the yOffset gets set to the st.pins.offset, so let's say it clamps such that the page starts with the element pinned 100px in, we have to set the yOffset to 100 but then subtract 100 from the change value to compensate, thus we must scale the positions accordingly based on the ratios. Like if it would normally have a change of 2000, and a pin would normally hit at 1000, but we're offsetting by 100, that means everything must scale now that we're only moving 1900px rather than 2000px.
+        distance *= (change - pinOffset / ratio) / change;
+      }
+
+      return position + (distance - offset * progressOffset) / ratio - distance;
+    },
+        adjustEffectRelatedTriggers = function adjustEffectRelatedTriggers(st, triggers, partial) {
+      // if we're using this method to do only a partial Array of triggers, we should NOT reset or rebuild the pin data. For example, we tap into this from the offset() method.
+      partial || (st.pins.length = st.pins.offset = 0);
+      var pins = st.pins,
+          markers = st.markers,
+          dif,
+          isClamped,
+          start,
+          end,
+          nativeStart,
+          nativeEnd,
+          i,
+          trig;
+
+      for (i = 0; i < triggers.length; i++) {
+        trig = triggers[i];
+
+        if (st.trigger && trig.trigger && st !== trig && (trig.trigger === st.trigger || trig.pinnedContainer === st.trigger || st.trigger.contains(trig.trigger))) {
+          nativeStart = trig._startNative || trig._startClamp || trig.start;
+          nativeEnd = trig._endNative || trig._endClamp || trig.end;
+          start = _transformPosition(nativeStart, st); // note: _startClamp and _endClamp are populated with the unclamped values. For the sake of efficiency sake, we use the property both like a boolean to indicate that clamping is enabled AND the actual original unclamped value which we need in situations like if there's a data-speed="" on an element that has something like start="clamp(top bottom)". For in-viewport elements, it would clamp the values on the ScrollTrigger first, then feed it here and we'd adjust it on the clamped value which could throw things off - we need to apply the logic to the unclamped value and THEN re-apply clamping on the result.
+
+          end = trig.pin && nativeEnd > 0 ? start + (nativeEnd - nativeStart) : _transformPosition(nativeEnd, st);
+          trig.setPositions(start, end, true, (trig._startClamp ? Math.max(0, start) : start) - nativeStart); // the last value (pinOffset) is to adjust the pinStart y value inside ScrollTrigger to accommodate for the y offset that gets applied by the parallax effect.
+
+          trig.markerStart && markers.push(ScrollSmoother_gsap.quickSetter([trig.markerStart, trig.markerEnd], "y", "px"));
+
+          if (trig.pin && trig.end > 0 && !partial) {
+            dif = trig.end - trig.start;
+            isClamped = st._startClamp && trig.start < 0;
+
+            if (isClamped) {
+              if (st.start > 0) {
+                // the trigger element on the effect must have been pinned BEFORE its starting position, so in this edge case we must adjust the start position to be 0 and end position to get pushed further by the amount of the overlap
+                st.setPositions(0, st.end + (st._startNative - st.start), true); // add the overlap amount
+
+                adjustEffectRelatedTriggers(st, triggers);
+                return; // start over for this trigger element!
+              }
+
+              dif += trig.start;
+              pins.offset = -trig.start; // edge case when a clamped effect starts mid-pin, we've gotta compensate in the onUpdate algorithm.
             }
+
+            pins.push({
+              start: trig.start,
+              nativeStart: nativeStart,
+              end: trig.end,
+              distance: dif,
+              trig: trig
+            });
+            st.setPositions(st.start, st.end + (isClamped ? -trig.start : dif), true);
           }
-        });
+        }
+      }
+    },
+        adjustParallaxPosition = function adjustParallaxPosition(triggers, createdAfterEffectWasApplied) {
+      effects.forEach(function (st) {
+        return adjustEffectRelatedTriggers(st, triggers, createdAfterEffectWasApplied);
       });
     },
         onRefresh = function onRefresh() {
@@ -20584,18 +20733,40 @@ var ScrollSmoother = /*#__PURE__*/function () {
 
       if (effects) {
         // adjust all the effect start/end positions including any pins!
+        ScrollSmoother_ScrollTrigger.getAll().forEach(function (st) {
+          // record the native start/end positions because we'll be messing with them and need a way to have a "source of truth"
+          st._startNative = st.start;
+          st._endNative = st.end;
+        });
         effects.forEach(function (st) {
-          var start = st.start,
-              end = st.auto ? Math.min(ScrollSmoother_ScrollTrigger.maxScroll(st.scroller), st.end) : start + (st.end - start) / st.ratio,
-              offset = (end - st.end) / 2; // we split the difference so that it reaches its natural position in the MIDDLE of the viewport
+          var start = st._startClamp || st.start,
+              // if it was already clamped, we should base things on the unclamped value and then do the clamping here.
+          end = st.autoSpeed ? Math.min(ScrollSmoother_maxScroll(), st.end) : start + Math.abs((st.end - start) / st.ratio),
+              offset = end - st.end; // we split the difference so that it reaches its natural position in the MIDDLE of the viewport
 
-          start -= offset;
-          end -= offset;
+          start -= offset / 2;
+          end -= offset / 2;
+
+          if (start > end) {
+            var s = start;
+            start = end;
+            end = s;
+          }
+
+          if (st._startClamp && start < 0) {
+            end = st.ratio < 0 ? ScrollSmoother_maxScroll() : st.end / st.ratio;
+            offset = end - st.end;
+            start = 0;
+          } else if (st.ratio < 0 || st._endClamp && end >= ScrollSmoother_maxScroll()) {
+            end = ScrollSmoother_maxScroll();
+            start = st.ratio < 0 ? 0 : st.ratio > 1 ? 0 : end - (end - st.start) / st.ratio;
+            offset = (end - start) * st.ratio - (st.end - st.start);
+          }
+
           st.offset = offset || 0.0001; // we assign at least a tiny value because we check in the onUpdate for .offset being set in order to apply values.
 
-          st.pins.length = 0;
-          st.setPositions(Math.min(start, end), Math.max(start, end));
-          st.vars.onRefresh(st);
+          st.pins.length = st.pins.offset = 0;
+          st.setPositions(start, end, true); // note: another way of getting only the amount of offset traveled for a certain ratio is: distanceBetweenStartAndEnd * (1 / ratio - 1)
         });
         adjustParallaxPosition(ScrollSmoother_ScrollTrigger.sort());
       }
@@ -20621,7 +20792,11 @@ var ScrollSmoother = /*#__PURE__*/function () {
         var v = typeof value === "function" ? value(index, el) : value;
         v || v === 0 || (v = el.getAttribute("data-" + effectsPrefix + name) || (name === "speed" ? 1 : 0));
         el.setAttribute("data-" + effectsPrefix + name, v);
-        return v === "auto" ? v : parseFloat(v);
+        var clamp = (v + "").substr(0, 6) === "clamp(";
+        return {
+          clamp: clamp,
+          value: clamp ? v.substr(6, v.length - 7) : v
+        };
       };
     },
         createEffect = function createEffect(el, speed, lag, index, effectsPadding) {
@@ -20637,12 +20812,13 @@ var ScrollSmoother = /*#__PURE__*/function () {
           scrub,
           progressOffset,
           yOffset,
+          pins = [],
           initDynamicValues = function initDynamicValues() {
         speed = getSpeed();
-        lag = getLag();
-        ratio = parseFloat(speed) || 1;
-        autoSpeed = speed === "auto";
-        progressOffset = autoSpeed ? 0 : 0.5;
+        lag = parseFloat(getLag().value);
+        ratio = parseFloat(speed.value) || 1;
+        autoSpeed = speed.value === "auto";
+        progressOffset = autoSpeed || st && st._startClamp && st.start <= 0 || pins.offset ? 0 : st && st._endClamp && st.end === ScrollSmoother_maxScroll() ? 1 : 0.5;
         scrub && scrub.kill();
         scrub = lag && ScrollSmoother_gsap.to(el, {
           ease: _expo,
@@ -20661,7 +20837,6 @@ var ScrollSmoother = /*#__PURE__*/function () {
         cache.renderTransform(1);
         initDynamicValues();
       },
-          pins = [],
           markers = [],
           change = 0,
           updateChange = function updateChange(self) {
@@ -20673,13 +20848,14 @@ var ScrollSmoother = /*#__PURE__*/function () {
           change = auto.change;
           yOffset = auto.offset;
         } else {
-          change = (self.end - self.start) * (1 - ratio);
-          yOffset = 0;
+          yOffset = pins.offset || 0;
+          change = (self.end - self.start - yOffset) * (1 - ratio);
         }
 
         pins.forEach(function (p) {
           return change -= p.distance * (1 - ratio);
         });
+        self.offset = change || 0.001;
         self.vars.onUpdate(self);
         scrub && scrub.progress(1);
       };
@@ -20689,8 +20865,12 @@ var ScrollSmoother = /*#__PURE__*/function () {
       if (ratio !== 1 || autoSpeed || scrub) {
         st = ScrollSmoother_ScrollTrigger.create({
           trigger: autoSpeed ? el.parentNode : el,
-          start: "top bottom+=" + effectsPadding,
-          end: "bottom top-=" + effectsPadding,
+          start: function start() {
+            return speed.clamp ? "clamp(top bottom+=" + effectsPadding + ")" : "top bottom+=" + effectsPadding;
+          },
+          end: function end() {
+            return speed.value < 0 ? "max" : speed.clamp ? "clamp(bottom top-=" + effectsPadding + ")" : "bottom top-=" + effectsPadding;
+          },
           scroller: wrapper,
           scrub: true,
           refreshPriority: -999,
@@ -20741,10 +20921,10 @@ var ScrollSmoother = /*#__PURE__*/function () {
                 y = startY + extraY + change * ((ScrollSmoother_gsap.utils.clamp(self.start, self.end, scrollY) - self.start - extraY) / (end - self.start) - progressOffset);
               }
 
-              y = ScrollSmoother_round(y + yOffset);
               markers.length && !autoSpeed && markers.forEach(function (setter) {
                 return setter(y - extraY);
               });
+              y = ScrollSmoother_round(y + yOffset);
 
               if (scrub) {
                 scrub.resetTo("y", y, -delta, true);
@@ -20778,7 +20958,7 @@ var ScrollSmoother = /*#__PURE__*/function () {
     this.scrollTop = scrollTop;
 
     this.scrollTo = function (target, smooth, position) {
-      var p = ScrollSmoother_gsap.utils.clamp(0, ScrollSmoother_ScrollTrigger.maxScroll(ScrollSmoother_win), isNaN(target) ? _this.offset(target, position) : +target);
+      var p = ScrollSmoother_gsap.utils.clamp(0, ScrollSmoother_maxScroll(), isNaN(target) ? _this.offset(target, position) : +target);
       !smooth ? scrollTop(p) : paused ? ScrollSmoother_gsap.to(_this, {
         duration: smoothDuration,
         scrollTop: p,
@@ -20796,7 +20976,11 @@ var ScrollSmoother = /*#__PURE__*/function () {
         start: position || "top top"
       }),
           y;
-      effects && adjustParallaxPosition([st], true);
+
+      if (effects) {
+        startupPhase ? ScrollSmoother_ScrollTrigger.refresh() : adjustParallaxPosition([st], true); // all the effects need to go through the initial full refresh() so that all the pins and ratios and offsets are set up. That's why we do a full refresh() if it's during the startupPhase.
+      }
+
       y = st.start / speed;
       st.kill(false);
       target.style.cssText = cssText;
@@ -20993,15 +21177,21 @@ var ScrollSmoother = /*#__PURE__*/function () {
         }
       }),
       onRefreshInit: function onRefreshInit(self) {
+        if (ScrollSmoother.isRefreshing) {
+          // gets called on the onRefresh() when we do self.setPositions(...) in which case we should skip this
+          return;
+        }
+
         ScrollSmoother.isRefreshing = true;
 
         if (effects) {
-          var pins = ScrollSmoother_ScrollTrigger.getAll().filter(function (st) {
+          var _pins = ScrollSmoother_ScrollTrigger.getAll().filter(function (st) {
             return !!st.pin;
           });
+
           effects.forEach(function (st) {
             if (!st.vars.pinnedContainer) {
-              pins.forEach(function (pinST) {
+              _pins.forEach(function (pinST) {
                 if (pinST.pin.contains(st.trigger)) {
                   var v = st.vars;
                   v.pinnedContainer = pinST.pin;
@@ -21201,14 +21391,13 @@ var ScrollSmoother = /*#__PURE__*/function () {
 
         ScrollSmoother_context = ScrollSmoother_gsap.core.context || function () {};
 
-        _onResizeDelayedCall = ScrollSmoother_gsap.delayedCall(0.2, function () {
-          return ScrollSmoother_ScrollTrigger.isRefreshing || _mainInstance && _mainInstance.refresh();
-        }).pause();
         ScrollSmoother_ScrollTrigger = ScrollSmoother_gsap.core.globals().ScrollTrigger;
         ScrollSmoother_gsap.core.globals("ScrollSmoother", ScrollSmoother); // must register the global manually because in Internet Explorer, functions (classes) don't have a "name" property.
-        //	gsap.ticker.lagSmoothing(50, 100); // generally people don't want things to jump (honoring smoothness over time is better with smooth scrolling)
 
         if (ScrollSmoother_body && ScrollSmoother_ScrollTrigger) {
+          _onResizeDelayedCall = ScrollSmoother_gsap.delayedCall(0.2, function () {
+            return ScrollSmoother_ScrollTrigger.isRefreshing || _mainInstance && _mainInstance.refresh();
+          }).pause();
           ScrollSmoother_root = [ScrollSmoother_win, ScrollSmoother_doc, ScrollSmoother_docEl, ScrollSmoother_body];
           ScrollSmoother_getVelocityProp = ScrollSmoother_ScrollTrigger.core._getVelocityProp;
           ScrollSmoother_inputObserver = ScrollSmoother_ScrollTrigger.core._inputObserver;
@@ -21230,7 +21419,7 @@ var ScrollSmoother = /*#__PURE__*/function () {
 
   return ScrollSmoother;
 }();
-ScrollSmoother.version = "3.11.5";
+ScrollSmoother.version = "3.12.2";
 
 ScrollSmoother.create = function (vars) {
   return _mainInstance && vars && _mainInstance.content() === ScrollSmoother_toArray(vars.content)[0] ? _mainInstance : new ScrollSmoother(vars);
@@ -21244,7 +21433,7 @@ ScrollSmoother_getGSAP() && ScrollSmoother_gsap.registerPlugin(ScrollSmoother);
 
 ;// CONCATENATED MODULE: ./node_modules/gsap/utils/strings.js
 /*!
- * strings: 3.11.5
+ * strings: 3.12.2
  * https://greensock.com
  *
  * Copyright 2008-2023, GreenSock. All rights reserved.
@@ -21352,7 +21541,7 @@ function emojiSafeSplit(text, delimiter, trim, preserveSpaces) {
 }
 ;// CONCATENATED MODULE: ./node_modules/gsap/SplitText.js
 /*!
- * SplitText: 3.11.5
+ * SplitText: 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -21954,7 +22143,7 @@ var SplitText = /*#__PURE__*/function () {
 
   return SplitText;
 }();
-SplitText.version = "3.11.5";
+SplitText.version = "3.12.2";
 SplitText.register = SplitText_initCore;
 
 ;// CONCATENATED MODULE: ./src/scripts/modules/Animations.js
@@ -21963,7 +22152,7 @@ SplitText.register = SplitText_initCore;
 gsapWithCSS.registerPlugin(ScrollTrigger_ScrollTrigger, ScrollSmoother, SplitText);
 function heroSplit() {
   var headings = new SplitText(document.querySelectorAll('.hero__title'), {
-    type: 'lines, chars',
+    type: 'lines',
     tag: 'span'
   });
   var tl = gsapWithCSS.timeline({});
@@ -21981,13 +22170,6 @@ function heroSplit() {
     autoAlpha: 0
   }, '>');
 }
-var smoother = ScrollSmoother.create({
-  smooth: 1,
-  effects: true
-});
-smoother.effects('.hero img', {
-  speed: 'auto'
-});
 window.addEventListener('load', function () {
   if (window.matchMedia(MatchMedia.isDesktop).matches) {
     heroSplit();
@@ -22021,17 +22203,6 @@ window.addEventListener('load', function () {
   }
 });
 
-//  scroll to archon
-
-var archonLinks = document.querySelectorAll('a[href^="#"]');
-archonLinks.forEach(function (t) {
-  t.addEventListener('click', function (e) {
-    e.preventDefault();
-    var target = e.currentTarget.getAttribute('href');
-    smoother.scrollTo(target);
-  });
-});
-
 //  sticky
 
 var sticky = document.querySelector('.sticky');
@@ -22045,7 +22216,42 @@ if (sticky) {
     pinSpacing: false
   });
 }
-/* harmony default export */ const Animations = (smoother);
+if (window.matchMedia(MatchMedia.isDesktop).matches) {
+  var smoother = ScrollSmoother.create({
+    smooth: 1,
+    effects: true
+  });
+  smoother.effects('.hero img', {
+    speed: 'auto'
+  });
+
+  //  scroll to archon
+
+  var archonLinks = document.querySelectorAll('a[href^="#"]');
+  archonLinks.forEach(function (t) {
+    t.addEventListener('click', function (e) {
+      e.preventDefault();
+      var target = e.currentTarget.getAttribute('href');
+      smoother.scrollTo(target);
+    });
+  });
+  // eslint-disable-next-line no-restricted-globals
+  var _location = location,
+    hash = _location.hash;
+  window.addEventListener('load', function () {
+    if (hash) {
+      var el = document.querySelector(hash);
+      if (el) smoother.scrollTo(el, true, 'top');
+    }
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      var el = document.querySelector(hash);
+      if (el) smoother.scrollTo(el, true, 'top');
+    });
+  });
+}
 // EXTERNAL MODULE: ./src/scripts/modules/Dropdown.js
 var Dropdown = __webpack_require__(92);
 // EXTERNAL MODULE: ./src/scripts/modules/fixedHeader.js
@@ -22095,14 +22301,15 @@ function collapseHide(t) {
   t.classList.remove('active');
 }
 accordionButton.forEach(function (t) {
-  t.addEventListener('click', function (e) {
-    bootstrap_collapse(t, e);
-  });
   t.addEventListener('mouseover', function (e) {
-    bootstrap_collapse(t, e);
+    requestAnimationFrame(function () {
+      bootstrap_collapse(t, e);
+    });
   });
   t.addEventListener('mouseout', function (e) {
-    collapseHide(t, e);
+    requestAnimationFrame(function () {
+      collapseHide(t, e);
+    });
   });
 });
 ;// CONCATENATED MODULE: ./src/scripts/app.js
@@ -22117,29 +22324,9 @@ accordionButton.forEach(function (t) {
 
 
 
-
-// eslint-disable-next-line import/no-duplicates
-
 (function calcHeaderHeight() {
   document.documentElement.style.setProperty('--header-height', "".concat(document.querySelector('.header').offsetHeight, "px"));
 })();
-
-// eslint-disable-next-line no-restricted-globals
-var _location = location,
-  hash = _location.hash;
-window.addEventListener('load', function () {
-  if (hash) {
-    var el = document.querySelector(hash);
-    if (el) Animations.scrollTo(el, true, 'top');
-  }
-});
-document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    var el = document.querySelector(hash);
-    if (el) Animations.scrollTo(el, true, 'top');
-  });
-});
 })();
 
 /******/ })()

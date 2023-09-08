@@ -40,13 +40,14 @@ function collapseHide(t) {
 }
 
 accordionButton.forEach((t) => {
-  t.addEventListener('click', (e) => {
-    collapse(t, e);
-  });
   t.addEventListener('mouseover', (e) => {
-    collapse(t, e);
+    requestAnimationFrame(() => {
+      collapse(t, e);
+    });
   });
   t.addEventListener('mouseout', (e) => {
-    collapseHide(t, e);
+    requestAnimationFrame(() => {
+      collapseHide(t, e);
+    });
   });
 });

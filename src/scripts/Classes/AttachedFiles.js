@@ -78,8 +78,12 @@ const observer = new MutationObserver(() => {
   document.querySelectorAll('.js-attached-files').forEach((elem) => new AttachedFiles(elem));
 });
 
-observer.observe(document.body, {
-  childList: true,
-  subtree: true,
-  characterDataOldValue: true,
+window.addEventListener('load', () => {
+  if (observer) {
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterDataOldValue: true,
+    });
+  }
 });

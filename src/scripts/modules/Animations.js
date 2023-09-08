@@ -5,7 +5,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
 function heroSplit() {
   const headings = new SplitText(document.querySelectorAll('.hero__title'), {
-    type: 'lines, chars',
+    type: 'lines',
     tag: 'span',
   });
 
@@ -29,13 +29,6 @@ function heroSplit() {
     '>',
   );
 }
-
-const smoother = ScrollSmoother.create({
-  smooth: 1,
-  effects: true,
-});
-
-smoother.effects('.hero img', { speed: 'auto' });
 
 window.addEventListener('load', () => {
   if (window.matchMedia(breakpoints.isDesktop).matches) {
@@ -79,17 +72,6 @@ window.addEventListener('load', () => {
   }
 });
 
-//  scroll to archon
-
-const archonLinks = document.querySelectorAll('a[href^="#"]');
-archonLinks.forEach((t) => {
-  t.addEventListener('click', (e) => {
-    e.preventDefault();
-    const target = e.currentTarget.getAttribute('href');
-    smoother.scrollTo(target);
-  });
-});
-
 //  sticky
 
 const sticky = document.querySelector('.sticky');
@@ -105,4 +87,41 @@ if (sticky) {
   });
 }
 
-export default smoother;
+if (window.matchMedia(breakpoints.isDesktop).matches) {
+  const smoother = ScrollSmoother.create({
+    smooth: 1,
+    effects: true,
+  });
+
+  smoother.effects('.hero img', { speed: 'auto' });
+
+  //  scroll to archon
+
+  const archonLinks = document.querySelectorAll('a[href^="#"]');
+  archonLinks.forEach((t) => {
+    t.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = e.currentTarget.getAttribute('href');
+      smoother.scrollTo(target);
+    });
+  });
+  // eslint-disable-next-line no-restricted-globals
+  const { hash } = location;
+  window.addEventListener('load', () => {
+    if (hash) {
+      const el = document.querySelector(hash);
+
+      if (el) smoother.scrollTo(el, true, 'top');
+    }
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const el = document.querySelector(hash);
+
+      if (el) smoother.scrollTo(el, true, 'top');
+    });
+  });
+}

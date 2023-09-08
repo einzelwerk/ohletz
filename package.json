@@ -59,7 +59,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
-    "gsap": "npm:@gsap/shockingly@^3.11.5",
+    "gsap": "npm:@gsap/shockingly@^3.12.2",
     "swiper": "^9.0.5",
     "the-new-css-reset": "^1.8.4"
   }

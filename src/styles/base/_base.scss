@@ -168,6 +168,31 @@ body p {
 
     color: var(--text);
 
+    &:not([style]) {
+      li {
+        position: relative;
+        padding-left: 1.2rem;
+
+        &::before {
+          content: '';
+
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          flex: none;
+
+          width: 6px;
+          height: 6px;
+          margin-top: 9px;
+          margin-right: 8px;
+
+          background: var(--dark-color);
+          border-radius: 1px;
+        }
+      }
+    }
+
     &:last-child {
       margin-bottom: 0;
     }
@@ -183,29 +208,6 @@ body p {
 
     &:hover {
       color: blueviolet;
-    }
-  }
-
-  li {
-    position: relative;
-    padding-left: 1.2rem;
-
-    &::before {
-      content: '';
-
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      flex: none;
-
-      width: 6px;
-      height: 6px;
-      margin-top: 9px;
-      margin-right: 8px;
-
-      background: var(--dark-color);
-      border-radius: 1px;
     }
   }
 }
