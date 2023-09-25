@@ -22324,9 +22324,10 @@ accordionButton.forEach(function (t) {
 
 
 
-(function calcHeaderHeight() {
-  document.documentElement.style.setProperty('--header-height', "".concat(document.querySelector('.header').offsetHeight, "px"));
-})();
+var header = document.querySelector('.header');
+window.addEventListener('load', function () {
+  document.documentElement.style.setProperty('--header-height', "".concat(header.offsetHeight, "px"));
+});
 })();
 
 /******/ })()

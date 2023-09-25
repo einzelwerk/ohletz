@@ -10,6 +10,8 @@ import './modules/togglePresentationBlock';
 import './modules/toogleClass';
 import './utils/bootstrap';
 
-(function calcHeaderHeight() {
-  document.documentElement.style.setProperty('--header-height', `${document.querySelector('.header').offsetHeight}px`);
-})();
+const header = document.querySelector('.header');
+
+window.addEventListener('load', () => {
+  document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`);
+});

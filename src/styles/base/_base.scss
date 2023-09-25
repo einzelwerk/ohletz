@@ -235,7 +235,10 @@ picture {
 }
 
 .main {
-  padding-top: var(--header-height);
+  padding-top: var(--header-height, 110px);
+  @include media(md) {
+    padding-top: var(--header-height, 80px);
+  }
 }
 
 .is-invalid ~ .checkbox__fake {
